@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     {"source":"/blog-commercial-locksmith-dc", "destination":"/blog-commercial-locksmith-dc.html"},

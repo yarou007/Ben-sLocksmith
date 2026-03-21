@@ -1,40 +1,31 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
-
-  "redirects": [
-    {
-      "source": "/(.*).html",
-      "destination": "/$1",
-      "permanent": true
-    }
-  ],
-
   "rewrites": [
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/blog-commercial-locksmith-dc", "destination": "/blog-commercial-locksmith-dc.html" },
-    { "source": "/blog-door-closer-repair", "destination": "/blog-door-closer-repair.html" },
-    { "source": "/blog-exit-device-compliance", "destination": "/blog-exit-device-compliance.html" },
-    { "source": "/blog-fire-door-inspection", "destination": "/blog-fire-door-inspection.html" },
-    { "source": "/blog-panic-bar-guide", "destination": "/blog-panic-bar-guide.html" },
-    { "source": "/city-maryland", "destination": "/city-maryland.html" },
-    { "source": "/city-new-york", "destination": "/city-new-york.html" },
-    { "source": "/city-northern-virginia", "destination": "/city-northern-virginia.html" },
-    { "source": "/city-washington-dc", "destination": "/city-washington-dc.html" },
-    { "source": "/gallery", "destination": "/gallery.html" },
-    { "source": "/index", "destination": "/index.html" },
-    { "source": "/locksmith-virginia", "destination": "/locksmith-virginia.html" },
-    { "source": "/locksmith-washington-dc", "destination": "/locksmith-washington-dc.html" },
-    { "source": "/locksmith-arlington-va", "destination": "/locksmith-arlington-va.html" },
-    { "source": "/locksmith-alexandria-va", "destination": "/locksmith-alexandria-va.html" },
-    { "source": "/service-access-control", "destination": "/service-access-control.html" },
-    { "source": "/service-door-closers", "destination": "/service-door-closers.html" },
-    { "source": "/service-door-hardware", "destination": "/service-door-hardware.html" },
-    { "source": "/service-door-installation", "destination": "/service-door-installation.html" },
-    { "source": "/service-exit-devices", "destination": "/service-exit-devices.html" },
-    { "source": "/service-fire-doors", "destination": "/service-fire-doors.html" },
-    { "source": "/service-locksmith", "destination": "/service-locksmith.html" },
-    { "source": "/service-panic-bars", "destination": "/service-panic-bars.html" },
-    { "source": "/sitemap", "destination": "/sitemap.html" }
+    {"source":"/about", "destination":"/about.html"},
+    {"source":"/blog-commercial-locksmith-dc", "destination":"/blog-commercial-locksmith-dc.html"},
+    {"source":"/blog-door-closer-repair", "destination":"/blog-door-closer-repair.html"},
+    {"source":"/blog-exit-device-compliance", "destination":"/blog-exit-device-compliance.html"},
+    {"source":"/blog-fire-door-inspection", "destination":"/blog-fire-door-inspection.html"},
+    {"source":"/blog-panic-bar-guide", "destination":"/blog-panic-bar-guide.html"},
+    {"source":"/city-maryland", "destination":"/city-maryland.html"},
+    {"source":"/city-new-york", "destination":"/city-new-york.html"},
+    {"source":"/city-northern-virginia", "destination":"/city-northern-virginia.html"},
+    {"source":"/city-washington-dc", "destination":"/city-washington-dc.html"},
+    {"source":"/gallery", "destination":"/gallery.html"},
+    {"source":"/index", "destination":"/index.html"},
+    {"source":"/locksmith-virginia", "destination":"/locksmith-virginia.html"},
+    {"source":"/locksmith-washington-dc", "destination":"/locksmith-washington-dc.html"},
+    {"source":"/locksmith-arlington-va", "destination":"/locksmith-arlington-va.html"},
+    {"source":"/locksmith-alexandria-va", "destination":"/locksmith-alexandria-va.html"},
+    {"source":"/service-access-control", "destination":"/service-access-control.html"},
+    {"source":"/service-door-closers", "destination":"/service-door-closers.html"},
+    {"source":"/service-door-hardware", "destination":"/service-door-hardware.html"},
+    {"source":"/service-door-installation", "destination":"/service-door-installation.html"},
+    {"source":"/service-exit-devices", "destination":"/service-exit-devices.html"},
+    {"source":"/service-fire-doors", "destination":"/service-fire-doors.html"},
+    {"source":"/service-locksmith", "destination":"/service-locksmith.html"},
+    {"source":"/service-panic-bars", "destination":"/service-panic-bars.html"},
+    {"source":"/sitemap", "destination":"/sitemap.html"}
   ]
 }

@@ -2,6 +2,7 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
+    {"source":"/about", "destination":"/about.html"},
     {"source":"/blog-commercial-locksmith-dc", "destination":"/blog-commercial-locksmith-dc.html"},
     {"source":"/blog-door-closer-repair", "destination":"/blog-door-closer-repair.html"},
     {"source":"/blog-exit-device-compliance", "destination":"/blog-exit-device-compliance.html"},
@@ -13,6 +14,10 @@
     {"source":"/city-washington-dc", "destination":"/city-washington-dc.html"},
     {"source":"/gallery", "destination":"/gallery.html"},
     {"source":"/index", "destination":"/index.html"},
+    {"source":"/locksmith-virginia", "destination":"/locksmith-virginia.html"},
+    {"source":"/locksmith-washington-dc", "destination":"/locksmith-washington-dc.html"},
+    {"source":"/locksmith-arlington-va", "destination":"/locksmith-arlington-va.html"},
+    {"source":"/locksmith-alexandria-va", "destination":"/locksmith-alexandria-va.html"},
     {"source":"/service-access-control", "destination":"/service-access-control.html"},
     {"source":"/service-door-closers", "destination":"/service-door-closers.html"},
     {"source":"/service-door-hardware", "destination":"/service-door-hardware.html"},

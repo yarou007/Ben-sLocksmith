@@ -4,6 +4,7 @@
         "/^cd /home/yassine-hammi/Bureau/locksmith/locksmith && python3 - <<'PY'\nimport glob, os, re\n\ndef extract_targets\\(html\\):\n    # href=\"\\.\\.\\.\" or href='\\.\\.\\.'\n    out=set\\(\\)\n    for m in re\\.finditer\\(r\"href\\\\s\\*=\\\\s\\*\\(\\['\\\\\"\\]\\)\\(\\[\\^'\\\\\"\\]\\+\\)\\\\1\", html, re\\.I\\):\n        href=m\\.group\\(2\\)\\.strip\\(\\)\n        if href\\.startswith\\(\\('http://','https://','mailto:','tel:','#','javascript:'\\)\\):\n            continue\n        href=href\\.split\\('#',1\\)\\[0\\]\\.split\\('\\?',1\\)\\[0\\]\n        if href\\.endswith\\('\\.html'\\):\n            out\\.add\\(os\\.path\\.basename\\(href\\)\\)\n    return out\n\nhtml_files=sorted\\(glob\\.glob\\('\\*\\.html'\\)\\)\nexisting=set\\(os\\.path\\.basename\\(p\\) for p in html_files\\)\nlinked=set\\(\\)\nfor path in html_files:\n    with open\\(path,'r',encoding='utf-8',errors='ignore'\\) as f:\n        linked \\|= extract_targets\\(f\\.read\\(\\)\\)\nmissing=sorted\\(linked-existing\\)\nprint\\('Existing \\.html files:', len\\(existing\\)\\)\nprint\\('Linked \\.html targets:', len\\(linked\\)\\)\nprint\\('Missing linked \\.html targets:', len\\(missing\\)\\)\nfor t in missing:\n    print\\(' -', t\\)\nPY$/": {
             "approve": true,
             "matchCommandLine": true
-        }
+        },
+        "true": true
     }
 }

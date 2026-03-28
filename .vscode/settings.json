@@ -5,6 +5,10 @@
             "approve": true,
             "matchCommandLine": true
         },
-        "true": true
+        "true": true,
+        "/^python3 - <<'PY'\nimport glob\nmissing=\\[\\]\nfor path in sorted\\(glob\\.glob\\('\\*\\.html'\\)\\):\n    with open\\(path,'r',encoding='utf-8',errors='ignore'\\) as f:\n        text=f\\.read\\(\\)\n    if 'rel=\"icon\"' not in text and \"rel='icon'\" not in text:\n        missing\\.append\\(path\\)\nprint\\('HTML files:', len\\(glob\\.glob\\('\\*\\.html'\\)\\)\\)\nprint\\('Missing rel=\"icon\":', len\\(missing\\)\\)\nprint\\('\\\\n'\\.join\\(missing\\)\\)\nPY$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }

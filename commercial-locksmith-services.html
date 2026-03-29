@@ -15,6 +15,7 @@
 <meta property="og:image" content="https://dcemergencylockanddoor.com/assets/img-956a4955d1ddb21c.jpg">
 <meta property="og:image:alt" content="Commercial locksmith and door hardware service">
 <meta property="og:site_name" content="DC Emergency Lock &amp; Door">
+<meta property="og:locale" content="en_US">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Commercial Locksmith Services | DC, VA, MD &amp; NY (24/7)">
@@ -58,7 +59,22 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "DC Emergency Lock & Door",
+  "url": "https://dcemergencylockanddoor.com/",
+  "sameAs": [
+    "https://www.instagram.com/dcemergencylockanddoor/",
+    "https://www.tiktok.com/@dc.lock.and.door",
+    "https://www.facebook.com/profile.php?id=61574339060945"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
@@ -83,12 +99,20 @@ h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;line-height:1.15;color:#1
 /* NAV */
 .nav{position:sticky;top:0;z-index:150;background:#fff;border-bottom:1px solid var(--bd);box-shadow:0 1px 8px rgba(0,0,0,.07)}
 .nav-inner{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-right{display:flex;align-items:center;gap:10px}
 .logo{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1.1;overflow-wrap:anywhere}
 .logo em{font-style:normal;color:var(--blue)}
 .nav-links{display:flex;gap:2px;list-style:none;align-items:center}
 .nav-links a{color:var(--t2);font-size:13px;font-weight:600;padding:6px 10px;border-radius:7px;transition:all .18s}
 .nav-links a:hover{color:var(--blue);background:var(--blue-l)}
 .nav-cta{background:var(--blue)!important;color:#fff!important;font-weight:700!important;border-radius:8px!important;padding:8px 14px!important}
+.nav-social{display:flex;align-items:center;gap:8px}
+.social-link{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid var(--bd);background:#fff;color:var(--t2);transition:transform .18s,color .18s,border-color .18s,background .18s;touch-action:manipulation}
+.social-link i{font-size:16px;line-height:1}
+.social-link:hover{transform:translateY(-1px) scale(1.04);border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
+.social-link:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+footer .social-link{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:rgba(226,234,244,.8)}
+footer .social-link:hover{background:rgba(96,165,250,.18);border-color:rgba(96,165,250,.55);color:#fff}
 .nav-cta:hover{background:#1548a0!important}
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
 .ham span{width:22px;height:2px;background:var(--navy);border-radius:2px;display:block}
@@ -170,6 +194,7 @@ footer{background:var(--navy2);color:rgba(255,255,255,.85);padding:54px 20px 16p
 }
 @media(max-width:767px){
   .nav-links{display:none}.ham{display:flex}
+  .social-link{width:40px;height:40px;border-radius:12px}
   .footer-grid{grid-template-columns:1fr}
   .sticky-call{bottom:12px;right:10px;font-size:12px;padding:10px 15px}
 }
@@ -181,17 +206,24 @@ footer{background:var(--navy2);color:rgba(255,255,255,.85);padding:54px 20px 16p
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="logo">dcemergencylockanddoor</a>
-    <ul class="nav-links">
-      <li><a href="/#services">Services</a></li>
-      <li><a href="gallery">Gallery</a></li>
-      <li><a href="city-washington-dc">DC</a></li>
-      <li><a href="city-northern-virginia">Virginia</a></li>
-      <li><a href="city-maryland">Maryland</a></li>
-      <li><a href="city-new-york">New York</a></li>
-      <li><a href="blog-panic-bar-guide">Blog</a></li>
-      <li><a href="tel:7032440559" class="nav-cta">🔑 703-244-0559</a></li>
-    </ul>
-    <button class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="gallery">Gallery</a></li>
+        <li><a href="city-washington-dc">DC</a></li>
+        <li><a href="city-northern-virginia">Virginia</a></li>
+        <li><a href="city-maryland">Maryland</a></li>
+        <li><a href="city-new-york">New York</a></li>
+        <li><a href="blog-panic-bar-guide">Blog</a></li>
+        <li><a href="tel:7032440559" class="nav-cta">🔑 703-244-0559</a></li>
+      </ul>
+      <div class="nav-social" aria-label="Social media">
+        <a class="social-link" href="https://www.instagram.com/dcemergencylockanddoor/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="social-link" href="https://www.tiktok.com/@dc.lock.and.door" target="_blank" rel="noopener noreferrer" aria-label="TikTok (opens in a new tab)" title="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        <a class="social-link" href="https://www.facebook.com/profile.php?id=61574339060945" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+      </div>
+      <button class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 <div class="mob-nav" id="mobNav">
@@ -305,9 +337,14 @@ footer{background:var(--navy2);color:rgba(255,255,255,.85);padding:54px 20px 16p
       <div class="logo">dcemergencylockanddoor</div>
       <p>Licensed & insured commercial locksmith and exit door hardware specialists serving Washington DC, Northern Virginia, Maryland, and New York City. Available 24/7.</p>
       <a href="tel:7032440559" class="footer-tel">703-244-0559</a>
-      <p style="margin-top:10px;font-size:12px;color:rgba(226,234,244,.55);line-height:1.7">
-        Follow us: <a href="https://www.facebook.com/YOUR_PAGE" rel="noopener" target="_blank" aria-label="Facebook (opens in a new tab)">Facebook</a> · <a href="https://www.instagram.com/YOUR_PROFILE/" rel="noopener" target="_blank" aria-label="Instagram (opens in a new tab)">Instagram</a> · <a href="https://www.linkedin.com/company/YOUR_COMPANY/" rel="noopener" target="_blank" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
-      </p>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-size:12px;color:rgba(226,234,244,.55);line-height:1.7">Follow us:</span>
+        <div class="nav-social" aria-label="Follow us on social media">
+          <a class="social-link" href="https://www.instagram.com/dcemergencylockanddoor/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a class="social-link" href="https://www.tiktok.com/@dc.lock.and.door" target="_blank" rel="noopener noreferrer" aria-label="TikTok (opens in a new tab)" title="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+          <a class="social-link" href="https://www.facebook.com/profile.php?id=61574339060945" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)" title="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        </div>
+      </div>
       <p style="margin-top:10px;font-size:12px;color:rgba(226,234,244,.55);line-height:1.7">
         Licensed &amp; insured · 24/7 emergency service · Response in under 45 minutes · Commercial specialists · <a href="tel:7032440559" style="text-decoration:underline" aria-label="Call now 703-244-0559">Call now: 703-244-0559</a>
       </p>

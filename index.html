@@ -355,6 +355,19 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
   </div>
 </nav>
 
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/#services" onclick="toggleMenu()">Services</a>
+  <a href="city-washington-dc" onclick="toggleMenu()">Washington DC</a>
+  <a href="city-northern-virginia" onclick="toggleMenu()">Northern Virginia</a>
+  <a href="city-maryland" onclick="toggleMenu()">Maryland</a>
+  <a href="city-new-york" onclick="toggleMenu()">New York</a>
+  <a href="gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="blog" onclick="toggleMenu()">Blog</a>
+  <a href="tel:7032440559" class="mob-cta" onclick="toggleMenu()">🔑 703-244-0559</a>
+</div>
+
 <header class="hero">
   <div class="hero-bg">
     <img src="assets/img-956a4955d1ddb21c.jpg" alt="Commercial exit door with panic bar hardware" />
@@ -825,7 +838,11 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
 </footer>
 <a href="tel:7032440559" class="sticky-call">🚨 Emergency: 703-244-0559</a>
 <script>
-function toggleMenu(){document.getElementById('mobNav').classList.toggle('open')}
+function toggleMenu(){
+  const mob=document.getElementById('mobNav')||document.querySelector('.mob-nav');
+  if(!mob) return;
+  mob.classList.toggle('open');
+}
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.08});
 document.querySelectorAll('.fi').forEach(el=>io.observe(el));
 document.querySelectorAll('.faq-q').forEach(q=>{

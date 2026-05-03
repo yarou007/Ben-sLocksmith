@@ -43,8 +43,13 @@
   "serviceType": "Fire Door Inspection (NFPA 80)",
   "areaServed": [
     "Washington DC",
+    "Alexandria VA",
+    "Arlington VA",
+    "Bethesda MD",
+    "Silver Spring MD",
     "Northern Virginia",
-    "Maryland"
+    "Maryland",
+    "DMV area"
   ],
   "provider": {
     "@type": "Organization",
@@ -52,8 +57,13 @@
     "telephone": "703-244-0559",
     "areaServed": [
       "Washington DC",
+      "Alexandria VA",
+      "Arlington VA",
+      "Bethesda MD",
+      "Silver Spring MD",
       "Northern Virginia",
-      "Maryland"
+      "Maryland",
+      "DMV area"
     ]
   }
 }
@@ -80,9 +90,33 @@
   "@type": ["LocalBusiness", "Locksmith"],
   "name": "DC Emergency Lock & Door",
   "telephone": "703-244-0559",
-  "areaServed": ["Washington DC", "Maryland", "Northern Virginia", "New York City"],
+  "areaServed": ["Washington DC", "Maryland", "Northern Virginia", "Alexandria VA", "Arlington VA", "Bethesda MD", "Silver Spring MD", "DMV area"],
   "serviceType": "Fire Door Inspection Washington DC",
   "address": {"@type": "PostalAddress", "addressLocality": "Washington", "addressRegion": "DC", "addressCountry": "US"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dcemergencylockanddoor.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://dcemergencylockanddoor.com/#services"},
+    {"@type": "ListItem", "position": 3, "name": "Fire Door Inspection Washington DC", "item": "https://dcemergencylockanddoor.com/service-fire-doors"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How quickly can a fire door technician arrive?", "acceptedAnswer": {"@type": "Answer", "text": "Most urgent calls are dispatched immediately and same-day service is standard for active commercial fire door issues."}},
+    {"@type": "Question", "name": "Can you repair deficiencies after inspection?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We inspect, document deficiencies, and provide correction support for panic bars, exit devices, closers, and hardware."}},
+    {"@type": "Question", "name": "Do you serve outside Washington DC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We serve Washington DC, Maryland, Northern Virginia, Alexandria VA, Arlington VA, Bethesda MD, Silver Spring MD, and the broader DMV area."}}
+  ]
 }
 </script>
 
@@ -258,6 +292,7 @@ footer .social-link:hover{background:rgba(96,165,250,.18);border-color:rgba(96,1
 /* BREADCRUMB */
 .bc-nav{font-size:12px;color:var(--t3);display:flex;gap:5px;align-items:center;padding:10px 0;flex-wrap:wrap}
 .bc-nav a{color:var(--blue);font-weight:500}
+.quote-grid-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 /* PARTNERS */
 .partners{background:#fff;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:32px 20px}
 .partners-lbl{text-align:center;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:18px}
@@ -340,6 +375,7 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
   .ba-grid{grid-template-columns:1fr}.gal{columns:2}.sec{padding:44px 0}
   .sec-title{font-size:clamp(20px,6vw,30px)}
   .sticky-call{bottom:12px;right:10px;font-size:12px;padding:10px 15px}
+  .quote-grid-two{grid-template-columns:1fr!important}
   .hero-trust{display:none}
 }
 @media(max-width:400px){.gal{columns:1}}
@@ -433,7 +469,17 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
 </div>
       <div style="margin-top:36px;padding:16px;background:var(--bg2);border:1px solid var(--bd);border-radius:10px">
         <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Related Services</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px"><a href="/service-exit-devices" style="color:var(--blue);font-size:13px;font-weight:600">Exit Devices →</a><a href="/service-panic-bars" style="color:var(--blue);font-size:13px;font-weight:600">Panic Bars →</a><a href="/service-door-hardware" style="color:var(--blue);font-size:13px;font-weight:600">Door Hardware →</a></div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="/fire-door-inspection-washington-dc" style="color:var(--blue);font-size:13px;font-weight:600">Fire Door Inspection DC →</a>
+          <a href="/annual-fire-door-inspection-washington-dc" style="color:var(--blue);font-size:13px;font-weight:600">Annual Fire Door Inspection DC →</a>
+          <a href="/fire-door-inspection-maryland" style="color:var(--blue);font-size:13px;font-weight:600">Fire Door Inspection Maryland →</a>
+          <a href="/fire-door-repair-washington-dc" style="color:var(--blue);font-size:13px;font-weight:600">Fire Door Repair DC →</a>
+          <a href="/fire-door-deficiency-repair" style="color:var(--blue);font-size:13px;font-weight:600">Deficiency Repair →</a>
+          <a href="/service-exit-devices" style="color:var(--blue);font-size:13px;font-weight:600">Exit Devices →</a>
+          <a href="/service-panic-bars" style="color:var(--blue);font-size:13px;font-weight:600">Panic Bars →</a>
+          <a href="/service-door-closers" style="color:var(--blue);font-size:13px;font-weight:600">Door Closers →</a>
+          <a href="/service-door-hardware" style="color:var(--blue);font-size:13px;font-weight:600">Door Hardware →</a>
+        </div>
       </div>
     </main>
     <aside class="sidebar">
@@ -490,6 +536,38 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
         <div class="card" style="padding:14px"><p style="font-size:14px;color:var(--t2)">"Professional technician, clear pricing, and same-day completion."</p><p style="font-size:12px;color:var(--t3);margin-top:8px">Property Team, Maryland</p></div>
         <div class="card" style="padding:14px"><p style="font-size:14px;color:var(--t2)">"Great for urgent lock and hardware issues after business hours."</p><p style="font-size:12px;color:var(--t3);margin-top:8px">Office Admin, Northern Virginia</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-white" id="quote-form">
+  <div class="wrap">
+    <div style="background:#fff;border:1px solid var(--bd);border-left:4px solid var(--blue);border-radius:12px;padding:18px;box-shadow:var(--sh)">
+      <h3 style="font-size:22px;color:var(--navy);margin-bottom:10px">Request Inspection / Get Quote</h3>
+      <p style="font-size:14px;color:var(--t2);margin-bottom:14px">Share your property details and we will follow up with scheduling options. For urgent issues, call <a href="tel:7032440559" style="color:var(--blue);font-weight:700">703-244-0559</a>.</p>
+      <form class="quote-form" action="https://formsubmit.co/info@dcemergencylockanddoor.com" method="POST" enctype="multipart/form-data" style="display:grid;gap:10px">
+        <div class="quote-grid-two" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label for="sf-name" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Name</label><input id="sf-name" name="Name" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+          <div><label for="sf-phone" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Phone</label><input id="sf-phone" name="Phone" type="tel" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+        </div>
+        <div class="quote-grid-two" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label for="sf-email" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Email</label><input id="sf-email" name="Email" type="email" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+          <div><label for="sf-service" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Service needed</label><input id="sf-service" name="Service needed" value="Fire Door Inspection Washington DC" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+        </div>
+        <div class="quote-grid-two" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label for="sf-city" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">City / location</label><input id="sf-city" name="City / location" placeholder="Washington DC / Maryland / Northern Virginia" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+          <div><label for="sf-building" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Building type</label><input id="sf-building" name="Building type" placeholder="Office, apartment, school, restaurant" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+        </div>
+        <div class="quote-grid-two" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label for="sf-doors" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Number of doors</label><input id="sf-doors" name="Number of doors" type="number" min="1" style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+          <div><label for="sf-photo" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Optional photo upload</label><input id="sf-photo" name="Photo" type="file" accept="image/*" style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
+        </div>
+        <div><label for="sf-message" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Message</label><textarea id="sf-message" name="Message" placeholder="Tell us your inspection deadline and known deficiencies." style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px;min-height:96px"></textarea></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary track-quote-submit" data-track="quote_submit" type="submit">Submit Quote Request</button>
+          <a href="tel:7032440559" class="btn btn-red track-request-inspection" data-track="request_inspection_click">Request Inspection by Phone</a>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -555,7 +633,7 @@ footer{background:var(--navy2);color:#e2eaf4;padding:44px 20px 26px}
   </div>
   <div class="footer-bottom">
     <p>© 2026 dcemergencylockanddoor. Licensed DC, VA, MD & NY. All rights reserved.</p>
-    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="/sitemap">Sitemap</a></div>
+    <div class="footer-legal"><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a><a href="/sitemap">Sitemap</a></div>
   </div>
 </footer>
 <a href="tel:7032440559" class="sticky-call">🚨 Emergency: 703-244-0559</a>
@@ -572,4 +650,5 @@ document.querySelectorAll('.faq-q').forEach(q=>{
   });
 });
 </script>
+<script src="assets/lead-pages.js" defer></script>
 </body></html>

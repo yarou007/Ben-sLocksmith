@@ -344,7 +344,7 @@ footer{background:var(--navy2);color:rgba(255,255,255,.85);padding:54px 20px 16p
   </div>
   <div class="footer-bottom">
     <p>© 2026 dcemergencylockanddoor. Licensed DC, VA, MD & NY. All rights reserved.</p>
-    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="sitemap">Sitemap</a></div>
+    <div class="footer-legal"><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a><a href="sitemap">Sitemap</a></div>
   </div>
 </footer>
 <a href="tel:7032440559" class="sticky-call">🚨 Emergency: 703-244-0559</a>
@@ -353,5 +353,6 @@ function toggleMenu(){document.getElementById('mobNav').classList.toggle('open')
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.08});
 document.querySelectorAll('.fi').forEach(el=>io.observe(el));
 </script>
+<script src="assets/lead-pages.js" defer></script>
 </body>
 </html>

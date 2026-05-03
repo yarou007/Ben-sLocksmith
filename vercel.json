@@ -1,19 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-
   "redirects": [
-    {
-      "source": "/(.*).html",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.dcemergencylockanddoor.com"
-        }
-      ],
-      "destination": "https://dcemergencylockanddoor.com/$1",
-      "permanent": true
-    },
     {
       "source": "/:path*",
       "has": [
@@ -23,6 +11,16 @@
         }
       ],
       "destination": "https://dcemergencylockanddoor.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/(.*).html",
+      "destination": "/$1",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
       "permanent": true
     }
   ]

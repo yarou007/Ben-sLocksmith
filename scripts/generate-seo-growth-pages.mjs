@@ -950,7 +950,7 @@ ${tag(faqSchema(page.faq))}
     <p>DC Emergency Lock & Door · Commercial locksmith, panic bars, exit devices, door closers, fire door compliance, and access control · <a href="tel:${PHONE_RAW}" style="color:#93c5fd;" data-event="phone_click">${PHONE_LABEL}</a></p>
   </div>
 </footer>
-<script src="assets/lead-pages.js" defer></script>
+<script src="assets/lead-pages.js?v=20260504" defer></script>
 </body>
 </html>
 `;
@@ -1094,7 +1094,7 @@ ${tag(faqSchema(post.faq))}
     <p>DC Emergency Lock & Door commercial resource · <a href="tel:${PHONE_RAW}" style="color:#93c5fd;" data-event="phone_click">${PHONE_LABEL}</a></p>
   </div>
 </footer>
-<script src="assets/lead-pages.js" defer></script>
+<script src="assets/lead-pages.js?v=20260504" defer></script>
 </body>
 </html>
 `;

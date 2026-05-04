@@ -605,6 +605,21 @@
     });
   }
 
+  function removeLegacyAnalyticsNotice() {
+    var candidates = document.querySelectorAll('div,aside,p,span');
+    candidates.forEach(function (node) {
+      var text = safeText(node.textContent).toLowerCase().replace(/\s+/g, ' ');
+      if (!text) return;
+
+      var isMatch =
+        text.indexOf('analytics setup pending') !== -1 ||
+        text.indexOf('placeholder ids in head scripts') !== -1;
+      if (!isMatch) return;
+
+      node.remove();
+    });
+  }
+
   function announceSubmissionIfNeeded() {
     var params = new URLSearchParams(window.location.search);
     if (!params.has('submitted')) return;
@@ -641,6 +656,7 @@
     addStickyMobileCall();
     attachLeadFormHandlers();
     wireClickTracking();
+    removeLegacyAnalyticsNotice();
     announceSubmissionIfNeeded();
   });
 })();

@@ -64,6 +64,32 @@
   background: #b91c1c;
 }
 
+.lead-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.lead-inline-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #d8e4d8;
+  border-radius: 999px;
+  background: #fff;
+  color: #1d5fb8;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lead-inline-links a:hover,
+.lead-inline-links a:focus-visible {
+  border-color: #1d5fb8;
+  background: #e8f0fc;
+}
+
 .estimate-trustline {
   margin-top: 12px;
   font-size: 12px;

@@ -83,17 +83,20 @@
       if (href.indexOf('tel:') === 0) {
         anchor.classList.add('track-phone-click');
         anchor.setAttribute('data-track', 'phone_click');
+        anchor.setAttribute('data-event', 'phone_click');
       }
 
       if (text.indexOf('request inspection') !== -1) {
         anchor.classList.add('track-request-inspection');
         anchor.setAttribute('data-track', 'request_inspection_click');
+        anchor.setAttribute('data-event', 'service_cta_click');
       }
 
-      if (text.indexOf('get quote') !== -1 || text.indexOf('free quote') !== -1) {
+      if (text.indexOf('get quote') !== -1 || text.indexOf('free quote') !== -1 || text.indexOf('free estimate') !== -1) {
         anchor.classList.add('track-get-estimate');
         anchor.setAttribute('data-track', 'get_free_estimate_click');
-        anchor.textContent = 'Get a free estimate';
+        anchor.setAttribute('data-event', 'quote_form_open');
+        anchor.textContent = 'Request a Free Estimate';
       }
 
       if (text.indexOf('emergency') !== -1) {
@@ -101,6 +104,13 @@
         if (!anchor.hasAttribute('data-track')) {
           anchor.setAttribute('data-track', 'emergency_service_click');
         }
+        if (!anchor.hasAttribute('data-event')) {
+          anchor.setAttribute('data-event', 'service_cta_click');
+        }
+      }
+
+      if (!anchor.hasAttribute('data-event') && (anchor.classList.contains('btn') || anchor.classList.contains('lead-btn'))) {
+        anchor.setAttribute('data-event', 'service_cta_click');
       }
 
       if (href === '#' && text === 'privacy') {
@@ -109,6 +119,21 @@
 
       if (href === '#' && text === 'terms') {
         anchor.setAttribute('href', '/terms-of-service');
+      }
+    });
+
+    var buttons = document.querySelectorAll('button, input[type="submit"]');
+    buttons.forEach(function (button) {
+      if (button.classList.contains('track-quote-submit')) {
+        button.setAttribute('data-event', 'quote_form_submit');
+        if (!button.hasAttribute('data-track')) {
+          button.setAttribute('data-track', 'quote_form_submit');
+        }
+        return;
+      }
+
+      if (!button.hasAttribute('data-event')) {
+        button.setAttribute('data-event', 'service_cta_click');
       }
     });
   }
@@ -260,10 +285,10 @@
       '</a>.</p>' +
       '<form class="quote-form request-service-form" id="request-service-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" style="display:grid;gap:10px">' +
       '<div class="request-service-extra"></div>' +
-      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn btn-primary track-quote-submit" data-track="quote_submit">Get a free estimate</button>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn btn-primary track-quote-submit" data-track="quote_form_submit" data-event="quote_form_submit">Request a Free Estimate</button>' +
       '<a href="tel:' +
       CONFIG.phoneRaw +
-      '" class="btn btn-red track-phone-click" data-track="phone_click">Call ' +
+      '" class="btn btn-red track-phone-click" data-track="phone_click" data-event="phone_click">Call ' +
       CONFIG.phoneLabel +
       '</a></div>' +
       '</form>' +
@@ -355,6 +380,29 @@
         ]
       });
 
+      appendFieldIfMissing(form, extras, '[name="Service needed"],[name="service_needed"],#request-service-needed', {
+        id: 'request-service-needed-' + index,
+        name: 'Service needed',
+        label: 'Service needed',
+        type: 'text',
+        placeholder: 'Commercial locksmith, panic bar repair, fire door inspection...',
+        required: true
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Urgency"],select[name*="urgency" i],#request-urgency', {
+        id: 'request-urgency-' + index,
+        name: 'Urgency',
+        label: 'Urgency',
+        type: 'select',
+        required: true,
+        options: [
+          { value: '', label: 'Select urgency', selected: true },
+          { value: 'Emergency', label: 'Emergency' },
+          { value: 'Same day', label: 'Same day' },
+          { value: 'Scheduled', label: 'Scheduled' }
+        ]
+      });
+
       appendFieldIfMissing(form, extras, '[name="Issue description"],[name="Message"],textarea', {
         id: 'request-issue-' + index,
         name: 'Issue description',
@@ -368,11 +416,12 @@
       var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
       if (submitButton) {
         submitButton.classList.add('track-quote-submit');
-        submitButton.setAttribute('data-track', 'quote_submit');
+        submitButton.setAttribute('data-track', 'quote_form_submit');
+        submitButton.setAttribute('data-event', 'quote_form_submit');
         if (submitButton.tagName.toLowerCase() === 'button') {
-          submitButton.textContent = 'Get a free estimate';
+          submitButton.textContent = 'Request a Free Estimate';
         } else {
-          submitButton.value = 'Get a free estimate';
+          submitButton.value = 'Request a Free Estimate';
         }
       }
 
@@ -405,7 +454,7 @@
 
         addHiddenInput(form, 'lead_summary', summary);
 
-        trackEvent('request_service_form_submit', {
+        trackEvent('quote_form_submit', {
           form_id: form.id || 'request-service-form',
           location: safeText((form.querySelector('[name="Service location"]') || {}).value)
         });
@@ -423,7 +472,8 @@
     cta.href = '#request-service-form';
     cta.className = 'global-free-estimate js-free-estimate-cta track-get-estimate';
     cta.setAttribute('data-track', 'get_free_estimate_click');
-    cta.textContent = 'Get a free estimate';
+    cta.setAttribute('data-event', 'quote_form_open');
+    cta.textContent = 'Request a Free Estimate';
     target.appendChild(cta);
 
     var trustline = target.parentElement && target.parentElement.querySelector('.estimate-trustline');
@@ -482,12 +532,70 @@
     });
   }
 
+  function ensureExpandedServiceMenus() {
+    var expandedLinks = [
+      { href: '/service-panic-bar-installation', label: 'Panic Bar Installation' },
+      { href: '/service-exit-device-installation', label: 'Exit Device Installation' },
+      { href: '/service-door-closer-adjustment', label: 'Door Closer Adjustment' },
+      { href: '/service-commercial-door-closer-installation', label: 'Door Closer Installation' },
+      { href: '/service-fire-door-compliance', label: 'Fire Door Compliance' },
+      { href: '/service-commercial-rekey', label: 'Commercial Rekey' },
+      { href: '/service-business-lock-change', label: 'Business Lock Change' },
+      { href: '/service-restricted-key-systems', label: 'Restricted Key Systems' },
+      { href: '/service-office-lockout', label: 'Office Lockout Service' },
+      { href: '/service-property-manager-locksmith', label: 'Property Manager Locksmith' },
+      { href: '/service-tenant-lock-change', label: 'Tenant Lock Change Service' }
+    ];
+
+    var containers = [];
+    document.querySelectorAll('.sb-box').forEach(function (box) {
+      var heading = safeText((box.querySelector('h4') || {}).textContent).toLowerCase();
+      if (heading === 'all services') containers.push(box);
+    });
+
+    document.querySelectorAll('footer .footer-col').forEach(function (col) {
+      var heading = safeText((col.querySelector('h4') || {}).textContent).toLowerCase();
+      if (heading === 'services') containers.push(col);
+    });
+
+    containers.forEach(function (container) {
+      var list = container.querySelector('ul');
+      if (list) {
+        expandedLinks.forEach(function (item) {
+          var exists = Array.from(list.querySelectorAll('a')).some(function (a) {
+            return (a.getAttribute('href') || '') === item.href;
+          });
+          if (exists) return;
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.label;
+          a.setAttribute('data-event', 'service_cta_click');
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      } else {
+        expandedLinks.forEach(function (item) {
+          var exists = Array.from(container.querySelectorAll('a')).some(function (a) {
+            return (a.getAttribute('href') || '') === item.href;
+          });
+          if (exists) return;
+          var a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.label;
+          a.setAttribute('data-event', 'service_cta_click');
+          container.appendChild(a);
+        });
+      }
+    });
+  }
+
   function wireClickTracking() {
     document.addEventListener('click', function (event) {
       var target = event.target.closest('a,button,input[type="submit"]');
       if (!target) return;
 
-      var trackName = target.getAttribute('data-track');
+      var trackName = target.getAttribute('data-event') || target.getAttribute('data-track');
       if (!trackName) return;
 
       trackEvent(trackName, {
@@ -510,7 +618,7 @@
     box.style.margin = '12px auto';
     box.style.maxWidth = '1160px';
     box.style.fontWeight = '700';
-    box.textContent = 'Thanks, your request was submitted. For immediate service call ' + CONFIG.phoneLabel + '.';
+    box.textContent = 'Thanks. We received your request. For urgent service, please call ' + CONFIG.phoneLabel + '.';
 
     var host = document.querySelector('.lead-wrap') || document.querySelector('.wrap') || document.body;
     host.insertAdjacentElement('afterbegin', box);
@@ -520,44 +628,13 @@
     window.history.replaceState({}, '', clean);
   }
 
-  function showAnalyticsSetupHint() {
-    var gtmConfig = window.GTM_CONFIG || {};
-    var unresolvedIds =
-      (gtmConfig.gtmId || CONFIG.gtmId) === CONFIG.gtmId ||
-      (gtmConfig.ga4Id || CONFIG.ga4Id) === CONFIG.ga4Id ||
-      (gtmConfig.fbPixelId || CONFIG.fbPixelId) === CONFIG.fbPixelId;
-
-    if (!unresolvedIds) return;
-    if (document.querySelector('[data-analytics-hint]')) return;
-
-    var hint = document.createElement('div');
-    hint.setAttribute('data-analytics-hint', 'true');
-    hint.style.position = 'fixed';
-    hint.style.left = '12px';
-    hint.style.bottom = '72px';
-    hint.style.zIndex = '998';
-    hint.style.background = '#0f172a';
-    hint.style.color = '#fff';
-    hint.style.fontSize = '12px';
-    hint.style.padding = '9px 11px';
-    hint.style.borderRadius = '8px';
-    hint.style.maxWidth = '300px';
-    hint.style.boxShadow = '0 6px 18px rgba(0,0,0,.22)';
-    hint.textContent = 'Analytics setup pending: replace GTM/GA4/Facebook placeholder IDs in head scripts.';
-
-    document.body.appendChild(hint);
-
-    setTimeout(function () {
-      if (hint && hint.parentNode) hint.parentNode.removeChild(hint);
-    }, 9000);
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     ensureStickyStyles();
     ensureNavAccessibility();
     applyTrackingAttributes();
     enhanceImages();
     ensureSocialLinks();
+    ensureExpandedServiceMenus();
     ensurePrimaryCta();
     ensureRequestServiceFormSection();
     enhanceRequestForms();
@@ -565,6 +642,5 @@
     attachLeadFormHandlers();
     wireClickTracking();
     announceSubmissionIfNeeded();
-    showAnalyticsSetupHint();
   });
 })();

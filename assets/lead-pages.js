@@ -2,6 +2,7 @@
   var CONFIG = {
     phoneRaw: '7032440559',
     phoneLabel: '703-244-0559',
+    formSubmitEndpoint: 'https://formsubmit.co/dclockanddoor@gmail.com',
     gtmId: 'GTM-XXXXXXX',
     ga4Id: 'G-XXXXXXXXXX',
     fbPixelId: '000000000000000',
@@ -311,6 +312,9 @@
     forms.forEach(function (form) {
       index += 1;
       form.classList.add('quote-form', 'request-service-form');
+
+      // Keep all lead forms on the same verified FormSubmit inbox, even if a stale HTML copy had an older endpoint.
+      form.setAttribute('action', CONFIG.formSubmitEndpoint);
 
       if (!form.id) {
         form.id = index === 1 ? 'request-service-form' : 'request-service-form-' + index;

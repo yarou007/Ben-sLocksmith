@@ -1,6 +1,37 @@
 (function () {
-  var BUSINESS_PHONE = '7032440559';
-  var PHONE_LABEL = '703-244-0559';
+  var CONFIG = {
+    phoneRaw: '7032440559',
+    phoneLabel: '703-244-0559',
+    gtmId: 'GTM-XXXXXXX',
+    ga4Id: 'G-XXXXXXXXXX',
+    fbPixelId: '000000000000000',
+    social: [
+      {
+        id: 'x',
+        label: 'X',
+        href: 'https://x.com/dcemergencylock',
+        iconClass: 'fa-brands fa-x-twitter'
+      },
+      {
+        id: 'linkedin',
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/company/dc-emergency-lock-and-door',
+        iconClass: 'fa-brands fa-linkedin-in'
+      },
+      {
+        id: 'youtube',
+        label: 'YouTube',
+        href: 'https://www.youtube.com/@dcemergencylockanddoor',
+        iconClass: 'fa-brands fa-youtube'
+      },
+      {
+        id: 'facebook',
+        label: 'Facebook',
+        href: 'https://www.facebook.com/profile.php?id=61574339060945',
+        iconClass: 'fa-brands fa-facebook-f'
+      }
+    ]
+  };
 
   function safeText(value) {
     return (value || '').toString().trim();
@@ -11,8 +42,40 @@
     return pathname.replace(/^\//, '').replace(/\/$/, '') || 'home';
   }
 
+  function trackEvent(eventName, payload) {
+    if (!eventName) return;
+
+    var enriched = Object.assign(
+      {
+        event: eventName,
+        page_slug: slugFromPath(window.location.pathname)
+      },
+      payload || {}
+    );
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(enriched);
+
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', eventName, payload || {});
+      } catch (e) {
+        // Ignore analytics runtime issues.
+      }
+    }
+
+    if (typeof window.fbq === 'function') {
+      try {
+        window.fbq('trackCustom', eventName, payload || {});
+      } catch (e) {
+        // Ignore analytics runtime issues.
+      }
+    }
+  }
+
   function applyTrackingAttributes() {
     var anchors = document.querySelectorAll('a');
+
     anchors.forEach(function (anchor) {
       var href = anchor.getAttribute('href') || '';
       var text = safeText(anchor.textContent).toLowerCase();
@@ -28,8 +91,9 @@
       }
 
       if (text.indexOf('get quote') !== -1 || text.indexOf('free quote') !== -1) {
-        anchor.classList.add('track-get-quote');
-        anchor.setAttribute('data-track', 'get_quote_click');
+        anchor.classList.add('track-get-estimate');
+        anchor.setAttribute('data-track', 'get_free_estimate_click');
+        anchor.textContent = 'Get a free estimate';
       }
 
       if (text.indexOf('emergency') !== -1) {
@@ -51,9 +115,23 @@
 
   function enhanceImages() {
     var images = document.querySelectorAll('img');
+    var firstMeaningfulImageSet = false;
+
     images.forEach(function (img, index) {
+      if (!img.hasAttribute('decoding')) {
+        img.setAttribute('decoding', 'async');
+      }
+
       if (!img.hasAttribute('loading') && index > 0) {
         img.setAttribute('loading', 'lazy');
+      }
+
+      if (!firstMeaningfulImageSet && !img.hasAttribute('fetchpriority')) {
+        var inHero = !!img.closest('.hero, .lead-hero');
+        if (inHero || index === 0) {
+          img.setAttribute('fetchpriority', 'high');
+          firstMeaningfulImageSet = true;
+        }
       }
 
       if (!img.hasAttribute('alt') || !safeText(img.getAttribute('alt'))) {
@@ -70,39 +148,246 @@
     });
   }
 
-  function addStickyMobileCall() {
-    if (document.querySelector('.sticky-call') || document.querySelector('.sticky-mobile-call')) {
-      return;
-    }
-
-    var sticky = document.createElement('a');
-    sticky.href = 'tel:' + BUSINESS_PHONE;
-    sticky.className = 'sticky-mobile-call track-phone-click track-emergency-service';
-    sticky.setAttribute('data-track', 'emergency_service_click');
-    sticky.setAttribute('aria-label', 'Call now ' + PHONE_LABEL);
-    sticky.textContent = 'Emergency Service: ' + PHONE_LABEL;
-    document.body.appendChild(sticky);
-  }
-
   function ensureStickyStyles() {
     if (document.getElementById('lead-pages-sticky-style')) return;
     var style = document.createElement('style');
     style.id = 'lead-pages-sticky-style';
     style.textContent =
       '.sticky-mobile-call{position:fixed;left:10px;right:10px;bottom:10px;z-index:999;display:none;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:#dc2626;color:#fff;font-weight:800;font-size:14px;border-radius:999px;padding:12px 18px;box-shadow:0 4px 18px rgba(15,30,46,.25)}' +
-      '@media (max-width:900px){.sticky-mobile-call{display:inline-flex}body{padding-bottom:64px}}';
+      '.global-free-estimate{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;background:#dc2626;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 6px 20px rgba(220,38,38,.28)}' +
+      '.global-free-estimate:hover{background:#b91c1c}' +
+      '.estimate-trustline{margin-top:12px;font-size:12px;color:rgba(255,255,255,.82);font-weight:600}' +
+      '.lead-cta-row + .estimate-trustline,.hero-actions + .estimate-trustline{color:inherit;opacity:.8}' +
+      '.request-service-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:2px}' +
+      '.request-service-field{display:flex;flex-direction:column;gap:4px}' +
+      '.request-service-field label{font-size:12px;font-weight:700;color:#3a4f3a}' +
+      '.request-service-field input,.request-service-field select,.request-service-field textarea{width:100%;border:1px solid #d8e4d8;border-radius:8px;padding:10px;background:#fff;color:#1c2b1c;font:inherit}' +
+      '.request-service-field textarea{min-height:96px;resize:vertical}' +
+      '.request-service-full{grid-column:1 / -1}' +
+      '@media (max-width:900px){.sticky-mobile-call{display:inline-flex}body{padding-bottom:64px}.request-service-extra{grid-template-columns:1fr}}';
     document.head.appendChild(style);
   }
 
-  function attachLeadFormHandlers() {
-    var forms = document.querySelectorAll('.quote-form');
+  function addStickyMobileCall() {
+    if (document.querySelector('.sticky-mobile-call')) {
+      return;
+    }
+
+    var existingSticky = document.querySelector('.sticky-call');
+    if (existingSticky) {
+      existingSticky.classList.add('track-phone-click', 'track-emergency-service');
+      existingSticky.setAttribute('data-track', 'phone_click');
+      existingSticky.setAttribute('aria-label', 'Call now ' + CONFIG.phoneLabel);
+      return;
+    }
+
+    var sticky = document.createElement('a');
+    sticky.href = 'tel:' + CONFIG.phoneRaw;
+    sticky.className = 'sticky-mobile-call track-phone-click track-emergency-service';
+    sticky.setAttribute('data-track', 'phone_click');
+    sticky.setAttribute('aria-label', 'Call now ' + CONFIG.phoneLabel);
+    sticky.textContent = 'Emergency Service: ' + CONFIG.phoneLabel;
+    document.body.appendChild(sticky);
+  }
+
+  function addHiddenInput(form, name, value) {
+    var field = form.querySelector('input[name="' + name + '"]');
+    if (!field) {
+      field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = name;
+      form.appendChild(field);
+    }
+    field.value = value;
+  }
+
+  function createInputField(config) {
+    var wrap = document.createElement('div');
+    wrap.className = 'request-service-field' + (config.full ? ' request-service-full' : '');
+
+    var label = document.createElement('label');
+    label.setAttribute('for', config.id);
+    label.textContent = config.label;
+
+    var field;
+    if (config.type === 'textarea') {
+      field = document.createElement('textarea');
+    } else if (config.type === 'select') {
+      field = document.createElement('select');
+      (config.options || []).forEach(function (optionConfig) {
+        var option = document.createElement('option');
+        option.value = optionConfig.value;
+        option.textContent = optionConfig.label;
+        if (optionConfig.selected) option.selected = true;
+        field.appendChild(option);
+      });
+    } else {
+      field = document.createElement('input');
+      field.type = config.type || 'text';
+    }
+
+    field.id = config.id;
+    field.name = config.name;
+    if (config.placeholder) field.placeholder = config.placeholder;
+    if (config.required) field.required = true;
+
+    wrap.appendChild(label);
+    wrap.appendChild(field);
+
+    return wrap;
+  }
+
+  function appendFieldIfMissing(form, container, query, config) {
+    if (form.querySelector(query)) return;
+    container.appendChild(createInputField(config));
+  }
+
+  function ensureRequestServiceFormSection() {
+    var hasQuoteForm = !!document.querySelector('form.quote-form, form.request-service-form');
+    if (hasQuoteForm) return;
+
+    var section = document.createElement('section');
+    section.className = 'sec sec-white request-service-component';
+    section.id = 'request-service-form-section';
+    section.innerHTML =
+      '<div class="wrap">' +
+      '<div style="background:#fff;border:1px solid #d8e4d8;border-left:4px solid #1d5fb8;border-radius:12px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.07)">' +
+      '<h2 style="font-size:22px;color:#0f1e2e;margin-bottom:10px">Request Service</h2>' +
+      '<p style="font-size:14px;color:#3a4f3a;margin-bottom:14px">Tell us what you need and we will respond quickly. For urgent requests call <a href="tel:' +
+      CONFIG.phoneRaw +
+      '" style="color:#1d5fb8;font-weight:700">' +
+      CONFIG.phoneLabel +
+      '</a>.</p>' +
+      '<form class="quote-form request-service-form" id="request-service-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" style="display:grid;gap:10px">' +
+      '<div class="request-service-extra"></div>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn btn-primary track-quote-submit" data-track="quote_submit">Get a free estimate</button>' +
+      '<a href="tel:' +
+      CONFIG.phoneRaw +
+      '" class="btn btn-red track-phone-click" data-track="phone_click">Call ' +
+      CONFIG.phoneLabel +
+      '</a></div>' +
+      '</form>' +
+      '</div>' +
+      '</div>' +
+      '</section>';
+
+    var insertionPoint = document.querySelector('.cta-band') || document.querySelector('footer') || document.body.lastElementChild;
+    if (insertionPoint && insertionPoint.parentNode) {
+      insertionPoint.parentNode.insertBefore(section, insertionPoint);
+    } else {
+      document.body.appendChild(section);
+    }
+  }
+
+  function enhanceRequestForms() {
+    var forms = document.querySelectorAll('form.quote-form, form.request-service-form');
+    var index = 0;
 
     forms.forEach(function (form) {
+      index += 1;
+      form.classList.add('quote-form', 'request-service-form');
+
+      if (!form.id) {
+        form.id = index === 1 ? 'request-service-form' : 'request-service-form-' + index;
+      }
+
+      var extras = form.querySelector('.request-service-extra');
+      if (!extras) {
+        extras = document.createElement('div');
+        extras.className = 'request-service-extra';
+        var firstRow = form.querySelector('button[type="submit"],input[type="submit"]');
+        var host = firstRow && firstRow.parentElement ? firstRow.parentElement : form.lastElementChild;
+        if (host && host.parentElement === form) {
+          form.insertBefore(extras, host);
+        } else {
+          form.appendChild(extras);
+        }
+      }
+
+      appendFieldIfMissing(form, extras, '[name="Company name"],[name="company_name"],[name="Company"],#request-company', {
+        id: 'request-company-' + index,
+        name: 'Company name',
+        label: 'Company name',
+        type: 'text',
+        placeholder: 'Your business name',
+        required: true
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Contact name"],[name="contact_name"],[name="Name"],#request-contact', {
+        id: 'request-contact-' + index,
+        name: 'Contact name',
+        label: 'Contact name',
+        type: 'text',
+        placeholder: 'Full name',
+        required: true
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Phone"],[name="phone"],[type="tel"],#request-phone', {
+        id: 'request-phone-' + index,
+        name: 'Phone',
+        label: 'Phone number',
+        type: 'tel',
+        placeholder: '(###) ###-####',
+        required: true
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Email"],[name="email"],[type="email"],#request-email', {
+        id: 'request-email-' + index,
+        name: 'Email',
+        label: 'Email',
+        type: 'email',
+        placeholder: 'name@company.com',
+        required: true
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Service location"],[name="Location"],select[name*="location" i],#request-location', {
+        id: 'request-location-' + index,
+        name: 'Service location',
+        label: 'Service location',
+        type: 'select',
+        required: true,
+        options: [
+          { value: '', label: 'Select location', selected: true },
+          { value: 'Washington DC', label: 'Washington DC' },
+          { value: 'Virginia', label: 'Virginia' },
+          { value: 'Maryland', label: 'Maryland' },
+          { value: 'New York', label: 'New York' }
+        ]
+      });
+
+      appendFieldIfMissing(form, extras, '[name="Issue description"],[name="Message"],textarea', {
+        id: 'request-issue-' + index,
+        name: 'Issue description',
+        label: 'Describe the issue',
+        type: 'textarea',
+        full: true,
+        placeholder: 'Tell us what is happening, address, and urgency level.',
+        required: true
+      });
+
       var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
       if (submitButton) {
         submitButton.classList.add('track-quote-submit');
         submitButton.setAttribute('data-track', 'quote_submit');
+        if (submitButton.tagName.toLowerCase() === 'button') {
+          submitButton.textContent = 'Get a free estimate';
+        } else {
+          submitButton.value = 'Get a free estimate';
+        }
       }
+
+      addHiddenInput(form, '_subject', 'New service request from ' + slugFromPath(window.location.pathname));
+      addHiddenInput(form, '_captcha', 'false');
+      addHiddenInput(form, '_next', window.location.origin + window.location.pathname + '?submitted=1');
+    });
+  }
+
+  function attachLeadFormHandlers() {
+    var forms = document.querySelectorAll('form.quote-form, form.request-service-form');
+
+    forms.forEach(function (form) {
+      if (form.getAttribute('data-lead-bound') === 'true') return;
+      form.setAttribute('data-lead-bound', 'true');
 
       form.addEventListener('submit', function () {
         var summaryParts = [];
@@ -116,40 +401,98 @@
         });
 
         var pageTag = slugFromPath(window.location.pathname);
-        var summary = 'Quote request from ' + pageTag + '\n' + summaryParts.join('\n');
+        var summary = 'Request from ' + pageTag + '\n' + summaryParts.join('\n');
 
-        var hiddenSummary = form.querySelector('input[name="lead_summary"]');
-        if (!hiddenSummary) {
-          hiddenSummary = document.createElement('input');
-          hiddenSummary.type = 'hidden';
-          hiddenSummary.name = 'lead_summary';
-          form.appendChild(hiddenSummary);
-        }
-        hiddenSummary.value = summary;
+        addHiddenInput(form, 'lead_summary', summary);
 
-        if (!form.querySelector('input[name="_subject"]')) {
-          var subject = document.createElement('input');
-          subject.type = 'hidden';
-          subject.name = '_subject';
-          subject.value = 'New inspection request from ' + pageTag;
-          form.appendChild(subject);
-        }
+        trackEvent('request_service_form_submit', {
+          form_id: form.id || 'request-service-form',
+          location: safeText((form.querySelector('[name="Service location"]') || {}).value)
+        });
+      });
+    });
+  }
 
-        if (!form.querySelector('input[name="_captcha"]')) {
-          var captcha = document.createElement('input');
-          captcha.type = 'hidden';
-          captcha.name = '_captcha';
-          captcha.value = 'false';
-          form.appendChild(captcha);
-        }
+  function ensurePrimaryCta() {
+    var target = document.querySelector('.hero-actions') || document.querySelector('.lead-cta-row');
+    if (!target) return;
 
-        if (!form.querySelector('input[name="_next"]')) {
-          var next = document.createElement('input');
-          next.type = 'hidden';
-          next.name = '_next';
-          next.value = window.location.origin + window.location.pathname + '?submitted=1';
-          form.appendChild(next);
+    if (target.querySelector('.js-free-estimate-cta')) return;
+
+    var cta = document.createElement('a');
+    cta.href = '#request-service-form';
+    cta.className = 'global-free-estimate js-free-estimate-cta track-get-estimate';
+    cta.setAttribute('data-track', 'get_free_estimate_click');
+    cta.textContent = 'Get a free estimate';
+    target.appendChild(cta);
+
+    var trustline = target.parentElement && target.parentElement.querySelector('.estimate-trustline');
+    if (!trustline) {
+      trustline = document.createElement('p');
+      trustline.className = 'estimate-trustline';
+      trustline.textContent = 'Licensed DC, VA, MD & NY · $2M insured · Avg response under 45 minutes';
+      target.insertAdjacentElement('afterend', trustline);
+    }
+  }
+
+  function ensureNavAccessibility() {
+    var navs = document.querySelectorAll('nav');
+    navs.forEach(function (nav, index) {
+      if (!nav.hasAttribute('aria-label')) {
+        if (nav.classList.contains('nav')) {
+          nav.setAttribute('aria-label', 'Primary');
+        } else if (nav.classList.contains('bc-nav')) {
+          nav.setAttribute('aria-label', 'Breadcrumb');
+        } else {
+          nav.setAttribute('aria-label', 'Site navigation ' + (index + 1));
         }
+      }
+    });
+  }
+
+  function buildSocialLink(item) {
+    var a = document.createElement('a');
+    a.className = 'social-link';
+    a.href = item.href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('aria-label', item.label + ' (opens in a new tab)');
+    a.title = item.label;
+
+    var i = document.createElement('i');
+    i.className = item.iconClass;
+    i.setAttribute('aria-hidden', 'true');
+    a.appendChild(i);
+
+    return a;
+  }
+
+  function ensureSocialLinks() {
+    var containers = document.querySelectorAll('.nav-social');
+
+    containers.forEach(function (container) {
+      CONFIG.social.forEach(function (item) {
+        var exists = Array.from(container.querySelectorAll('a')).some(function (link) {
+          return (link.getAttribute('href') || '').indexOf(item.href) === 0;
+        });
+        if (!exists) {
+          container.appendChild(buildSocialLink(item));
+        }
+      });
+    });
+  }
+
+  function wireClickTracking() {
+    document.addEventListener('click', function (event) {
+      var target = event.target.closest('a,button,input[type="submit"]');
+      if (!target) return;
+
+      var trackName = target.getAttribute('data-track');
+      if (!trackName) return;
+
+      trackEvent(trackName, {
+        element_text: safeText(target.textContent || target.value || target.getAttribute('aria-label') || 'interaction'),
+        href: target.getAttribute('href') || ''
       });
     });
   }
@@ -167,9 +510,9 @@
     box.style.margin = '12px auto';
     box.style.maxWidth = '1160px';
     box.style.fontWeight = '700';
-    box.textContent = 'Thanks, your request was submitted. For immediate service call ' + PHONE_LABEL + '.';
+    box.textContent = 'Thanks, your request was submitted. For immediate service call ' + CONFIG.phoneLabel + '.';
 
-    var host = document.querySelector('.lead-wrap') || document.body;
+    var host = document.querySelector('.lead-wrap') || document.querySelector('.wrap') || document.body;
     host.insertAdjacentElement('afterbegin', box);
 
     params.delete('submitted');
@@ -177,12 +520,51 @@
     window.history.replaceState({}, '', clean);
   }
 
+  function showAnalyticsSetupHint() {
+    var gtmConfig = window.GTM_CONFIG || {};
+    var unresolvedIds =
+      (gtmConfig.gtmId || CONFIG.gtmId) === CONFIG.gtmId ||
+      (gtmConfig.ga4Id || CONFIG.ga4Id) === CONFIG.ga4Id ||
+      (gtmConfig.fbPixelId || CONFIG.fbPixelId) === CONFIG.fbPixelId;
+
+    if (!unresolvedIds) return;
+    if (document.querySelector('[data-analytics-hint]')) return;
+
+    var hint = document.createElement('div');
+    hint.setAttribute('data-analytics-hint', 'true');
+    hint.style.position = 'fixed';
+    hint.style.left = '12px';
+    hint.style.bottom = '72px';
+    hint.style.zIndex = '998';
+    hint.style.background = '#0f172a';
+    hint.style.color = '#fff';
+    hint.style.fontSize = '12px';
+    hint.style.padding = '9px 11px';
+    hint.style.borderRadius = '8px';
+    hint.style.maxWidth = '300px';
+    hint.style.boxShadow = '0 6px 18px rgba(0,0,0,.22)';
+    hint.textContent = 'Analytics setup pending: replace GTM/GA4/Facebook placeholder IDs in head scripts.';
+
+    document.body.appendChild(hint);
+
+    setTimeout(function () {
+      if (hint && hint.parentNode) hint.parentNode.removeChild(hint);
+    }, 9000);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     ensureStickyStyles();
+    ensureNavAccessibility();
     applyTrackingAttributes();
     enhanceImages();
+    ensureSocialLinks();
+    ensurePrimaryCta();
+    ensureRequestServiceFormSection();
+    enhanceRequestForms();
     addStickyMobileCall();
     attachLeadFormHandlers();
+    wireClickTracking();
     announceSubmissionIfNeeded();
+    showAnalyticsSetupHint();
   });
 })();

@@ -3,3 +3,6 @@ Allow: /
 
 Sitemap: https://dcemergencylockanddoor.com/sitemap.xml
 Host: dcemergencylockanddoor.com
+
+# AI context file
+# llms.txt: https://dcemergencylockanddoor.com/llms.txt

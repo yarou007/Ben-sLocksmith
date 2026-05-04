@@ -435,6 +435,13 @@
     });
   }
 
+  function enforceGlobalFormSubmitEndpoint() {
+    var forms = document.querySelectorAll('form[action*="formsubmit.co"]');
+    forms.forEach(function (form) {
+      form.setAttribute('action', CONFIG.formSubmitEndpoint);
+    });
+  }
+
   function attachLeadFormHandlers() {
     var forms = document.querySelectorAll('form.quote-form, form.request-service-form');
 
@@ -657,6 +664,7 @@
     ensurePrimaryCta();
     ensureRequestServiceFormSection();
     enhanceRequestForms();
+    enforceGlobalFormSubmitEndpoint();
     addStickyMobileCall();
     attachLeadFormHandlers();
     wireClickTracking();

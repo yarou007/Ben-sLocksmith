@@ -5,6 +5,7 @@ const ROOT = process.cwd();
 const DOMAIN = 'https://dcemergencylockanddoor.com';
 const PHONE_RAW = '7032440559';
 const PHONE_LABEL = '703-244-0559';
+const FORM_SUBMIT_ENDPOINT = 'https://formsubmit.co/dclockanddoor@gmail.com';
 
 const sameAs = [
   'https://x.com/dcemergencylock',
@@ -923,7 +924,7 @@ ${tag(faqSchema(page.faq))}
     <article class="lead-cta-box">
       <h2>Request Service</h2>
       <p>Share your details and we will follow up quickly. For urgent requests, call <a href="tel:${PHONE_RAW}" data-event="phone_click">${PHONE_LABEL}</a>.</p>
-      <form class="lead-quote-form quote-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" enctype="multipart/form-data">
+      <form class="lead-quote-form quote-form" action="${FORM_SUBMIT_ENDPOINT}" method="POST" enctype="multipart/form-data">
         <div class="lead-form-row"><div><label for="${page.slug}-name">Name</label><input id="${page.slug}-name" name="Name" required></div><div><label for="${page.slug}-business">Business name</label><input id="${page.slug}-business" name="Business name" required></div></div>
         <div class="lead-form-row"><div><label for="${page.slug}-phone">Phone</label><input id="${page.slug}-phone" name="Phone" type="tel" required></div><div><label for="${page.slug}-email">Email</label><input id="${page.slug}-email" name="Email" type="email" required></div></div>
         <div class="lead-form-row"><div><label for="${page.slug}-service">Service needed</label><input id="${page.slug}-service" name="Service needed" value="${page.h1}" required></div><div><label for="${page.slug}-location">Location / service area</label><select id="${page.slug}-location" name="Service location" required><option value="">Select location</option><option>Washington DC</option><option>Northern Virginia</option><option>Maryland</option><option>New York</option></select></div></div>

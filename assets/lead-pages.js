@@ -284,7 +284,9 @@
       '" style="color:#1d5fb8;font-weight:700">' +
       CONFIG.phoneLabel +
       '</a>.</p>' +
-      '<form class="quote-form request-service-form" id="request-service-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" style="display:grid;gap:10px">' +
+      '<form class="quote-form request-service-form" id="request-service-form" action="' +
+      CONFIG.formSubmitEndpoint +
+      '" method="POST" style="display:grid;gap:10px">' +
       '<div class="request-service-extra"></div>' +
       '<div style="display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn btn-primary track-quote-submit" data-track="quote_form_submit" data-event="quote_form_submit">Request a Free Estimate</button>' +
       '<a href="tel:' +

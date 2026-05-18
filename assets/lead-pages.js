@@ -1,6 +1,6 @@
 (function () {
   var CONFIG = {
-    phoneRaw: '7032440559',
+    phoneRaw: '+17032440559',
     phoneLabel: '703-244-0559',
     formSubmitEndpoint: 'https://formsubmit.co/dclockanddoor@gmail.com',
     gtmId: 'GTM-XXXXXXX',
@@ -82,6 +82,7 @@
       var text = safeText(anchor.textContent).toLowerCase();
 
       if (href.indexOf('tel:') === 0) {
+        anchor.setAttribute('href', 'tel:' + CONFIG.phoneRaw);
         anchor.classList.add('track-phone-click');
         anchor.setAttribute('data-track', 'phone_click');
         anchor.setAttribute('data-event', 'phone_click');
@@ -192,6 +193,103 @@
       '.request-service-full{grid-column:1 / -1}' +
       '@media (max-width:900px){.sticky-mobile-call{display:inline-flex}body{padding-bottom:64px}.request-service-extra{grid-template-columns:1fr}}';
     document.head.appendChild(style);
+  }
+
+  function ensurePerformanceHints() {
+    function ensureLink(rel, href, extra) {
+      var selector = 'link[rel="' + rel + '"][href="' + href + '"]';
+      if (document.querySelector(selector)) return;
+      var link = document.createElement('link');
+      link.rel = rel;
+      link.href = href;
+      if (extra && extra.crossorigin) link.crossOrigin = extra.crossorigin;
+      if (extra && extra.as) link.as = extra.as;
+      document.head.appendChild(link);
+    }
+
+    ensureLink('preconnect', 'https://fonts.gstatic.com', { crossorigin: 'anonymous' });
+    ensureLink('preconnect', 'https://cdnjs.cloudflare.com', { crossorigin: 'anonymous' });
+
+    var fontAwesomeLink = document.querySelector('link[rel="stylesheet"][href*="font-awesome/6.5.2/css/all.min.css"]');
+    if (!fontAwesomeLink) return;
+
+    if (fontAwesomeLink.dataset && fontAwesomeLink.dataset.asyncLoaded === 'true') return;
+
+    var href = fontAwesomeLink.getAttribute('href');
+    var asyncLink = document.createElement('link');
+    asyncLink.rel = 'preload';
+    asyncLink.as = 'style';
+    asyncLink.href = href;
+    asyncLink.crossOrigin = 'anonymous';
+    asyncLink.onload = function () {
+      this.onload = null;
+      this.rel = 'stylesheet';
+    };
+    if (fontAwesomeLink.dataset) {
+      fontAwesomeLink.dataset.asyncLoaded = 'true';
+    }
+
+    var noscript = document.createElement('noscript');
+    noscript.innerHTML = '<link rel="stylesheet" href="' + href + '" crossorigin="anonymous">';
+
+    fontAwesomeLink.parentNode.insertBefore(asyncLink, fontAwesomeLink);
+    fontAwesomeLink.parentNode.insertBefore(noscript, fontAwesomeLink.nextSibling);
+    fontAwesomeLink.remove();
+  }
+
+  function normalizeLocationLinks() {
+    var map = {
+      '/city-washington-dc': '/washington-dc',
+      'city-washington-dc': '/washington-dc',
+      '/city-northern-virginia': '/northern-virginia',
+      'city-northern-virginia': '/northern-virginia',
+      '/city-maryland': '/maryland',
+      'city-maryland': '/maryland',
+      '/city-new-york': '/new-york',
+      'city-new-york': '/new-york'
+    };
+
+    document.querySelectorAll('a[href]').forEach(function (anchor) {
+      var href = anchor.getAttribute('href');
+      if (!href || !map[href]) return;
+      anchor.setAttribute('href', map[href]);
+    });
+  }
+
+  function ensureCoreSchemaBlock() {
+    if (document.getElementById('dceld-core-local-seo-schema')) return;
+
+    var canonical = (document.querySelector('link[rel="canonical"]') || {}).href || window.location.href;
+    var script = document.createElement('script');
+    script.id = 'dceld-core-local-seo-schema';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': ['Locksmith', 'LocalBusiness'],
+      name: 'DC Emergency Lock & Door',
+      url: canonical,
+      telephone: '+1-703-244-0559',
+      priceRange: '$$',
+      image: 'https://dcemergencylockanddoor.com/assets/img-956a4955d1ddb21c.jpg',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Mobile Commercial Service',
+        addressLocality: 'Washington',
+        addressRegion: 'DC',
+        postalCode: '20001',
+        addressCountry: 'US'
+      },
+      areaServed: ['Washington DC', 'Northern Virginia', 'Maryland', 'New York City'],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }
+      ]
+    });
+    document.head.appendChild(script);
   }
 
   function addStickyMobileCall() {
@@ -651,12 +749,19 @@
     var host = document.querySelector('.lead-wrap') || document.querySelector('.wrap') || document.body;
     host.insertAdjacentElement('afterbegin', box);
 
+    trackEvent('quote_form_confirmation_view', {
+      page_slug: slugFromPath(window.location.pathname)
+    });
+
     params.delete('submitted');
     var clean = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
     window.history.replaceState({}, '', clean);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    ensurePerformanceHints();
+    normalizeLocationLinks();
+    ensureCoreSchemaBlock();
     ensureStickyStyles();
     ensureNavAccessibility();
     applyTrackingAttributes();

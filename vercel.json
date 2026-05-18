@@ -50,6 +50,26 @@
       "source": "/index",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/city-washington-dc",
+      "destination": "/washington-dc",
+      "permanent": true
+    },
+    {
+      "source": "/city-northern-virginia",
+      "destination": "/northern-virginia",
+      "permanent": true
+    },
+    {
+      "source": "/city-maryland",
+      "destination": "/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/city-new-york",
+      "destination": "/new-york",
+      "permanent": true
     }
   ]
 }

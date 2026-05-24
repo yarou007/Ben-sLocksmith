@@ -43,6 +43,23 @@
     return pathname.replace(/^\//, '').replace(/\/$/, '') || 'home';
   }
 
+  function inferPhoneLocation(anchor) {
+    if (!anchor) return 'hero';
+    if (anchor.classList.contains('sticky-call') || anchor.classList.contains('sticky-mobile-call') || anchor.closest('.sticky-call, .sticky-mobile-call')) {
+      return 'sticky';
+    }
+    if (anchor.closest('footer, .lead-footer')) {
+      return 'footer';
+    }
+    if (anchor.closest('.card, .lead-card, .area-card, .service-card, .bc, .sb-box')) {
+      return 'service-card';
+    }
+    if (anchor.closest('.hero, .lead-hero, .topbar, .lead-topbar, .cta-band, .hero-actions, .lead-cta-row, .nav')) {
+      return 'hero';
+    }
+    return 'service-card';
+  }
+
   function trackEvent(eventName, payload) {
     if (!eventName) return;
 
@@ -80,25 +97,31 @@
     anchors.forEach(function (anchor) {
       var href = anchor.getAttribute('href') || '';
       var text = safeText(anchor.textContent).toLowerCase();
+      var isQuoteLink =
+        href === '#request-service-form' ||
+        href === '#request-service-form-section' ||
+        href.indexOf('quote-form') !== -1 ||
+        text.indexOf('get quote') !== -1 ||
+        text.indexOf('free quote') !== -1 ||
+        text.indexOf('free estimate') !== -1 ||
+        text.indexOf('request service') !== -1;
 
-      if (href.indexOf('tel:') === 0) {
+      if (href.indexOf('tel:') === 0 || isQuoteLink) {
         anchor.setAttribute('href', 'tel:' + CONFIG.phoneRaw);
         anchor.classList.add('track-phone-click');
         anchor.setAttribute('data-track', 'phone_click');
         anchor.setAttribute('data-event', 'phone_click');
+        anchor.setAttribute('data-cta', 'phone');
+        anchor.setAttribute('data-location', inferPhoneLocation(anchor));
+        if (isQuoteLink) {
+          anchor.textContent = 'Call Now: ' + CONFIG.phoneLabel;
+        }
       }
 
       if (text.indexOf('request inspection') !== -1) {
         anchor.classList.add('track-request-inspection');
         anchor.setAttribute('data-track', 'request_inspection_click');
         anchor.setAttribute('data-event', 'service_cta_click');
-      }
-
-      if (text.indexOf('get quote') !== -1 || text.indexOf('free quote') !== -1 || text.indexOf('free estimate') !== -1) {
-        anchor.classList.add('track-get-estimate');
-        anchor.setAttribute('data-track', 'get_free_estimate_click');
-        anchor.setAttribute('data-event', 'quote_form_open');
-        anchor.textContent = 'Request a Free Estimate';
       }
 
       if (text.indexOf('emergency') !== -1) {
@@ -258,6 +281,11 @@
 
   function ensureCoreSchemaBlock() {
     if (document.getElementById('dceld-core-local-seo-schema')) return;
+    var hasExistingLocalBusiness = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).some(function (scriptNode) {
+      var text = scriptNode.textContent || '';
+      return text.indexOf('LocalBusiness') !== -1 && text.indexOf('DC Emergency Lock & Door') !== -1;
+    });
+    if (hasExistingLocalBusiness) return;
 
     var canonical = (document.querySelector('link[rel="canonical"]') || {}).href || window.location.href;
     var script = document.createElement('script');
@@ -279,7 +307,7 @@
         postalCode: '20001',
         addressCountry: 'US'
       },
-      areaServed: ['Washington DC', 'Northern Virginia', 'Maryland', 'New York City'],
+      areaServed: ['Washington DC', 'Northern Virginia', 'Maryland'],
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -301,7 +329,11 @@
     if (existingSticky) {
       existingSticky.classList.add('track-phone-click', 'track-emergency-service');
       existingSticky.setAttribute('data-track', 'phone_click');
+      existingSticky.setAttribute('data-event', 'phone_click');
+      existingSticky.setAttribute('data-cta', 'phone');
+      existingSticky.setAttribute('data-location', 'sticky');
       existingSticky.setAttribute('aria-label', 'Call now ' + CONFIG.phoneLabel);
+      existingSticky.textContent = 'Call Now: ' + CONFIG.phoneLabel;
       return;
     }
 
@@ -309,9 +341,94 @@
     sticky.href = 'tel:' + CONFIG.phoneRaw;
     sticky.className = 'sticky-mobile-call track-phone-click track-emergency-service';
     sticky.setAttribute('data-track', 'phone_click');
+    sticky.setAttribute('data-event', 'phone_click');
+    sticky.setAttribute('data-cta', 'phone');
+    sticky.setAttribute('data-location', 'sticky');
     sticky.setAttribute('aria-label', 'Call now ' + CONFIG.phoneLabel);
-    sticky.textContent = 'Emergency Service: ' + CONFIG.phoneLabel;
+    sticky.textContent = 'Call Now: ' + CONFIG.phoneLabel;
     document.body.appendChild(sticky);
+  }
+
+  function removeQuoteFormsAndAddCallSection() {
+    document.querySelectorAll('section#request-service-form,section#request-service-form-section,section[id*="quote-form"],section[id*="request-service-form"]').forEach(function (section) {
+      if (section.querySelector('form')) {
+        section.remove();
+      }
+    });
+
+    document.querySelectorAll('form.quote-form,form.request-service-form,form.lead-quote-form').forEach(function (form) {
+      var section = form.closest('section');
+      if (section) {
+        section.remove();
+      } else {
+        form.remove();
+      }
+    });
+
+    var hasCallOnlySection =
+      !!document.querySelector('.call-only-service-section') ||
+      Array.from(document.querySelectorAll('section#request-service-form,section[id*="request-service-form"]')).some(function (section) {
+        return !section.querySelector('form');
+      });
+    if (hasCallOnlySection) return;
+
+    var section = document.createElement('section');
+    section.className = 'lead-section call-only-service-section';
+    section.id = 'request-service-form';
+    section.innerHTML =
+      '<div class="lead-wrap">' +
+      '<article class="lead-cta-box">' +
+      '<h2>Call for 24/7 Commercial Service</h2>' +
+      '<p>For immediate dispatch in Washington DC and the DMV, call <a href="tel:' +
+      CONFIG.phoneRaw +
+      '" data-cta="phone" data-location="service-card">Call Now: ' +
+      CONFIG.phoneLabel +
+      '</a>.</p>' +
+      '<div class="lead-cta-row" style="margin-top:14px">' +
+      '<a class="lead-btn lead-btn-primary" href="tel:' +
+      CONFIG.phoneRaw +
+      '" data-track="phone_click" data-event="phone_click" data-cta="phone" data-location="service-card">Call Now: ' +
+      CONFIG.phoneLabel +
+      '</a>' +
+      '<a class="lead-btn lead-btn-ghost" href="/commercial-locksmith-washington-dc" data-event="service_cta_click">Commercial Locksmith in Washington DC</a>' +
+      '</div>' +
+      '</article>' +
+      '</div>';
+
+    var insertionPoint = document.querySelector('footer') || document.body.lastElementChild;
+    if (insertionPoint && insertionPoint.parentNode) {
+      insertionPoint.parentNode.insertBefore(section, insertionPoint);
+    } else {
+      document.body.appendChild(section);
+    }
+  }
+
+  function addSectionCallCtas() {
+    if (!document.body.classList.contains('lead-page')) return;
+
+    document.querySelectorAll('.lead-section').forEach(function (section) {
+      if (section.classList.contains('call-only-service-section')) return;
+      if (section.querySelector('.js-section-call-cta')) return;
+
+      var host = section.querySelector('.lead-wrap');
+      if (!host) return;
+
+      var row = document.createElement('div');
+      row.className = 'lead-cta-row js-section-call-cta';
+      row.style.marginTop = '16px';
+
+      var call = document.createElement('a');
+      call.className = 'lead-btn lead-btn-primary';
+      call.href = 'tel:' + CONFIG.phoneRaw;
+      call.textContent = 'Call Now: ' + CONFIG.phoneLabel;
+      call.setAttribute('data-track', 'phone_click');
+      call.setAttribute('data-event', 'phone_click');
+      call.setAttribute('data-cta', 'phone');
+      call.setAttribute('data-location', 'service-card');
+      row.appendChild(call);
+
+      host.appendChild(row);
+    });
   }
 
   function addHiddenInput(form, name, value) {
@@ -480,7 +597,7 @@
           { value: 'Washington DC', label: 'Washington DC' },
           { value: 'Virginia', label: 'Virginia' },
           { value: 'Maryland', label: 'Maryland' },
-          { value: 'New York', label: 'New York' }
+          { value: 'Northern Virginia', label: 'Northern Virginia' }
         ]
       });
 
@@ -576,22 +693,24 @@
   function ensurePrimaryCta() {
     var target = document.querySelector('.hero-actions') || document.querySelector('.lead-cta-row');
     if (!target) return;
-
-    if (target.querySelector('.js-free-estimate-cta')) return;
-
-    var cta = document.createElement('a');
-    cta.href = '#request-service-form';
-    cta.className = 'global-free-estimate js-free-estimate-cta track-get-estimate';
-    cta.setAttribute('data-track', 'get_free_estimate_click');
-    cta.setAttribute('data-event', 'quote_form_open');
-    cta.textContent = 'Request a Free Estimate';
-    target.appendChild(cta);
+    var hasPrimaryCall = !!target.querySelector('a[href^="tel:"]');
+    if (!hasPrimaryCall) {
+      var cta = document.createElement('a');
+      cta.href = 'tel:' + CONFIG.phoneRaw;
+      cta.className = 'global-free-estimate js-free-estimate-cta track-phone-click';
+      cta.setAttribute('data-track', 'phone_click');
+      cta.setAttribute('data-event', 'phone_click');
+      cta.setAttribute('data-cta', 'phone');
+      cta.setAttribute('data-location', 'hero');
+      cta.textContent = 'Call Now: ' + CONFIG.phoneLabel;
+      target.appendChild(cta);
+    }
 
     var trustline = target.parentElement && target.parentElement.querySelector('.estimate-trustline');
     if (!trustline) {
       trustline = document.createElement('p');
       trustline.className = 'estimate-trustline';
-      trustline.textContent = 'Licensed DC, VA, MD & NY · $2M insured · Avg response under 45 minutes';
+      trustline.textContent = 'Licensed & insured technicians · 24/7 emergency dispatch · Same-day service available';
       target.insertAdjacentElement('afterend', trustline);
     }
   }
@@ -761,21 +880,18 @@
   document.addEventListener('DOMContentLoaded', function () {
     ensurePerformanceHints();
     normalizeLocationLinks();
+    removeQuoteFormsAndAddCallSection();
     ensureCoreSchemaBlock();
     ensureStickyStyles();
     ensureNavAccessibility();
+    ensurePrimaryCta();
+    addSectionCallCtas();
     applyTrackingAttributes();
     enhanceImages();
     ensureSocialLinks();
     ensureExpandedServiceMenus();
-    ensurePrimaryCta();
-    ensureRequestServiceFormSection();
-    enhanceRequestForms();
-    enforceGlobalFormSubmitEndpoint();
     addStickyMobileCall();
-    attachLeadFormHandlers();
     wireClickTracking();
     removeLegacyAnalyticsNotice();
-    announceSubmissionIfNeeded();
   });
 })();

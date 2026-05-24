@@ -214,7 +214,22 @@
       '.request-service-field input,.request-service-field select,.request-service-field textarea{width:100%;border:1px solid #d8e4d8;border-radius:8px;padding:10px;background:#fff;color:#1c2b1c;font:inherit}' +
       '.request-service-field textarea{min-height:96px;resize:vertical}' +
       '.request-service-full{grid-column:1 / -1}' +
-      '@media (max-width:900px){.sticky-mobile-call{display:inline-flex}body{padding-bottom:64px}.request-service-extra{grid-template-columns:1fr}}';
+      '.call-only-service-section{padding:24px 14px;background:linear-gradient(180deg,#f7fbff 0%,#edf3fb 100%)}' +
+      '.call-only-wrap{max-width:1160px;margin:0 auto}' +
+      '.call-only-card{border:1px solid #d7e5f7;border-radius:16px;padding:22px;background:#fff;box-shadow:0 10px 24px rgba(15,30,46,.08)}' +
+      '.call-only-kicker{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1d5fb8}' +
+      '.call-only-card h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.15;color:#0f1e2e}' +
+      '.call-only-desc{margin:10px 0 0;font-size:16px;line-height:1.5;color:#334155}' +
+      '.call-only-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}' +
+      '.call-only-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:800;border-radius:10px;padding:12px 16px;line-height:1.1}' +
+      '.call-only-btn-primary{background:#1d5fb8;color:#fff;box-shadow:0 8px 22px rgba(29,95,184,.28)}' +
+      '.call-only-btn-primary:hover,.call-only-btn-primary:focus-visible{background:#184e98}' +
+      '.call-only-btn-secondary{background:#f8fbff;color:#1d5fb8;border:1px solid #c8daf3}' +
+      '.call-only-btn-secondary:hover,.call-only-btn-secondary:focus-visible{background:#eaf2ff;border-color:#9ebee6}' +
+      '.call-only-trust{display:flex;flex-wrap:wrap;gap:10px 18px;margin:14px 0 0;padding:0;list-style:none;font-size:13px;color:#334155;font-weight:600}' +
+      '.call-only-trust li{position:relative;padding-left:16px}' +
+      '.call-only-trust li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:999px;background:#1d5fb8;transform:translateY(-50%)}' +
+      '@media (max-width:900px){.sticky-mobile-call{display:inline-flex}body{padding-bottom:64px}.request-service-extra{grid-template-columns:1fr}.call-only-service-section{padding:18px 12px}.call-only-card{padding:18px}.call-only-actions{flex-direction:column;align-items:stretch}.call-only-btn{width:100%}.call-only-trust{display:grid;grid-template-columns:1fr;gap:8px}}';
     document.head.appendChild(style);
   }
 
@@ -350,9 +365,12 @@
   }
 
   function removeQuoteFormsAndAddCallSection() {
+    var removedQuoteForm = false;
+
     document.querySelectorAll('section#request-service-form,section#request-service-form-section,section[id*="quote-form"],section[id*="request-service-form"]').forEach(function (section) {
       if (section.querySelector('form')) {
         section.remove();
+        removedQuoteForm = true;
       }
     });
 
@@ -363,35 +381,47 @@
       } else {
         form.remove();
       }
+      removedQuoteForm = true;
     });
 
-    var hasCallOnlySection =
-      !!document.querySelector('.call-only-service-section') ||
-      Array.from(document.querySelectorAll('section#request-service-form,section[id*="request-service-form"]')).some(function (section) {
-        return !section.querySelector('form');
-      });
-    if (hasCallOnlySection) return;
+    document.querySelectorAll('.call-only-service-section').forEach(function (section) {
+      section.remove();
+    });
+
+    // Only render the fallback CTA block after we actually removed a form.
+    if (!removedQuoteForm) return;
+    // Skip duplicate CTA sections when pages already include a strong dispatch block.
+    if (document.querySelector('.cta-band')) return;
+    if (document.body.classList.contains('lead-page') && (document.querySelector('.lead-cta-row') || document.querySelector('.lead-cta-box'))) {
+      return;
+    }
 
     var section = document.createElement('section');
-    section.className = 'lead-section call-only-service-section';
+    section.className = 'call-only-service-section';
     section.id = 'request-service-form';
     section.innerHTML =
-      '<div class="lead-wrap">' +
-      '<article class="lead-cta-box">' +
+      '<div class="call-only-wrap">' +
+      '<article class="call-only-card">' +
+      '<p class="call-only-kicker">24/7 Emergency Dispatch</p>' +
       '<h2>Call for 24/7 Commercial Service</h2>' +
-      '<p>For immediate dispatch in Washington DC and the DMV, call <a href="tel:' +
+      '<p class="call-only-desc">For immediate dispatch in Washington DC and the DMV, call <a href="tel:' +
       CONFIG.phoneRaw +
-      '" data-cta="phone" data-location="service-card">Call Now: ' +
+      '" data-cta="phone" data-location="service-card">' +
       CONFIG.phoneLabel +
       '</a>.</p>' +
-      '<div class="lead-cta-row" style="margin-top:14px">' +
-      '<a class="lead-btn lead-btn-primary" href="tel:' +
+      '<div class="call-only-actions">' +
+      '<a class="call-only-btn call-only-btn-primary track-phone-click" href="tel:' +
       CONFIG.phoneRaw +
       '" data-track="phone_click" data-event="phone_click" data-cta="phone" data-location="service-card">Call Now: ' +
       CONFIG.phoneLabel +
       '</a>' +
-      '<a class="lead-btn lead-btn-ghost" href="/commercial-locksmith-washington-dc" data-event="service_cta_click">Commercial Locksmith in Washington DC</a>' +
+      '<a class="call-only-btn call-only-btn-secondary" href="/commercial-locksmith-washington-dc" data-event="service_cta_click">Commercial Locksmith in Washington DC</a>' +
       '</div>' +
+      '<ul class="call-only-trust">' +
+      '<li>Licensed &amp; insured technicians</li>' +
+      '<li>24/7 emergency dispatch</li>' +
+      '<li>Same-day service available</li>' +
+      '</ul>' +
       '</article>' +
       '</div>';
 

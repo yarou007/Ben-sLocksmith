@@ -25,7 +25,8 @@ const SKIPPED_DIRECTORIES = new Set([
   '.vercel',
   'coverage',
   'dist',
-  'node_modules'
+  'node_modules',
+  'public'
 ]);
 
 const PLACEHOLDER_ANALYTICS_PATTERN =

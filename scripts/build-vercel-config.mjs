@@ -36,6 +36,8 @@ redirectRules.push(rule('/:path*', `${origin}/:path*`, wwwHost));
 redirectRules.push(rule('/(.*).html', `${origin}/$1`));
 
 const config = {
+  $schema: 'https://openapi.vercel.sh/vercel.json',
+  outputDirectory: 'public',
   cleanUrls: true,
   trailingSlash: false,
   headers: [

@@ -15,7 +15,8 @@ const SKIPPED_DIRECTORIES = new Set([
   '.vercel',
   'coverage',
   'dist',
-  'node_modules'
+  'node_modules',
+  'public'
 ]);
 
 // These documents can remain available to people and crawlers, but they are

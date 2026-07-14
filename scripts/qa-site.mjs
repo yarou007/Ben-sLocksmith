@@ -45,7 +45,8 @@ const ignoredDirectories = new Set([
   '.agents',
   '.codex',
   'node_modules',
-  '.vercel'
+  '.vercel',
+  'public'
 ]);
 
 const issueGroups = new Map();

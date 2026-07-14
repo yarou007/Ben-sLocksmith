@@ -6,7 +6,7 @@ const origin = 'https://dcemergencylockanddoor.com';
 
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    if (entry.name === '.git' || entry.name === 'node_modules') return [];
+    if (entry.name === '.git' || entry.name === 'node_modules' || entry.name === 'public') return [];
     const absolute = path.join(directory, entry.name);
     return entry.isDirectory() ? walk(absolute) : [absolute];
   });

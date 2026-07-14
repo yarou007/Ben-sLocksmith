@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-core-pages.mjs && node scripts/sanitize-legacy-pages.mjs && node scripts/build-core-pages.mjs && node scripts/build-vercel-config.mjs && node scripts/generate-sitemap.mjs",
+    "build": "node scripts/build-core-pages.mjs && node scripts/sanitize-legacy-pages.mjs && node scripts/build-core-pages.mjs && node scripts/build-vercel-config.mjs && node scripts/generate-sitemap.mjs && node scripts/prepare-deploy-output.mjs",
     "lint": "node scripts/check-syntax.mjs",
     "typecheck": "node scripts/validate-site-data.mjs",
     "test": "node scripts/qa-site.mjs",

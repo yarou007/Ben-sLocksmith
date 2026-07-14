@@ -44,7 +44,7 @@ The implementation centralizes uncertain facts as disabled configuration values 
 | Differentiated service content | `data/service-pages-locksmith.mjs`, `data/service-pages-hardware.mjs`, `data/service-pages-planned.mjs` | Defines 17 pages by buyer problem, intent, CTA type, related services, and visible FAQs. |
 | Shared page/conversion system | `scripts/build-core-pages.mjs`, `assets/site.css`, `assets/site.js`, `assets/business-config.js` | Generates semantic pages, positive commercial-service context, call CTAs, mobile sticky call bar, service-page forms, breadcrumbs, verified-only trust output, paid-search mode, and data-layer events. The homepage is call-focused and has no form. |
 | Legacy safety pass | `scripts/sanitize-legacy-pages.mjs`, `assets/legacy-safety.css` | Removes placeholder tracking and unsupported claims/schema, normalizes shared assets, improves metadata/accessibility, rewrites internal links, and applies verification gates to legacy content. |
-| Technical SEO and delivery | `data/redirects.json`, `scripts/build-vercel-config.mjs`, `scripts/generate-sitemap.mjs`, `vercel.json`, `robots.txt`, `sitemap.xml`, `404.html`, `site.webmanifest`, `favicon.ico`, `llms.txt` | Establishes the preferred clean URL convention, explicit single-hop 301 redirect registry, final sitemap, crawl rules, security/cache headers, manifest/favicon, and a noindex 404 document. |
+| Technical SEO and delivery | `data/redirects.json`, `scripts/build-vercel-config.mjs`, `scripts/generate-sitemap.mjs`, `scripts/prepare-deploy-output.mjs`, `vercel.json`, `robots.txt`, `sitemap.xml`, `404.html`, `site.webmanifest`, `favicon.ico`, `llms.txt` | Establishes the preferred clean URL convention, explicit single-hop 301 redirect registry, final sitemap, crawl rules, security/cache headers, manifest/favicon, a noindex 404 document, and a clean `public/` Vercel output containing only deployable files. |
 | Images and performance | `assets/*.webp`, generated `<picture>`/image markup, shared CSS/JS | Adds WebP derivatives, intrinsic dimensions, responsive sources, eager/fetch-priority hero loading, lazy below-fold loading, system fonts, and delayed nonessential analytics. |
 | Measurement documentation | `docs/measurement-plan.md`, `docs/post-implementation-checklist.md` | Defines event semantics, attribution, conversion hierarchy, GTM/GA4/Ads setup, test procedures, and the external release gate. |
 | QA tooling | `package.json`, `scripts/check-syntax.mjs`, `scripts/validate-site-data.mjs`, `scripts/qa-site.mjs`, `scripts/site-audit.mjs` | Adds deterministic build, syntax checks, data/redirect validation, metadata/link/schema/form/image QA, and repeatable site inventory. |
@@ -173,10 +173,10 @@ Use qualified calls and delivered commercial requests as the operating measures.
 
 Local repository evidence for this implementation includes:
 
-- `npm run build` generated 28 canonical/support pages, the Vercel rules, and a 59-URL sitemap.
+- `npm run build` generated 28 canonical/support pages, the Vercel rules, a 59-URL sitemap, and a clean 194-file `public/` deployment bundle.
 - `npm run qa` covers JavaScript/module syntax, business/service/redirect configuration, and the full static crawl.
 - The final recorded static run reported `QA PASSED — 0 issues`: 127 pages, 59 sitemap URLs, 1,834 internal links, 692 asset references, 176 images, 61 forms, and 5,611 checks.
-- Configuration validation covered the 17 service definitions, all 63 redirect sources, and the explicit 301 status of every generated Vercel redirect rule.
+- Configuration validation covered the 17 service definitions, all 63 redirect sources, the explicit 301 status of every generated Vercel redirect rule, and the required `public` Vercel output directory.
 - A local headless-Chromium interaction pass exercised 40 checks across mobile navigation/sticky calls, event deduplication, form validation/attribution/success guards, paid mode, scheduled service, 404, and a legacy article. Desktop/mobile visual captures were also reviewed locally.
 
 These results prove source generation and local behavior only. Before release, rerun the exact commands against the final commit and record the SHA/output in `docs/post-implementation-checklist.md`.

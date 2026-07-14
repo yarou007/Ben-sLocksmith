@@ -23,53 +23,2095 @@
           "value": "nosniff"
         },
         {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), geolocation=(), microphone=()"
         }
       ]
     }
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/access-control-systems.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
       "has": [
         {
           "type": "host",
           "value": "www.dcemergencylockanddoor.com"
         }
-      ],
-      "destination": "https://dcemergencylockanddoor.com/:path*",
-      "permanent": true
+      ]
     },
     {
-      "source": "/(.*).html",
-      "destination": "/$1",
-      "permanent": true
+      "source": "/access-control-systems",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
     },
     {
-      "source": "/index",
-      "destination": "/",
-      "permanent": true
+      "source": "/access-control-systems.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
     },
     {
-      "source": "/city-washington-dc",
-      "destination": "/washington-dc",
-      "permanent": true
+      "source": "/access-control-systems",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
     },
     {
-      "source": "/city-northern-virginia",
-      "destination": "/northern-virginia",
-      "permanent": true
+      "source": "/annual-fire-door-inspection-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/annual-fire-door-inspection-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/annual-fire-door-inspection-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/annual-fire-door-inspection-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/bethesda-md-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/bethesda-md-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/bethesda-md-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/bethesda-md-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/business-security-solutions.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/business-security-solutions",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/business-security-solutions.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/business-security-solutions",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-maryland.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
     },
     {
       "source": "/city-maryland",
-      "destination": "/maryland",
-      "permanent": true
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-maryland.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-maryland",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-new-york.html",
+      "destination": "https://dcemergencylockanddoor.com/new-york",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
     },
     {
       "source": "/city-new-york",
-      "destination": "/new-york",
-      "permanent": true
+      "destination": "https://dcemergencylockanddoor.com/new-york",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-new-york.html",
+      "destination": "https://dcemergencylockanddoor.com/new-york",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-new-york",
+      "destination": "https://dcemergencylockanddoor.com/new-york",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-northern-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-northern-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-northern-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-northern-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/city-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-door-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-door-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-services.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-services",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-services.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-services",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/commercial-locksmith-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-locksmith-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/dmv-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/dmv-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/dmv-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dmv-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-closer-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-closer-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-repair-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-repair-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/door-repair-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/door-repair-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/emergency-commercial-locksmith-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/emergency-commercial-locksmith-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-compliance-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-compliance-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-compliance-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-compliance-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-deficiency-repair.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-deficiency-repair",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-deficiency-repair.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-deficiency-repair",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-maryland.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-maryland",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-maryland.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-maryland",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-northern-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-northern-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-northern-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-northern-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/fire-door-inspection-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/fire-door-inspection-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-virginia.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-virginia",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/locksmith-washington-dc.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/locksmith-washington-dc",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/nfpa-80-fire-door-inspection.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/nfpa-80-fire-door-inspection",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/nfpa-80-fire-door-inspection.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/nfpa-80-fire-door-inspection",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-alexandria-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-alexandria-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-arlington-va.html",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-arlington-va",
+      "destination": "https://dcemergencylockanddoor.com/northern-virginia",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-bethesda-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-bethesda-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/panic-bar-repair-silver-spring-md.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/panic-bar-repair-silver-spring-md",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-access-control.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-access-control",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-access-control.html",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-access-control",
+      "destination": "https://dcemergencylockanddoor.com/access-control-systems-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-business-lock-change.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-business-lock-change",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-business-lock-change.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-business-lock-change",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-commercial-door-closer-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-commercial-door-closer-installation",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-commercial-door-closer-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-commercial-door-closer-installation",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-commercial-rekey.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-commercial-rekey",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-commercial-rekey.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-commercial-rekey",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-closer-adjustment.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-closer-adjustment",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-closer-adjustment.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-closer-adjustment",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-closers.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-closers",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-closers.html",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-closers",
+      "destination": "https://dcemergencylockanddoor.com/door-closer-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-hardware.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-lock-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-hardware",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-lock-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-hardware.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-lock-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-hardware",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-lock-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-installation",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-door-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-door-installation",
+      "destination": "https://dcemergencylockanddoor.com/commercial-door-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-exit-device-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-exit-device-installation",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-exit-device-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-exit-device-installation",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-exit-devices.html",
+      "destination": "https://dcemergencylockanddoor.com/exit-device-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-exit-devices",
+      "destination": "https://dcemergencylockanddoor.com/exit-device-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-exit-devices.html",
+      "destination": "https://dcemergencylockanddoor.com/exit-device-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-exit-devices",
+      "destination": "https://dcemergencylockanddoor.com/exit-device-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-fire-door-compliance.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-fire-door-compliance",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-fire-door-compliance.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-fire-door-compliance",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-fire-doors.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-fire-doors",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-fire-doors.html",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-fire-doors",
+      "destination": "https://dcemergencylockanddoor.com/fire-door-inspection-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/commercial-locksmith-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-panic-bar-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-panic-bar-installation",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-panic-bar-installation.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-panic-bar-installation",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-installation-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-panic-bars.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-panic-bars",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-repair-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-panic-bars.html",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-panic-bars",
+      "destination": "https://dcemergencylockanddoor.com/panic-bar-repair-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-tenant-lock-change.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-tenant-lock-change",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/service-tenant-lock-change.html",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-tenant-lock-change",
+      "destination": "https://dcemergencylockanddoor.com/commercial-rekey-washington-dc",
+      "statusCode": 301
+    },
+    {
+      "source": "/silver-spring-md-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/silver-spring-md-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/silver-spring-md-commercial-locksmith.html",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/silver-spring-md-commercial-locksmith",
+      "destination": "https://dcemergencylockanddoor.com/maryland",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/index",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index",
+      "destination": "https://dcemergencylockanddoor.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*).html",
+      "destination": "https://dcemergencylockanddoor.com/$1",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://dcemergencylockanddoor.com/:path*",
+      "statusCode": 301,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dcemergencylockanddoor.com"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "destination": "https://dcemergencylockanddoor.com/$1",
+      "statusCode": 301
     }
   ]
 }

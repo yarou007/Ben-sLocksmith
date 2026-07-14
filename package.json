@@ -1,0 +1,16 @@
+{
+  "name": "dc-emergency-lock-and-door-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-core-pages.mjs && node scripts/sanitize-legacy-pages.mjs && node scripts/build-core-pages.mjs && node scripts/build-vercel-config.mjs && node scripts/generate-sitemap.mjs",
+    "lint": "node scripts/check-syntax.mjs",
+    "typecheck": "node scripts/validate-site-data.mjs",
+    "test": "node scripts/qa-site.mjs",
+    "test:verbose": "node scripts/qa-site.mjs --verbose",
+    "qa": "npm run lint && npm run typecheck && npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

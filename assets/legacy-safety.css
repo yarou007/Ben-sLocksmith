@@ -1,0 +1,264 @@
+/*
+ * Safety and accessibility layer for retained legacy pages.
+ *
+ * Every selector is gated by body:not(.has-sticky-call). Rebuilt pages use
+ * body.has-sticky-call and /assets/site.css, so this file remains inert if it
+ * is accidentally loaded by the generated page system.
+ */
+
+body:not(.has-sticky-call) {
+  --legacy-focus: #f2b544;
+  --legacy-focus-contrast: #102132;
+  --legacy-ink: #172b3a;
+  --legacy-muted: #405767;
+  --legacy-line: #b8c9d5;
+  --legacy-surface: #f4f8fb;
+  --legacy-blue: #0d5ca6;
+  --legacy-danger: #a51d17;
+  --legacy-success: #176b45;
+  --legacy-overlay-bottom: 0px;
+}
+
+body:not(.has-sticky-call)
+  :where(
+    a[href],
+    button,
+    input:not([type="hidden"]),
+    select,
+    textarea,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+  outline: 3px solid var(--legacy-focus) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px var(--legacy-focus-contrast);
+}
+
+body:not(.has-sticky-call)
+  :where(.skip-link, .legacy-skip-link, [data-skip-link]) {
+  position: fixed;
+  top: max(0.5rem, env(safe-area-inset-top, 0px));
+  left: max(0.5rem, env(safe-area-inset-left, 0px));
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--legacy-focus-contrast);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: var(--legacy-focus-contrast);
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+body:not(.has-sticky-call)
+  :where(.skip-link, .legacy-skip-link, [data-skip-link]):focus,
+body:not(.has-sticky-call)
+  :where(.skip-link, .legacy-skip-link, [data-skip-link]):focus-visible {
+  transform: translateY(0);
+}
+
+body:not(.has-sticky-call)
+  :where(
+    .commercial-only-notice,
+    .legacy-commercial-notice,
+    .qualification-notice,
+    [data-commercial-only-notice]
+  ) {
+  margin-block: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #a9c9e5;
+  border-left: 4px solid var(--legacy-blue);
+  border-radius: 0.5rem;
+  background: #edf6ff;
+  color: #153b5d;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+body:not(.has-sticky-call)
+  :where(
+    .code-disclaimer,
+    .legacy-code-disclaimer,
+    [data-code-disclaimer]
+  ) {
+  margin-block: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #dcc37c;
+  border-left: 4px solid #8a5b00;
+  border-radius: 0.5rem;
+  background: #fff8df;
+  color: #4e3708;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+body:not(.has-sticky-call)
+  :where(
+    .commercial-only-notice,
+    .legacy-commercial-notice,
+    .qualification-notice,
+    [data-commercial-only-notice],
+    .code-disclaimer,
+    .legacy-code-disclaimer,
+    [data-code-disclaimer]
+  )
+  :where(a, strong) {
+  color: inherit;
+}
+
+body:not(.has-sticky-call) form :where(label, legend) {
+  color: var(--legacy-ink);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+body:not(.has-sticky-call) form label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+body:not(.has-sticky-call) form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body:not(.has-sticky-call)
+  form
+  :where(
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="image"]),
+    select,
+    textarea
+  ) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--legacy-line);
+  border-radius: 0.45rem;
+  background: #fff;
+  color: var(--legacy-ink);
+  font: inherit;
+  line-height: 1.35;
+}
+
+body:not(.has-sticky-call) form textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+body:not(.has-sticky-call)
+  form
+  :where(button, input[type="submit"], input[type="button"], input[type="reset"]) {
+  min-width: 44px;
+  min-height: 44px;
+  font: inherit;
+  touch-action: manipulation;
+}
+
+body:not(.has-sticky-call)
+  form
+  :where(input, select, textarea)[aria-invalid="true"] {
+  border-color: var(--legacy-danger);
+  box-shadow: 0 0 0 1px var(--legacy-danger);
+}
+
+body:not(.has-sticky-call)
+  form
+  :where(input, select, textarea, button):disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+body:not(.has-sticky-call)
+  :where(.form-status, .legacy-form-status, [data-form-status], form [role="status"]) {
+  min-height: 1.5em;
+  margin-block: 0.6rem 0;
+  color: var(--legacy-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+body:not(.has-sticky-call)
+  :where(.form-status, .legacy-form-status, [data-form-status])[data-status="success"] {
+  color: var(--legacy-success);
+}
+
+body:not(.has-sticky-call)
+  :where(
+    .form-status,
+    .legacy-form-status,
+    [data-form-status]
+  )[data-status="error"],
+body:not(.has-sticky-call) :where(.form-error, form [role="alert"]) {
+  color: var(--legacy-danger);
+}
+
+body:not(.has-sticky-call) img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  body:not(.has-sticky-call) {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  @supports selector(body:has(.sticky-call)) {
+    body:not(.has-sticky-call):not(:has(.sticky-call)) {
+      padding-bottom: 0;
+    }
+  }
+
+  body:not(.has-sticky-call) .sticky-call {
+    position: fixed;
+    right: 0;
+    bottom: var(--legacy-overlay-bottom);
+    left: 0;
+    z-index: 9998;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 44px;
+    min-height: calc(44px + env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    padding:
+      0.75rem
+      max(1rem, env(safe-area-inset-right, 0px))
+      calc(0.75rem + env(safe-area-inset-bottom, 0px))
+      max(1rem, env(safe-area-inset-left, 0px));
+    border: 0;
+    border-radius: 0;
+    background: #b42318;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    box-shadow: 0 -4px 18px rgb(11 29 45 / 22%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.has-sticky-call),
+  body:not(.has-sticky-call) *,
+  body:not(.has-sticky-call) *::before,
+  body:not(.has-sticky-call) *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

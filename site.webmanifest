@@ -1,0 +1,18 @@
+{
+  "name": "DC Emergency Lock & Door",
+  "short_name": "DC Lock & Door",
+  "description": "Commercial door and locksmith service for Washington DC businesses and commercial properties.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#0b1d2d",
+  "icons": [
+    {
+      "src": "/assets/locksmith.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "publicationRule": "Render an entry only when approvedForPublication is true and every claim, image, location and attribution used on the page has an approval source.",
+  "caseStudies": [],
+  "jobPhotos": [],
+  "hardwareBrands": [],
+  "serviceAreas": [],
+  "testimonials": [],
+  "certifications": [],
+  "licenses": [],
+  "insurance": [],
+  "templates": {
+    "caseStudy": {
+      "id": null,
+      "clientType": null,
+      "generalServiceArea": null,
+      "problem": null,
+      "hardwareOrDoorType": null,
+      "diagnosis": null,
+      "workCompleted": null,
+      "outcome": null,
+      "images": [],
+      "approvedDate": null,
+      "relatedService": null,
+      "sourceRecord": null,
+      "clientIdentityApproved": false,
+      "locationPrecisionApproved": false,
+      "approvedForPublication": false
+    },
+    "jobPhoto": {
+      "src": null,
+      "width": null,
+      "height": null,
+      "alt": null,
+      "caption": null,
+      "generalServiceArea": null,
+      "sourceRecord": null,
+      "clientApproved": false,
+      "locationApproved": false,
+      "approvedForPublication": false
+    },
+    "hardwareBrand": {
+      "name": null,
+      "relationship": null,
+      "sourceRecord": null,
+      "approvedWording": null,
+      "approvedForPublication": false
+    },
+    "serviceArea": {
+      "name": null,
+      "priority": null,
+      "coverageNotes": null,
+      "sourceRecord": null,
+      "approvedForPublication": false
+    },
+    "testimonial": {
+      "text": null,
+      "sourceUrl": null,
+      "sourcePlatform": null,
+      "attribution": null,
+      "reviewDate": null,
+      "permissionRecord": null,
+      "approvedForPublication": false
+    },
+    "credential": {
+      "type": null,
+      "name": null,
+      "jurisdictionOrIssuer": null,
+      "identifier": null,
+      "validThrough": null,
+      "verificationUrlOrRecord": null,
+      "approvedWording": null,
+      "approvedForPublication": false
+    },
+    "insurance": {
+      "approvedWording": null,
+      "verificationRecord": null,
+      "verifiedThrough": null,
+      "approvedForPublication": false
+    }
+  }
+}

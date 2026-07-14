@@ -1,0 +1,229 @@
+{
+  "publicName": "DC Emergency Lock & Door",
+  "legalName": null,
+  "origin": "https://dcemergencylockanddoor.com",
+  "language": "en-US",
+  "businessAudience": "Commercial door and locksmith service",
+  "phone": {
+    "e164": "+17032440559",
+    "display": "703-244-0559",
+    "verificationStatus": "consistent_existing_site_configuration"
+  },
+  "form": {
+    "endpoint": "https://formsubmit.co/dclockanddoor@gmail.com",
+    "recipient": "dclockanddoor@gmail.com",
+    "verificationStatus": "existing_site_configuration_owner_confirmation_required",
+    "photoChannel": "form_file_upload"
+  },
+  "serviceAreas": [
+    {
+      "name": "Washington DC",
+      "priority": 1,
+      "verifiedFromBrief": true
+    },
+    {
+      "name": "Nearby Northern Virginia",
+      "priority": 2,
+      "verifiedFromBrief": true
+    },
+    {
+      "name": "Nearby Maryland",
+      "priority": 3,
+      "verifiedFromBrief": true
+    }
+  ],
+  "legacyMarketsNeedingConfirmation": [
+    "New York City"
+  ],
+  "trust": {
+    "licensed": {
+      "value": null,
+      "verified": false
+    },
+    "insured": {
+      "value": null,
+      "verified": false
+    },
+    "availability24x7": {
+      "value": null,
+      "verified": false
+    },
+    "sameDayService": {
+      "value": null,
+      "verified": false
+    },
+    "responseTime": {
+      "value": null,
+      "verified": false
+    },
+    "writtenEstimates": {
+      "value": null,
+      "verified": false
+    },
+    "coiAvailable": {
+      "value": null,
+      "verified": false
+    },
+    "w9Available": {
+      "value": null,
+      "verified": false
+    },
+    "commercialInvoicing": {
+      "value": null,
+      "verified": false
+    },
+    "serviceHours": {
+      "value": null,
+      "verified": false
+    }
+  },
+  "address": {
+    "value": null,
+    "verified": false,
+    "todo": "Confirm whether the business has a public address or should use service-area-only setup."
+  },
+  "serviceCapabilities": {
+    "formalFireDoorInspection": {
+      "value": null,
+      "verified": false,
+      "todo": "Confirm whether formal inspections are performed directly, coordinated, or subcontracted, including required personnel qualifications and AHJ acceptability."
+    },
+    "fireDoorInspectionReports": {
+      "value": null,
+      "verified": false,
+      "todo": "Confirm available report format, photos, opening identifiers, deficiency language, and follow-up or reinspection scope."
+    },
+    "fireDoorDeficiencyCorrection": {
+      "value": null,
+      "verified": false,
+      "todo": "Confirm rated-opening repair qualifications, listing/manufacturer constraints, trade scope, documentation, and sign-off boundaries."
+    }
+  },
+  "analytics": {
+    "gtmContainerId": null,
+    "ga4MeasurementId": null,
+    "googleAdsConversionId": null,
+    "googleAdsCallLabel": null,
+    "googleAdsCallIntegrationMode": null,
+    "callTrackingProvider": null,
+    "dynamicNumber": null,
+    "ahrefsAnalyticsKey": "rGLOu9/aecffwkjM0DzUfA",
+    "ahrefsVerificationStatus": "active_existing_production_configuration"
+  },
+  "siteVerification": {
+    "google": "_0bnt0sERIqkq90V2DSZtoyykL7q0cEsbyM8vG4Rk0g",
+    "verificationStatus": "active_existing_production_configuration"
+  },
+  "socialProfiles": [
+    {
+      "network": "Instagram",
+      "url": "https://www.instagram.com/dcemergencylockanddoor/",
+      "verified": false
+    },
+    {
+      "network": "TikTok",
+      "url": "https://www.tiktok.com/@dc.lock.and.door",
+      "verified": false
+    },
+    {
+      "network": "YouTube",
+      "url": "https://www.youtube.com/@dcemergencylockanddoor",
+      "verified": false
+    },
+    {
+      "network": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=61574339060945",
+      "verified": false
+    },
+    {
+      "network": "X",
+      "url": "https://x.com/dcemergencylock",
+      "verified": false
+    },
+    {
+      "network": "LinkedIn",
+      "url": "https://www.linkedin.com/company/dc-emergency-lock-and-door",
+      "verified": false
+    }
+  ],
+  "hardwareBrands": [
+    "Von Duprin",
+    "Sargent",
+    "Falcon",
+    "Detex",
+    "LCN",
+    "Norton",
+    "Dorma",
+    "Schlage",
+    "Medeco",
+    "BEST",
+    "Corbin Russwin"
+  ],
+  "hardwareBrandsVerified": false,
+  "proof": {
+    "caseStudies": [],
+    "testimonials": [],
+    "certifications": [],
+    "licenses": [],
+    "insurance": [],
+    "approvedCustomerLogos": []
+  },
+  "existingPhotos": [
+    {
+      "src": "/assets/img-956a4955d1ddb21c.jpg",
+      "width": 525,
+      "height": 700,
+      "subject": "Commercial exit door with panic hardware",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-94ae8ed1d777b872.jpg",
+      "width": 525,
+      "height": 700,
+      "subject": "Commercial door and exit hardware",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-9e19b3ab02e1d2d8.jpg",
+      "width": 525,
+      "height": 700,
+      "subject": "Commercial door closer and hardware",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-af734f238d1e0eb7.jpg",
+      "width": 394,
+      "height": 700,
+      "subject": "Commercial lock cylinders",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-ac0dc74c141fc9b7.jpg",
+      "width": 525,
+      "height": 700,
+      "subject": "Commercial exterior doors",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-02691dacdfba1f73.jpg",
+      "width": 394,
+      "height": 700,
+      "subject": "Commercial fire door hardware",
+      "locationVerified": false,
+      "clientVerified": false
+    },
+    {
+      "src": "/assets/img-57f1ffbcf83b634a.jpg",
+      "width": 394,
+      "height": 700,
+      "subject": "Commercial access-control door hardware",
+      "locationVerified": false,
+      "clientVerified": false
+    }
+  ]
+}

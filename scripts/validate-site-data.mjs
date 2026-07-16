@@ -103,6 +103,12 @@ Object.entries(redirects).forEach(([source, target]) => {
 
 assert(Array.isArray(deployment.redirects) && deployment.redirects.length > 0, 'vercel.json must contain redirect rules.');
 assert(deployment.outputDirectory === 'public', 'vercel.json must publish the generated public directory.');
+const assetCacheRule = (deployment.headers || []).find((rule) => rule.source === '/assets/(.*)');
+const assetCacheControl = assetCacheRule?.headers?.find((header) => header.key.toLowerCase() === 'cache-control')?.value;
+assert(
+  assetCacheControl === 'public, max-age=0, must-revalidate',
+  'Vercel assets must revalidate so a missing stylesheet response cannot be cached as immutable.'
+);
 (deployment.redirects || []).forEach((rule, index) => {
   assert(rule.statusCode === 301, `Vercel redirect rule ${index + 1} must use an explicit 301 status code.`);
   assert(!Object.hasOwn(rule, 'permanent'), `Vercel redirect rule ${index + 1} must not combine statusCode with permanent.`);

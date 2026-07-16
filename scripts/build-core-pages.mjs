@@ -17,6 +17,10 @@ const assetVersion = createHash('sha256')
   .update(JSON.stringify(business))
   .update(fs.readFileSync(path.join(root, 'assets/site.css')))
   .update(fs.readFileSync(path.join(root, 'assets/site.js')))
+  // Bust browser caches when the Vercel publish pipeline changes, even if the
+  // CSS bytes did not. This prevents a previously cached missing asset from
+  // surviving the deployment that restores the public asset directory.
+  .update(fs.readFileSync(path.join(root, 'scripts/prepare-deploy-output.mjs')))
   .digest('hex')
   .slice(0, 12);
 

@@ -16,6 +16,7 @@ const assetVersion = createHash('sha256')
   .update(JSON.stringify(business))
   .update(fs.readFileSync(path.join(ROOT_DIR, 'assets', 'site.js')))
   .update(fs.readFileSync(path.join(ROOT_DIR, 'assets', 'legacy-safety.css')))
+  .update(fs.readFileSync(path.join(ROOT_DIR, 'scripts', 'prepare-deploy-output.mjs')))
   .digest('hex')
   .slice(0, 12);
 
@@ -1348,6 +1349,11 @@ function safeSchema(html, pageRoute) {
 }
 
 function addSharedAssetsAndSchema(html, pageRoute) {
+  html = html
+    .replace(/\/assets\/legacy-safety\.css(?:\?[^"']*)?/gi, `/assets/legacy-safety.css?v=${assetVersion}`)
+    .replace(/\/assets\/business-config\.js(?:\?[^"']*)?/gi, `/assets/business-config.js?v=${assetVersion}`)
+    .replace(/\/assets\/site\.js(?:\?[^"']*)?/gi, `/assets/site.js?v=${assetVersion}`);
+
   const additions = [];
 
   if (!/href\s*=\s*["']\/assets\/legacy-safety\.css(?:\?[^"']*)?["']/i.test(html)) {

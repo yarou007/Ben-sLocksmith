@@ -10,9 +10,11 @@
     "verificationStatus": "consistent_existing_site_configuration"
   },
   "form": {
-    "endpoint": "https://formsubmit.co/dclockanddoor@gmail.com",
-    "recipient": "dclockanddoor@gmail.com",
-    "verificationStatus": "existing_site_configuration_owner_confirmation_required",
+    "enabled": false,
+    "endpoint": null,
+    "recipient": null,
+    "disabledMessage": "Online requests are currently unavailable. Call to discuss commercial service.",
+    "verificationStatus": "disabled_by_owner_request",
     "photoChannel": "form_file_upload"
   },
   "serviceAreas": [

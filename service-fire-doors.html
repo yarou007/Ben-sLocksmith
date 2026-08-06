@@ -413,7 +413,11 @@
     <div style="background:#fff;border:1px solid var(--bd);border-left:4px solid var(--blue);border-radius:12px;padding:18px;box-shadow:var(--sh)">
       <h3 style="font-size:22px;color:var(--navy);margin-bottom:10px">Request Inspection / Get Quote</h3>
       <p style="font-size:14px;color:var(--t2);margin-bottom:14px">Share your property details and we will follow up with scheduling options. For urgent issues, call <a href="tel:+17032440559" style="color:var(--blue);font-weight:700">703-244-0559</a>.</p>
-      <form class="quote-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" enctype="multipart/form-data" style="display:grid;gap:10px">
+      <form class="quote-form is-disabled is-disabled" style="display:grid;gap:10px" id="disabled-service-form-1" data-lead-form="" data-form-disabled="true" aria-disabled="true" aria-describedby="disabled-service-form-1-availability">
+<p class="form-unavailable" id="disabled-service-form-1-availability" role="note"><strong>Online form unavailable.</strong> Online requests are currently unavailable. Call to discuss commercial service.</p>
+<fieldset class="disabled-form-fieldset" data-disabled-form-fields disabled>
+<legend>Commercial service request details</legend>
+
         <div class="quote-grid-two" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div><label for="sf-name" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Name</label><input id="sf-name" name="Name" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
           <div><label for="sf-phone" style="font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px">Phone</label><input id="sf-phone" name="Phone" type="tel" required style="width:100%;border:1px solid var(--bd);border-radius:8px;padding:10px"></div>
@@ -435,7 +439,10 @@
           <button class="btn btn-primary track-quote-submit" data-track="quote_submit" type="submit">Submit Quote Request</button>
           <a href="tel:+17032440559" class="btn btn-red track-request-inspection" data-track="request_inspection_click">Request Inspection by Phone</a>
         </div>
-      </form>
+
+</fieldset>
+<p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
+</form>
     </div>
   </div>
 </section>

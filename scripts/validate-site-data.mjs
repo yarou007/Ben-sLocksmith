@@ -26,8 +26,11 @@ function duplicates(values) {
 
 assert(business.origin === 'https://dcemergencylockanddoor.com', 'Business origin must use the canonical HTTPS non-www host.');
 assert(/^\+1\d{10}$/.test(business.phone?.e164 || ''), 'Business phone must be a US E.164 number.');
-assert(/^https:\/\//.test(business.form?.endpoint || ''), 'Form endpoint must use HTTPS.');
+assert(business.form?.enabled === false, 'Forms must remain disabled until the owner explicitly enables a verified handler.');
+assert(business.form?.endpoint === null, 'Disabled forms must not expose a submission endpoint.');
+assert(business.form?.recipient === null, 'Disabled forms must not expose a submission recipient.');
 assert(business.address?.verified !== true || Boolean(business.address.value), 'A verified address must include a value.');
+assert(!/electric[ -]?strikes?/i.test(JSON.stringify(pages)), 'Service page data must not include the removed electric-strike offering.');
 
 Object.entries(business.trust || {}).forEach(([key, entry]) => {
   assert(!(entry?.value && !entry?.verified), `Trust field ${key} has a value but is not verified.`);

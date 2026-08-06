@@ -163,13 +163,20 @@
     <article class="lead-cta-box">
       <h2>Request Service</h2>
       <p>Share your details and we will follow up quickly. For urgent requests, call <a href="tel:+17032440559" data-event="phone_click">703-244-0559</a>.</p>
-      <form class="lead-quote-form quote-form" action="https://formsubmit.co/dclockanddoor@gmail.com" method="POST" enctype="multipart/form-data">
+      <form class="lead-quote-form quote-form is-disabled is-disabled" id="disabled-service-form-1" data-lead-form="" data-form-disabled="true" aria-disabled="true" aria-describedby="disabled-service-form-1-availability">
+<p class="form-unavailable" id="disabled-service-form-1-availability" role="note"><strong>Online form unavailable.</strong> Online requests are currently unavailable. Call to discuss commercial service.</p>
+<fieldset class="disabled-form-fieldset" data-disabled-form-fields disabled>
+<legend>Commercial service request details</legend>
+
         <div class="lead-form-row"><div><label for="service-business-lock-change-name">Name</label><input id="service-business-lock-change-name" name="Name" required></div><div><label for="service-business-lock-change-business">Business name</label><input id="service-business-lock-change-business" name="Business name" required></div></div>
         <div class="lead-form-row"><div><label for="service-business-lock-change-phone">Phone</label><input id="service-business-lock-change-phone" name="Phone" type="tel" required></div><div><label for="service-business-lock-change-email">Email</label><input id="service-business-lock-change-email" name="Email" type="email" required></div></div>
         <div class="lead-form-row"><div><label for="service-business-lock-change-service">Service needed</label><input id="service-business-lock-change-service" name="Service needed" value="Business Lock Change Washington DC" required></div><div><label for="service-business-lock-change-location">Location / service area</label><select id="service-business-lock-change-location" name="Service location" required><option value="">Select location</option><option>Washington DC</option><option>Northern Virginia</option><option>Maryland</option><option>New York</option></select></div></div>
         <div class="lead-form-row"><div><label for="service-business-lock-change-urgency">Urgency</label><select id="service-business-lock-change-urgency" name="Urgency" required><option value="">Select urgency</option><option>Emergency</option><option>Same day</option><option>Scheduled</option></select></div><div><label for="service-business-lock-change-message">Short description</label><textarea id="service-business-lock-change-message" name="Issue description" placeholder="Describe the issue and building type."></textarea></div></div>
         <button class="lead-btn lead-btn-primary" type="submit" data-event="quote_form_submit">Request a Free Estimate</button>
-      </form>
+
+</fieldset>
+<p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
+</form>
     </article>
   </div>
 </section>

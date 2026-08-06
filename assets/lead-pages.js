@@ -2,7 +2,7 @@
   var CONFIG = {
     phoneRaw: '+17032440559',
     phoneLabel: '703-244-0559',
-    formSubmitEndpoint: 'https://formsubmit.co/dclockanddoor@gmail.com',
+    formsEnabled: false,
     gtmId: 'GTM-XXXXXXX',
     ga4Id: 'G-XXXXXXXXXX',
     fbPixelId: '000000000000000',
@@ -682,10 +682,20 @@
     });
   }
 
-  function enforceGlobalFormSubmitEndpoint() {
-    var forms = document.querySelectorAll('form[action*="formsubmit.co"]');
+  function enforceDisabledForms() {
+    var forms = document.querySelectorAll('form.quote-form, form.request-service-form, form[data-lead-form]');
     forms.forEach(function (form) {
-      form.setAttribute('action', CONFIG.formSubmitEndpoint);
+      form.removeAttribute('action');
+      form.removeAttribute('method');
+      form.removeAttribute('enctype');
+      form.dataset.formDisabled = 'true';
+      form.setAttribute('aria-disabled', 'true');
+      form.querySelectorAll('input, select, textarea, button').forEach(function (control) {
+        control.disabled = true;
+      });
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+      });
     });
   }
 

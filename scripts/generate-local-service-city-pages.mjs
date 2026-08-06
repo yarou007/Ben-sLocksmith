@@ -6,7 +6,6 @@ const DOMAIN = 'https://dcemergencylockanddoor.com';
 const PHONE_RAW = '7032440559';
 const PHONE_LABEL = '703-244-0559';
 const LASTMOD = '2026-05-07';
-const FORM_SUBMIT_ENDPOINT = 'https://formsubmit.co/dclockanddoor@gmail.com';
 
 const SOCIAL = [
   'https://x.com/dcemergencylock',
@@ -669,13 +668,17 @@ ${scripts}
   <div class="lead-wrap">
     <article class="lead-cta-box">
       <h2>Request Service in ${escapeHtml(city.name)}</h2>
-      <p>Need a fast quote? Submit the form below. For urgent issues, call <a href="tel:${PHONE_RAW}" data-event="phone_click">${PHONE_LABEL}</a>.</p>
-      <form class="lead-quote-form quote-form" action="${FORM_SUBMIT_ENDPOINT}" method="POST" enctype="multipart/form-data">
+      <p>The disabled fields show what to prepare before calling <a href="tel:${PHONE_RAW}" data-event="phone_click">${PHONE_LABEL}</a>.</p>
+      <form class="lead-quote-form quote-form is-disabled" data-lead-form data-form-disabled="true" aria-disabled="true" aria-describedby="${page.slug}-form-availability">
+        <p class="form-unavailable" id="${page.slug}-form-availability" role="note"><strong>Online form unavailable.</strong> Call to discuss commercial service.</p>
+        <fieldset class="disabled-form-fieldset" data-disabled-form-fields disabled><legend>Commercial service request details</legend>
         <div class="lead-form-row"><div><label for="${page.slug}-name">Name</label><input id="${page.slug}-name" name="Name" required></div><div><label for="${page.slug}-business">Business name</label><input id="${page.slug}-business" name="Business name" required></div></div>
         <div class="lead-form-row"><div><label for="${page.slug}-phone">Phone</label><input id="${page.slug}-phone" name="Phone" type="tel" required></div><div><label for="${page.slug}-email">Email</label><input id="${page.slug}-email" name="Email" type="email" required></div></div>
         <div class="lead-form-row"><div><label for="${page.slug}-service">Service needed</label><input id="${page.slug}-service" name="Service needed" value="${escapeHtml(h1)}" required></div><div><label for="${page.slug}-location">Service area</label><input id="${page.slug}-location" name="Service location" value="${escapeHtml(city.name)}" required></div></div>
         <div class="lead-form-row"><div><label for="${page.slug}-urgency">Urgency</label><select id="${page.slug}-urgency" name="Urgency" required><option value="">Select urgency</option><option>Emergency</option><option>Same day</option><option>Scheduled</option></select></div><div><label for="${page.slug}-message">Issue details</label><textarea id="${page.slug}-message" name="Issue description" placeholder="Example: panic bar stuck, closer leaking oil, storefront door not locking"></textarea></div></div>
-        <button class="lead-btn lead-btn-primary" type="submit" data-event="quote_form_submit">Request a Free Estimate</button>
+        <button class="lead-btn lead-btn-primary" type="submit" disabled>Online Form Unavailable</button>
+        </fieldset>
+        <p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
       </form>
     </article>
   </div>

@@ -2,9 +2,9 @@ export default [
   {
     slug: "commercial-locksmith-washington-dc",
     service: "commercial_locksmith",
-    title: "Commercial Locksmith Washington DC | Business Lock Service",
+    title: "Commercial Locksmith Washington DC | Business Locks & Rekeys",
     description:
-      "Commercial locksmith service for Washington DC offices, stores and managed properties. Help with lockouts, rekeys, mortise locks and practical key control.",
+      "Commercial lockouts, lock repair, rekeys and key-control help for Washington DC businesses. Call with the door type, symptoms and access concern.",
     h1: "Commercial Locksmith Services in Washington DC",
     eyebrow: "Business Locks & Key Control",
     subtitle:
@@ -269,7 +269,7 @@ export default [
       {
         question: "What should a business report after break-in damage?",
         answer:
-          "Describe whether the opening can close and secure, where the impact occurred, and whether the frame or lock area is distorted. Photos can help define the initial scope through the approved request form."
+          "Describe whether the opening can close and secure, where the impact occurred, and whether the frame or lock area is distorted. A door photo may help define the initial scope when an approved sharing channel is confirmed by phone."
       },
       {
         question: "How is an urgent commercial door repair scoped?",
@@ -1118,7 +1118,7 @@ export default [
     ],
     process: [
       {
-        title: "Submit the property and opening details",
+        title: "Prepare the property and opening details",
         text: "Identify the location, suite, door, observed problem, site contact and work-order reference requirement."
       },
       {

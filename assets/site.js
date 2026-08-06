@@ -140,7 +140,7 @@
   function inferCtaLocation(element) {
     var explicit = value(element.dataset.ctaLocation);
     if (explicit) return explicit;
-    if (element.closest('.sticky-mobile-call')) return 'sticky';
+    if (element.closest('.sticky-mobile-actions, .sticky-mobile-call')) return 'sticky';
     if (element.closest('.hero')) return 'hero';
     if (element.closest('.site-footer')) return 'footer';
     if (element.closest('form, .form-panel, .hero-form')) return 'form';
@@ -366,6 +366,21 @@
 
   function configureForms() {
     document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
+      if (form.dataset.formDisabled === 'true') {
+        form.removeAttribute('action');
+        form.removeAttribute('method');
+        form.removeAttribute('enctype');
+        form.setAttribute('aria-disabled', 'true');
+        form.querySelectorAll('input, select, textarea, button').forEach(function (control) {
+          control.disabled = true;
+        });
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          showFormStatus(form, 'error', 'Online submissions are disabled. Call to discuss commercial service.');
+        });
+        return;
+      }
+
       populateFormAttribution(form);
       var formType = value(form.dataset.formType) || 'service_request';
       var started = false;
@@ -391,6 +406,11 @@
             form_id: form.id,
             error_type: 'client_validation'
           });
+          track('form_error', {
+            form_type: formType,
+            form_id: form.id,
+            error_type: 'client_validation'
+          });
           showFormStatus(form, 'error', 'Please complete the required fields highlighted above.');
         },
         true
@@ -399,6 +419,20 @@
       form.addEventListener('input', function () {
         invalidTracked = false;
         showFormStatus(form, '', '');
+      });
+
+      form.addEventListener('change', function (event) {
+        if (!event.target.matches('input[type="file"]')) return;
+        var files = Array.from(event.target.files || []);
+        if (!files.length) return;
+        track('photo_upload', {
+          form_type: formType,
+          form_id: form.id,
+          file_count: files.length,
+          total_size_bucket: files.reduce(function (total, file) {
+            return total + (Number(file.size) || 0);
+          }, 0) > 5 * 1024 * 1024 ? 'over_5mb' : 'up_to_5mb'
+        });
       });
 
       form.addEventListener('submit', function (event) {
@@ -422,6 +456,11 @@
         if (totalFileBytes > 10 * 1024 * 1024) {
           event.preventDefault();
           track('form_submit_error', {
+            form_type: formType,
+            form_id: form.id,
+            error_type: 'file_size'
+          });
+          track('form_error', {
             form_type: formType,
             form_id: form.id,
             error_type: 'file_size'
@@ -455,6 +494,13 @@
           );
         }
         track('form_submit_attempt', {
+          form_type: formType,
+          form_id: form.id,
+          lead_id: leadId,
+          cta_location: ctaLocation,
+          service_requested: serviceRequested
+        });
+        track('form_submit_valid', {
           form_type: formType,
           form_id: form.id,
           lead_id: leadId,
@@ -515,6 +561,7 @@
     };
     if (pendingIsRecent) {
       track(success ? 'form_submit_success' : 'form_submit_error', resultPayload);
+      if (!success) track('form_error', resultPayload);
       if (success) track('commercial_lead_submit', resultPayload);
     }
 
@@ -578,5 +625,8 @@
     announceSubmissionResult();
     observeQualificationNotices();
     setCopyrightYear();
+    track('service_page_view', {
+      service_category: value(document.body.dataset.service) || 'general_commercial_service'
+    });
   });
 })();

@@ -70,7 +70,7 @@ function compactCallButton(location = 'hero') {
 }
 
 function photoCta(href, location = 'body') {
-  return `<a class="button button-secondary" href="${escapeAttribute(href)}" data-component="SendPhotoCTA" data-photo-cta data-cta-location="${escapeAttribute(location)}">Send a Door Photo</a>`;
+  return `<a class="button button-secondary" href="${escapeAttribute(href)}" data-component="SendPhotoCTA" data-photo-cta data-cta-location="${escapeAttribute(location)}" aria-label="View the unavailable door photo request form">Send a Door Photo</a>`;
 }
 
 function header() {
@@ -118,58 +118,42 @@ function trustBar() {
 </aside>`;
 }
 
-function hiddenAttribution(formType) {
-  return `
-    <input type="hidden" name="landing_page" value="">
-    <input type="hidden" name="referrer" value="">
-    <input type="hidden" name="utm_source" value="">
-    <input type="hidden" name="utm_medium" value="">
-    <input type="hidden" name="utm_campaign" value="">
-    <input type="hidden" name="utm_term" value="">
-    <input type="hidden" name="utm_content" value="">
-    <input type="hidden" name="gclid" value="">
-    <input type="hidden" name="gbraid" value="">
-    <input type="hidden" name="wbraid" value="">
-    <input type="hidden" name="page_path" value="">
-    <input type="hidden" name="page_title" value="">
-    <input type="hidden" name="lead_id" value="">`;
-}
-
-function formCommon(type, currentPath, subject, formId) {
-  const nextUrl = `${origin}${currentPath}?submitted=1&form=${encodeURIComponent(type)}`;
-  return `${hiddenAttribution(type)}
-    <input type="hidden" name="_subject" value="${escapeAttribute(subject)}">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="${escapeAttribute(nextUrl)}">
-    <div class="honeypot" aria-hidden="true"><label for="${escapeAttribute(formId)}-company-website">Leave this field empty</label><input id="${escapeAttribute(formId)}-company-website" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>`;
+function formUnavailableNotice(formId) {
+  const noticeId = `${formId}-availability`;
+  const message = business.form?.disabledMessage || 'Online requests are currently unavailable. Call to discuss commercial service.';
+  return `<p class="form-unavailable" id="${escapeAttribute(noticeId)}" role="note"><strong>Online form unavailable.</strong> ${escapeHtml(message)}</p>`;
 }
 
 function emergencyForm(page, compact = false) {
   const formId = compact ? `hero-${page.service}-form` : `${page.service}-emergency-form`;
   const problemOptions = page.symptoms.slice(0, 8);
-  return `<form id="${escapeAttribute(formId)}" class="lead-form" action="${escapeAttribute(business.form.endpoint)}" method="post" enctype="multipart/form-data" data-lead-form data-form-type="emergency" data-cta-location="${compact ? 'hero' : 'body'}">
-  ${formCommon('emergency', `/${page.slug}`, `Commercial emergency request: ${page.h1}`, formId)}
+  return `<form id="${escapeAttribute(formId)}" class="lead-form is-disabled" data-lead-form data-form-disabled="true" data-form-type="emergency" data-cta-location="${compact ? 'hero' : 'body'}" aria-disabled="true" aria-describedby="${escapeAttribute(formId)}-availability">
+  ${formUnavailableNotice(formId)}
+  <fieldset class="disabled-form-fieldset" disabled>
+  <legend>Commercial service request details</legend>
   <div class="form-grid">
     <div class="field"><label for="${formId}-business">Business or organization <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-business" name="business_name" autocomplete="organization" required></div>
     <div class="field"><label for="${formId}-contact">Contact name <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-contact" name="contact_name" autocomplete="name" required></div>
     <div class="field"><label for="${formId}-phone">Phone <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
     <div class="field"><label for="${formId}-location">Service location city or ZIP <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-location" name="service_location" autocomplete="postal-code" required></div>
     <div class="field field-full"><label for="${formId}-problem">Problem type <span class="required-mark" aria-hidden="true">*</span></label><select id="${formId}-problem" name="problem_type" required><option value="">Select the closest problem</option>${problemOptions.map((item) => `<option>${escapeHtml(item)}</option>`).join('')}<option>Other commercial door or lock problem</option></select></div>
-    <div class="field ${compact ? '' : 'field-full'}"><label for="${formId}-photo">Optional door photo</label><input id="${formId}-photo" name="attachment" type="file" accept="image/jpeg,image/png,image/webp,image/heic"><p class="field-hint">Attach one clear image of the door or hardware. Do not include people or confidential documents.</p></div>
+    <div class="field ${compact ? '' : 'field-full'}"><label for="${formId}-photo">Optional door photo</label><input id="${formId}-photo" name="attachment" type="file" accept="image/jpeg,image/png,image/webp,image/heic"><p class="field-hint">Reference field only. If a future approved channel is provided, use one clear image without people or confidential documents.</p></div>
     ${compact ? '' : `<div class="field field-full"><label for="${formId}-message">Optional short message</label><textarea id="${formId}-message" name="message" placeholder="What happened, which opening is affected, and whether it can close or secure?"></textarea></div>`}
   </div>
   ${qualificationNotice(compact ? 'hero_form' : 'form')}
-  <button class="button button-primary" type="submit">Request Commercial Service</button>
-  <p class="form-note">Submitting this form does not confirm dispatch or an appointment. For an active security or egress issue, call.</p>
-  <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+  <button class="button button-primary" type="submit" disabled>Online Form Unavailable</button>
+  </fieldset>
+  <p class="form-note">The form is shown for reference but cannot be completed or sent. For an active security or egress issue, call.</p>
+  <p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
 </form>`;
 }
 
 function scheduledForm(page) {
   const formId = `${page.service}-scheduled-form`;
-  return `<form id="${escapeAttribute(formId)}" class="lead-form" action="${escapeAttribute(business.form.endpoint)}" method="post" enctype="multipart/form-data" data-lead-form data-form-type="scheduled" data-cta-location="body">
-  ${formCommon('scheduled', `/${page.slug}`, `Scheduled commercial service request: ${page.h1}`, formId)}
+  return `<form id="${escapeAttribute(formId)}" class="lead-form is-disabled" data-lead-form data-form-disabled="true" data-form-type="scheduled" data-cta-location="body" aria-disabled="true" aria-describedby="${escapeAttribute(formId)}-availability">
+  ${formUnavailableNotice(formId)}
+  <fieldset class="disabled-form-fieldset" disabled>
+  <legend>Planned commercial project details</legend>
   <div class="form-grid">
     <div class="field"><label for="${formId}-company">Company name <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-company" name="company_name" autocomplete="organization" required></div>
     <div class="field"><label for="${formId}-contact">Contact name <span class="required-mark" aria-hidden="true">*</span></label><input id="${formId}-contact" name="contact_name" autocomplete="name" required></div>
@@ -184,9 +168,10 @@ function scheduledForm(page) {
     <div class="field field-full"><label for="${formId}-message">Project details</label><textarea id="${formId}-message" name="message" placeholder="Describe the openings, known issues, deadline and any report, access or coordination requirements."></textarea></div>
   </div>
   ${qualificationNotice('form')}
-  <button class="button button-primary" type="submit">Request a Commercial Service Quote</button>
-  <p class="form-note">Submitting the form is a request, not a confirmed appointment. Scope, documentation and availability are confirmed separately. See the <a href="/privacy-policy">privacy policy</a>.</p>
-  <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+  <button class="button button-primary" type="submit" disabled>Online Form Unavailable</button>
+  </fieldset>
+  <p class="form-note">The form is shown for reference but cannot be completed or sent. Call to discuss scope and availability. See the <a href="/privacy-policy">privacy policy</a>.</p>
+  <p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
 </form>`;
 }
 
@@ -331,8 +316,11 @@ function footer() {
 </footer>`;
 }
 
-function stickyCall() {
-  return `<a class="sticky-mobile-call" href="tel:${escapeAttribute(phone.e164)}" data-component="StickyMobileCallBar" data-business-phone-link data-dynamic-number-eligible data-cta-location="sticky" aria-label="Call ${phone.display}">Call <span data-business-phone>${escapeHtml(phone.display)}</span></a>`;
+function stickyActions(photoHref = '/commercial-door-repair-washington-dc#service-request') {
+  return `<nav class="sticky-mobile-actions" data-component="StickyMobileActionBar" aria-label="Quick contact actions">
+  <a class="sticky-mobile-action sticky-mobile-call" href="tel:${escapeAttribute(phone.e164)}" data-business-phone-link data-dynamic-number-eligible data-cta-location="sticky" aria-label="Call ${phone.display}">Call</a>
+  <a class="sticky-mobile-action sticky-mobile-photo" href="${escapeAttribute(photoHref)}" data-photo-cta data-cta-location="sticky" aria-label="View the unavailable door photo request form">Send a Door Photo</a>
+</nav>`;
 }
 
 function renderFaqs(faqs) {
@@ -349,11 +337,11 @@ function servicePage(page) {
   const pageForm = page.form === 'scheduled' ? scheduledForm(page) : emergencyForm(page);
   const heroSecondaryHref = urgentHeroForm ? '#service-request' : '#service-request';
   const heroSide = urgentHeroForm
-    ? `<aside class="hero-form" id="hero-request"><figure class="hero-form-photo"><picture><source srcset="${escapeAttribute(webpSource(page.heroImage.src))}" type="image/webp"><img src="${escapeAttribute(page.heroImage.src)}" width="${page.heroImage.width}" height="${page.heroImage.height}" alt="${escapeAttribute(page.heroImage.alt)}" decoding="async" fetchpriority="high"></picture><figcaption>${escapeHtml(page.heroImage.caption)}</figcaption></figure><h2>Request emergency commercial service</h2>${emergencyForm(page, true)}</aside>`
+    ? `<aside class="hero-form" id="hero-request"><figure class="hero-form-photo"><picture><source srcset="${escapeAttribute(webpSource(page.heroImage.src))}" type="image/webp"><img src="${escapeAttribute(page.heroImage.src)}" width="${page.heroImage.width}" height="${page.heroImage.height}" alt="${escapeAttribute(page.heroImage.alt)}" decoding="async" fetchpriority="high"></picture><figcaption>${escapeHtml(page.heroImage.caption)}</figcaption></figure><h2>Review service request details</h2>${emergencyForm(page, true)}</aside>`
     : heroImage(page.heroImage);
 
   return `${head({ title: page.title, description: page.description, pathName: currentPath, image: page.heroImage, schema: serviceSchema(page) })}
-<body class="has-sticky-call" data-service="${escapeAttribute(page.service)}" data-location="Washington DC" data-intent="${escapeAttribute(page.intent)}">
+  <body class="has-sticky-actions" data-service="${escapeAttribute(page.service)}" data-location="Washington DC" data-intent="${escapeAttribute(page.intent)}">
 ${header()}
 <main id="main-content">
   <section class="hero">
@@ -364,7 +352,7 @@ ${header()}
         <p class="eyebrow" style="color:#bcdcff">${escapeHtml(page.eyebrow)}</p>
         <h1>${escapeHtml(page.h1)}</h1>
         <p class="hero-subtitle">${escapeHtml(page.subtitle)}</p>
-        <div class="hero-actions">${page.intent === 'scheduled' ? `<a class="button button-primary" href="${heroSecondaryHref}">Request Scheduled Service</a>${callButton('Call About This Commercial Service', 'hero', true)}` : `${callButton('Call for Commercial Emergency Dispatch', 'hero')}${photoCta(heroSecondaryHref, 'hero')}`}</div>
+        <div class="hero-actions">${page.intent === 'scheduled' ? `<a class="button button-primary" href="${heroSecondaryHref}">Review Request Details</a>${callButton('Call About This Commercial Service', 'hero', true)}` : `${callButton('Call for Commercial Emergency Dispatch', 'hero')}${photoCta(heroSecondaryHref, 'hero')}`}</div>
         <p class="service-area-line">Serving Washington DC, with nearby Northern Virginia and Maryland requests reviewed by service location.</p>
       </div>
       <div class="hero-side">${heroSide}</div>
@@ -380,7 +368,7 @@ ${header()}
   ${page.sections.map((section, index) => `<section class="section ${index % 2 === 0 ? 'section-alt' : ''}"${index > 0 ? ' data-paid-hide' : ''}><div class="wrap grid-2"><div><p class="eyebrow">${index === 0 ? 'Diagnosis and scope' : index === 1 ? 'Commercial decision support' : 'Service details'}</p><h2>${escapeHtml(section.heading)}</h2>${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div><article class="card"><h3>Key points</h3>${formatList(section.bullets)}</article></div></section>`).join('')}
   <section class="section section-navy">
     <div class="wrap grid-2">
-      <div class="section-heading"><p class="eyebrow" style="color:#bcdcff">What happens next</p><h2>${page.intent === 'scheduled' ? 'How a scheduled request moves forward' : 'How a commercial service request moves forward'}</h2><p>Call or use the service-page request form. The request is reviewed and the available next step is confirmed directly.</p></div>
+      <div class="section-heading"><p class="eyebrow" style="color:#bcdcff">What happens next</p><h2>${page.intent === 'scheduled' ? 'How a scheduled request moves forward' : 'How a commercial service request moves forward'}</h2><p>Call with the service location and opening details. The request is reviewed and the available next step is confirmed directly.</p></div>
       <ol class="steps">${page.process.map((step) => `<li><h3>${escapeHtml(step.title)}</h3><p>${escapeHtml(step.text)}</p></li>`).join('')}</ol>
     </div>
   </section>
@@ -392,17 +380,17 @@ ${header()}
   </section>
   <section class="section section-alt" id="service-request">
     <div class="wrap grid-2">
-      <div><p class="eyebrow">Request service</p><h2>${page.form === 'scheduled' ? 'Request a scoped commercial service quote' : 'Send a short commercial service request'}</h2><p>${page.form === 'scheduled' ? 'Include the building type, approximate number of openings and any deadline or documentation requirement.' : 'For an active security or egress issue, calling is the fastest way to explain the condition. The form is available when a photo will help.'}</p>${page.form === 'scheduled' ? callButton('Call to Discuss the Project', 'form', true) : callButton('Call for Commercial Emergency Dispatch', 'form')}</div>
+      <div><p class="eyebrow">Request service</p><h2>${page.form === 'scheduled' ? 'Review the project details we will ask for' : 'Review the service details we will ask for'}</h2><p>${page.form === 'scheduled' ? 'The disabled form shows the building, opening-count and project details to prepare before calling.' : 'For an active security or egress issue, call and describe the condition. The disabled form shows the details and door photo that may help scope the conversation.'}</p>${page.form === 'scheduled' ? callButton('Call to Discuss the Project', 'form', true) : callButton('Call for Commercial Emergency Dispatch', 'form')}</div>
       <div class="form-panel">${pageForm}</div>
     </div>
   </section>
   <section class="section">
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial FAQ</p><h2>Questions about this commercial service</h2></div>${renderFaqs(page.faqs)}</div>
   </section>
-  <section class="section final-cta"><div class="wrap"><h2>${page.intent === 'scheduled' ? 'Ready to define the commercial scope?' : 'Is the commercial opening unsafe or unsecured?'}</h2><p>${page.intent === 'scheduled' ? 'Commercial installation, inspection and planned repair service for businesses and managed properties.' : 'Commercial door, lock and hardware repair service for businesses and managed properties.'}</p><div class="button-row">${page.intent === 'scheduled' ? `<a class="button button-primary" href="#service-request">Request Scheduled Service</a>${callButton('Call About the Project', 'body', true)}` : `${callButton('Call Commercial Dispatch', 'body')}${photoCta('#service-request', 'body')}`}</div></div></section>
+  <section class="section final-cta"><div class="wrap"><h2>${page.intent === 'scheduled' ? 'Ready to define the commercial scope?' : 'Is the commercial opening unsafe or unsecured?'}</h2><p>${page.intent === 'scheduled' ? 'Commercial installation, inspection and planned repair service for businesses and managed properties.' : 'Commercial door, lock and hardware repair service for businesses and managed properties.'}</p><div class="button-row">${page.intent === 'scheduled' ? `<a class="button button-primary" href="#service-request">Review Request Details</a>${callButton('Call About the Project', 'body', true)}` : `${callButton('Call Commercial Dispatch', 'body')}${photoCta('#service-request', 'body')}`}</div></div></section>
 </main>
 ${footer()}
-${stickyCall()}
+${stickyActions('#service-request')}
 </body>
 </html>`;
 }
@@ -499,7 +487,7 @@ function homepage() {
     image: homeImage,
     schema: homeSchema()
   })}
-<body class="has-sticky-call" data-service="commercial_door_and_locksmith" data-location="Washington DC">
+<body class="has-sticky-actions" data-service="commercial_door_and_locksmith" data-location="Washington DC">
 ${header()}
 <main id="main-content">
   <section class="hero">
@@ -550,7 +538,7 @@ ${header()}
   <section class="section final-cta"><div class="wrap"><h2>Commercial door and locksmith service in Washington DC</h2><p>Call for commercial door repair, lock service, panic hardware, closers, rekeys and planned door projects.</p><div class="button-row">${callButton('Call Commercial Door & Locksmith Service', 'body')}<a class="button button-secondary" href="#services">View Commercial Services</a></div></div></section>
 </main>
 ${footer()}
-${stickyCall()}
+${stickyActions()}
 </body>
 </html>`;
 }
@@ -677,27 +665,27 @@ function locationPage(page) {
     propertyTypes: []
   };
   return `${head({ title: page.title, description: page.description, pathName: currentPath, image: page.image, schema: locationSchema(page) })}
-<body class="has-sticky-call" data-service="${escapeAttribute(page.service)}" data-location="${escapeAttribute(page.location)}">
+<body class="has-sticky-actions" data-service="${escapeAttribute(page.service)}" data-location="${escapeAttribute(page.location)}">
 ${header()}
 <main id="main-content">
   <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${breadcrumbs(page.h1, currentPath, null)}${commercialBadge()}<p class="eyebrow" style="color:#bcdcff">Commercial service area</p><h1>${escapeHtml(page.h1)}</h1><p class="hero-subtitle">${escapeHtml(page.subtitle)}</p><div class="hero-actions">${callButton('Call Commercial Dispatch', 'hero')}${photoCta('#area-request', 'hero')}</div></div>${heroImage(page.image)}</div></section>
   ${trustBar()}
-  <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Each service page explains a distinct buyer problem. The request form still needs the exact commercial location to confirm coverage.</p></div><div class="grid-3">${locationServiceLinks.map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
+  <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Each service page explains a distinct buyer problem. Call with the exact commercial location so coverage can be confirmed.</p></div><div class="grid-3">${locationServiceLinks.map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
   <section class="section section-alt"><div class="wrap grid-2"><div><p class="eyebrow">Area context</p><h2>Commercial properties in ${escapeHtml(page.location)}</h2><p>This page is a regional service hub, not a substitute for the page describing the actual door, lock or hardware problem.</p>${formatList(page.areas)}</div><aside class="callout"><h3>What to include</h3>${formatList(['Business or organization name', 'Exact city, ZIP and service address', 'Affected door and hardware type', 'Whether the opening closes, latches and secures', 'Onsite contact and access window', 'Photo when it can be shared safely'])}${qualificationNotice('service_area')}</aside></div></section>
-  <section class="section" id="area-request"><div class="wrap grid-2"><div><p class="eyebrow">Request commercial service</p><h2>Send the exact service location</h2><p>The regional name alone is not enough to confirm availability. Include the city or ZIP and the affected commercial opening.</p>${callButton('Call Commercial Dispatch', 'form')}</div><div class="form-panel">${emergencyForm(formConfig)}</div></div></section>
+  <section class="section" id="area-request"><div class="wrap grid-2"><div><p class="eyebrow">Request commercial service</p><h2>Prepare the exact service location</h2><p>The regional name alone is not enough to confirm availability. Have the city or ZIP and affected commercial opening ready when calling.</p>${callButton('Call Commercial Dispatch', 'form')}</div><div class="form-panel">${emergencyForm(formConfig)}</div></div></section>
   <section class="section final-cta"><div class="wrap"><h2>Need help with a commercial door or lock?</h2><p>Commercial door, lock and hardware service is available throughout this service area.</p><div class="button-row">${callButton('Call Commercial Dispatch', 'body')}${photoCta('#area-request', 'body')}</div></div></section>
-</main>${footer()}${stickyCall()}</body></html>`;
+</main>${footer()}${stickyActions('#area-request')}</body></html>`;
 }
 
 function supportPage({ slug, title, description, h1, eyebrow, bodyHtml, image = homeImage, robots = 'index,follow,max-image-preview:large', service = 'site_information', sticky = false, type = 'WebPage' }) {
   const currentPath = slug ? `/${slug}` : '/';
   return `${head({ title, description, pathName: currentPath, image, schema: simpleSchema(title, description, currentPath, type, h1), robots })}
-<body class="${sticky ? 'has-sticky-call' : ''}" data-service="${escapeAttribute(service)}" data-location="Washington DC service area">
+<body class="${sticky ? 'has-sticky-actions' : ''}" data-service="${escapeAttribute(service)}" data-location="Washington DC service area">
 ${header()}
 <main id="main-content">
   <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${slug ? breadcrumbs(h1, currentPath, null) : ''}${commercialBadge()}<p class="eyebrow" style="color:#bcdcff">${escapeHtml(eyebrow)}</p><h1>${escapeHtml(h1)}</h1><p class="hero-subtitle">${escapeHtml(description)}</p></div>${heroImage(image)}</div></section>
   ${bodyHtml}
-</main>${footer()}${sticky ? stickyCall() : ''}</body></html>`;
+</main>${footer()}${sticky ? stickyActions() : ''}</body></html>`;
 }
 
 function aboutPage() {
@@ -723,7 +711,7 @@ function galleryPage() {
     eyebrow: 'Existing site photo library',
     service: 'commercial_hardware_gallery',
     sticky: true,
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Photo-use policy</p><h2>Commercial hardware without invented job stories</h2><p>These images were already present in the site repository. They are shown as hardware references only. They are not presented as customer testimonials, location-verified projects, recent work or proof of a particular outcome.</p></div><div class="photo-grid">${images}</div></div></section><section class="section final-cta"><div class="wrap"><h2>Have a photo of the failed commercial opening?</h2><p>Attach it to the short request form on the relevant repair page.</p><div class="button-row">${callButton('Call Commercial Dispatch', 'body')}<a class="button button-secondary" href="/commercial-door-repair-washington-dc#service-request" data-photo-cta>Send a Door Photo</a></div></div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Photo-use policy</p><h2>Commercial hardware without invented job stories</h2><p>These images were already present in the site repository. They are shown as hardware references only. They are not presented as customer testimonials, location-verified projects, recent work or proof of a particular outcome.</p></div><div class="photo-grid">${images}</div></div></section><section class="section final-cta"><div class="wrap"><h2>Have a photo of the failed commercial opening?</h2><p>The disabled request form shows the useful photo and opening details to prepare before calling.</p><div class="button-row">${callButton('Call Commercial Dispatch', 'body')}<a class="button button-secondary" href="/commercial-door-repair-washington-dc#service-request" data-photo-cta aria-label="View the unavailable door photo request form">Send a Door Photo</a></div></div></section>`
   });
 }
 
@@ -731,7 +719,7 @@ function privacyPage() {
   return supportPage({
     slug: 'privacy-policy',
     title: `Privacy Policy | ${business.publicName}`,
-    description: 'Privacy information for commercial service forms, phone-click measurement, campaign attribution and optional photo uploads on this website.',
+    description: 'Privacy information for disabled service forms, phone-click measurement, campaign attribution and optional analytics on this commercial website.',
     h1: 'Privacy Policy',
     eyebrow: 'Website and lead data',
     service: 'privacy_policy',
@@ -742,7 +730,7 @@ function privacyPage() {
       alt: 'Commercial door closer mounted above a door',
       caption: 'Commercial door hardware shown; the image location is not published.'
     },
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Information submitted for commercial service</h2><p>Service forms may collect a business or organization name, contact name, phone number, work email when supplied, service location, building type, requested service, opening count, preferred date, message and optional image files. Do not upload images containing people, IDs, access credentials, confidential documents or information unrelated to the door or hardware.</p><p><strong>Policy review status:</strong> the legal business identity, effective date, dedicated privacy contact, retention terms and required consent language still need owner or legal approval before deployment.</p></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site stores landing page, referrer, UTM parameters and the presence/value of advertising click identifiers such as gclid, gbraid and wbraid in the browser session and copies them into submitted forms. Phone and CTA clicks may be placed in a local data layer; they are not treated as booked jobs.</p></article><article class="card"><h3>Form processor</h3><p>Forms currently post to the FormSubmit endpoint configured in this repository and deliver to the configured recipient. That recipient and the business’s retention, deletion and access-request process require owner confirmation. Avoid sending sensitive data through the form.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load. Its continued use and the corresponding disclosure or consent requirements need owner or legal review. GTM, GA4, Google Ads and call-tracking IDs are not active; this policy must be updated before those tools are enabled.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. Legal business identity, mailing address and a dedicated privacy contact still require confirmation.</p></article></div></div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Online service forms are disabled</h2><p>The visible forms are reference-only and cannot be completed, uploaded to or submitted. They have no configured submission endpoint or recipient. Call the displayed business number to discuss service, and do not send confidential building, credential or personal information through general analytics channels.</p><p><strong>Policy review status:</strong> the legal business identity, effective date, dedicated privacy contact, retention terms and required consent language still need owner or legal approval before deployment.</p></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site may retain landing page, referrer and UTM parameters in the browser session. Phone and CTA clicks may be placed in a local data layer; they are not treated as booked jobs and do not include form messages or uploaded files.</p></article><article class="card"><h3>Form processor</h3><p>No form processor or submission recipient is active. Re-enabling online requests requires a verified handler, server-side validation, upload controls, spam protection and an approved privacy disclosure.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load. Its continued use and the corresponding disclosure or consent requirements need owner or legal review. GTM, GA4, Google Ads and call-tracking IDs are not active; this policy must be updated before those tools are enabled.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. Legal business identity, mailing address and a dedicated privacy contact still require confirmation.</p></article></div></div></section>`
   });
 }
 
@@ -750,11 +738,11 @@ function termsPage() {
   return supportPage({
     slug: 'terms-of-service',
     title: `Website Terms | ${business.publicName}`,
-    description: 'Website terms for requesting commercial door, lock, inspection and installation service. Form submission does not confirm dispatch or an appointment.',
+    description: 'Website terms for discussing commercial door, lock, inspection and installation service. Online forms are disabled and do not confirm service.',
     h1: 'Website Terms of Service',
     eyebrow: 'Commercial service requests',
     service: 'terms',
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Website requests are not confirmed appointments</h2><p>Submitting a form or clicking a phone link does not guarantee dispatch, arrival time, price, scope, parts availability, inspection result or appointment. Service availability and the authorized commercial scope must be confirmed directly.</p></div><div class="grid-2"><article class="card"><h3>Commercial authorization</h3><p>The requester should be authorized to seek work for the business or property and should provide accurate access, opening and contact information.</p></article><article class="card"><h3>Photos and files</h3><p>Only submit files the requester is allowed to share. Do not include people, credentials, confidential documents or unrelated personal information.</p></article><article class="card"><h3>Inspection and code information</h3><p>General website information is not legal, engineering or authority approval. Applicable requirements and final acceptance are project-specific.</p></article><article class="card"><h3>Verified scope controls</h3><p>License, insurance, hours, response times, documentation, payment terms and project capabilities are not promised by this website unless included in an approved service agreement.</p></article></div>${qualificationNotice('terms')}</div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Website contact does not confirm an appointment</h2><p>The online forms are disabled. Calling or clicking a phone link does not guarantee dispatch, arrival time, price, scope, parts availability, inspection result or appointment. Service availability and the authorized commercial scope must be confirmed directly.</p></div><div class="grid-2"><article class="card"><h3>Commercial authorization</h3><p>The requester should be authorized to seek work for the business or property and should provide accurate access, opening and contact information.</p></article><article class="card"><h3>Photos and files</h3><p>Do not attempt to submit files through the disabled forms. If a future approved channel is provided, share only files the requester is allowed to disclose and exclude people, credentials and confidential documents.</p></article><article class="card"><h3>Inspection and code information</h3><p>General website information is not legal, engineering or authority approval. Applicable requirements and final acceptance are project-specific.</p></article><article class="card"><h3>Verified scope controls</h3><p>License, insurance, hours, response times, documentation, payment terms and project capabilities are not promised by this website unless included in an approved service agreement.</p></article></div>${qualificationNotice('terms')}</div></section>`
   });
 }
 

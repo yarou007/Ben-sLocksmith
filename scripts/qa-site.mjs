@@ -27,19 +27,6 @@ if (args.has('--help') || args.has('-h')) {
   process.exit(0);
 }
 
-const requiredTrackingFields = [
-  'landing_page',
-  'referrer',
-  'utm_source',
-  'utm_medium',
-  'utm_campaign',
-  'utm_term',
-  'utm_content',
-  'gclid',
-  'gbraid',
-  'wbraid'
-];
-
 const ignoredDirectories = new Set([
   '.git',
   '.agents',
@@ -351,6 +338,17 @@ function hasStickyPhoneCta(html, phone) {
   });
 }
 
+function hasStickyPhotoCta(html) {
+  return tagMatches(html, 'a').some((anchor) => {
+    const className = anchor.attrs.class || '';
+    const location = anchor.attrs['data-cta-location'] || '';
+    return /sticky-mobile-photo/i.test(className)
+      && location === 'sticky'
+      && Object.hasOwn(anchor.attrs, 'data-photo-cta')
+      && Boolean((anchor.attrs.href || '').trim());
+  });
+}
+
 function heroImages(html) {
   const images = [];
   const regionExpression = /<(?:header|section|div)\b[^>]*(?:class|id)\s*=\s*(?:"[^"]*\bhero\b[^"]*"|'[^']*\bhero\b[^']*')[^>]*>([\s\S]*?)<\/(?:header|section|div)\s*>/gi;
@@ -381,7 +379,6 @@ const deployment = readJson('vercel.json');
 const origin = String(business.origin || '').replace(/\/+$/, '');
 const originUrl = safeUrl(origin);
 const configuredPhone = business.phone && business.phone.e164;
-const configuredFormEndpoint = business.form && business.form.endpoint;
 const redirects = Array.isArray(deployment.redirects) ? deployment.redirects : [];
 
 const fatalConfigurationErrors = [];
@@ -496,6 +493,12 @@ for (const filePath of htmlFiles) {
   }
   const viewport = metaContent(html, 'viewport');
   if (!viewport) addIssue('accessibility', route, 'missing viewport meta tag');
+  if (/electric[ -]?strikes?/i.test(html)) {
+    addIssue('removed-service', route, 'contains the removed electric-strike offering');
+  }
+  if (/formsubmit\.co/i.test(html)) {
+    addIssue('forms', route, 'contains a live third-party form submission endpoint');
+  }
   checked(21);
 
   if (canonical) {
@@ -571,22 +574,35 @@ for (const filePath of htmlFiles) {
     const labels = pairedTagMatches(form.inner, 'label');
     const formIds = idValues(form.inner);
 
-    if ((form.attrs.action || '') !== configuredFormEndpoint) {
-      addIssue('forms', route, formName + ' action does not match the configured form endpoint');
+    if (Object.hasOwn(form.attrs, 'action')) {
+      addIssue('forms', route, formName + ' must not expose an action while forms are disabled');
     }
-    if ((form.attrs.method || '').toLowerCase() !== 'post') {
-      addIssue('forms', route, formName + ' must use method="post"');
+    if (Object.hasOwn(form.attrs, 'method') || Object.hasOwn(form.attrs, 'enctype')) {
+      addIssue('forms', route, formName + ' must not expose submission attributes while forms are disabled');
     }
     if (!Object.hasOwn(form.attrs, 'data-lead-form')) {
       addIssue('forms', route, formName + ' is missing the shared data-lead-form integration');
     }
-    if (!controls.some((control) => (control.attrs.name || '').toLowerCase() === '_honey')) {
-      addIssue('forms', route, formName + ' is missing the low-friction honeypot field');
+    if ((form.attrs['data-form-disabled'] || '').toLowerCase() !== 'true') {
+      addIssue('forms', route, formName + ' is not marked as disabled');
     }
-    if (!controls.some((control) => (control.attrs.name || '').toLowerCase() === 'lead_id' && (control.attrs.type || '').toLowerCase() === 'hidden')) {
-      addIssue('forms', route, formName + ' is missing the hidden lead_id field');
+    if ((form.attrs['aria-disabled'] || '').toLowerCase() !== 'true') {
+      addIssue('forms', route, formName + ' is missing aria-disabled="true"');
     }
-    checked(5);
+    const disabledFieldsets = tagMatches(form.inner, 'fieldset').filter((fieldset) =>
+      Object.hasOwn(fieldset.attrs, 'disabled')
+    );
+    if (!disabledFieldsets.length) {
+      addIssue('forms', route, formName + ' must contain a disabled fieldset');
+    }
+    const submitControls = [
+      ...tagMatches(form.inner, 'button').filter((button) => (button.attrs.type || 'submit').toLowerCase() === 'submit'),
+      ...tagMatches(form.inner, 'input').filter((input) => (input.attrs.type || '').toLowerCase() === 'submit')
+    ];
+    if (submitControls.some((control) => !Object.hasOwn(control.attrs, 'disabled')) && !disabledFieldsets.length) {
+      addIssue('forms', route, formName + ' has an enabled submit control');
+    }
+    checked(6);
 
     for (const control of controls) {
       const type = (control.attrs.type || '').toLowerCase();
@@ -606,19 +622,6 @@ for (const filePath of htmlFiles) {
       checked();
     }
 
-    for (const fieldName of requiredTrackingFields) {
-      const matching = controls.filter((control) => {
-        return (control.attrs.name || '').toLowerCase() === fieldName;
-      });
-      if (matching.length !== 1 || (matching[0].attrs.type || '').toLowerCase() !== 'hidden') {
-        addIssue(
-          'forms',
-          route,
-          formName + ' must contain exactly one hidden input named "' + fieldName + '"'
-        );
-      }
-      checked();
-    }
   }
 
   if (!redirect && hasLeadRejectionCopy(page.text)) {
@@ -633,7 +636,10 @@ for (const filePath of htmlFiles) {
     if (!hasStickyPhoneCta(html, configuredPhone)) {
       addIssue('mobile-cta', route, 'high-intent page is missing a source-rendered sticky tel CTA');
     }
-    checked(2);
+    if (!hasStickyPhotoCta(html)) {
+      addIssue('mobile-cta', route, 'high-intent page is missing a source-rendered sticky door-photo CTA');
+    }
+    checked(3);
   }
 
   if (!redirect && isDcPrimaryRoute(route)) {
@@ -916,7 +922,6 @@ if (jsonOutput) {
   console.log(JSON.stringify({
     ok: totalIssues === 0,
     stats,
-    requiredTrackingFields,
     issues
   }, null, 2));
 } else {

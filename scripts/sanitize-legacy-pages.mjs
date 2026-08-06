@@ -187,6 +187,46 @@ function removeAttribute(tag, name) {
   );
 }
 
+function disableForms(html) {
+  let formIndex = 0;
+
+  return html.replace(/<form\b[^>]*>[\s\S]*?<\/form\s*>/gi, (formBlock) => {
+    formIndex += 1;
+    const startTag = formBlock.match(/<form\b[^>]*>/i)?.[0];
+    if (!startTag) return formBlock;
+
+    let formTag = startTag;
+    const formId = getAttribute(formTag, 'id') || `disabled-service-form-${formIndex}`;
+    const noticeId = `${formId}-availability`;
+    const existingClass = getAttribute(formTag, 'class') || '';
+    formTag = removeAttribute(formTag, 'action');
+    formTag = removeAttribute(formTag, 'method');
+    formTag = removeAttribute(formTag, 'enctype');
+    formTag = removeAttribute(formTag, 'target');
+    formTag = setAttribute(formTag, 'id', formId);
+    formTag = setAttribute(formTag, 'class', `${existingClass} is-disabled`.trim().replace(/\s+/g, ' '));
+    formTag = setAttribute(formTag, 'data-lead-form', '');
+    formTag = setAttribute(formTag, 'data-form-disabled', 'true');
+    formTag = setAttribute(formTag, 'aria-disabled', 'true');
+    formTag = setAttribute(formTag, 'aria-describedby', noticeId);
+
+    const inner = formBlock.slice(startTag.length).replace(/<\/form\s*>$/i, '');
+    if (/data-disabled-form-fields/i.test(inner)) {
+      return `${formTag}${inner}</form>`;
+    }
+
+    const message = business.form?.disabledMessage || 'Online requests are currently unavailable. Call to discuss commercial service.';
+    return `${formTag}
+<p class="form-unavailable" id="${htmlEscapeAttribute(noticeId)}" role="note"><strong>Online form unavailable.</strong> ${htmlEscapeAttribute(message)}</p>
+<fieldset class="disabled-form-fieldset" data-disabled-form-fields disabled>
+<legend>Commercial service request details</legend>
+${inner}
+</fieldset>
+<p class="form-status" data-form-status role="status" aria-live="polite">Online submissions are disabled.</p>
+</form>`;
+  });
+}
+
 function stripTags(value) {
   return decodeBasicEntities(value.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
 }
@@ -1248,17 +1288,40 @@ function configureLegacyBody(html, pageRoute) {
     'data-location',
     isNewYorkPage(pageRoute) ? 'New York availability requires confirmation' : 'Washington DC service area'
   );
+  if (!pageRoute.includes('blog') && !/^\/(?:about|gallery|privacy-policy|terms-of-service|sitemap|404)$/.test(pageRoute)) {
+    const className = getAttribute(body, 'class') || '';
+    body = setAttribute(body, 'class', `${className} has-sticky-actions`.trim().replace(/\s+/g, ' '));
+  }
   return html.replace(bodyMatch[0], body);
 }
 
-function addTransactionalStickyCall(html, pageRoute) {
-  if (pageRoute.includes('blog') || !isNewYorkPage(pageRoute)) return html;
-  const hasStickyCall = (html.match(/<a\b[^>]*>/gi) || []).some((tag) =>
-    /sticky/i.test(getAttribute(tag, 'class') || '') && /^tel:/i.test(getAttribute(tag, 'href') || '')
-  );
-  if (hasStickyCall) return html;
-  const call = `<a class="sticky-call" href="tel:${htmlEscapeAttribute(business.phone.e164)}" data-business-phone-link data-dynamic-number-eligible data-cta-location="sticky" aria-label="Call to confirm commercial service availability at ${htmlEscapeAttribute(business.phone.display)}">Call to Confirm Commercial Service · <span data-business-phone>${htmlEscapeAttribute(business.phone.display)}</span></a>`;
-  return /<\/body\s*>/i.test(html) ? html.replace(/<\/body\s*>/i, `${call}\n</body>`) : `${html}\n${call}`;
+function legacyPhotoTarget(pageRoute) {
+  if (/access-control/i.test(pageRoute)) return '/access-control-systems-washington-dc#service-request';
+  if (/door-closer/i.test(pageRoute)) return '/door-closer-repair-washington-dc#service-request';
+  if (/fire-door/i.test(pageRoute)) return '/fire-door-inspection-washington-dc#service-request';
+  if (/panic-bar|exit-device/i.test(pageRoute)) return '/panic-bar-repair-washington-dc#service-request';
+  if (/rekey/i.test(pageRoute)) return '/commercial-rekey-washington-dc#service-request';
+  if (/door-repair|door-wont-latch|door-not-locking/i.test(pageRoute)) return '/commercial-door-repair-washington-dc#service-request';
+  return '/commercial-locksmith-washington-dc#service-request';
+}
+
+function addTransactionalStickyActions(html, pageRoute) {
+  if (pageRoute.includes('blog') || /^\/(?:about|gallery|privacy-policy|terms-of-service|sitemap|404)$/.test(pageRoute)) return html;
+  if (/\bsticky-mobile-actions\b/i.test(html)) return html;
+
+  const withoutOldStickyCalls = html.replace(/<a\b[^>]*>[\s\S]*?<\/a\s*>/gi, (anchor) => {
+    const startTag = anchor.match(/<a\b[^>]*>/i)?.[0] || '';
+    return /sticky/i.test(getAttribute(startTag, 'class') || '') && /^tel:/i.test(getAttribute(startTag, 'href') || '')
+      ? ''
+      : anchor;
+  });
+  const actions = `<nav class="sticky-mobile-actions" data-component="StickyMobileActionBar" aria-label="Quick contact actions">
+  <a class="sticky-mobile-action sticky-mobile-call" href="tel:${htmlEscapeAttribute(business.phone.e164)}" data-business-phone-link data-dynamic-number-eligible data-cta-location="sticky" aria-label="Call ${htmlEscapeAttribute(business.phone.display)}">Call</a>
+  <a class="sticky-mobile-action sticky-mobile-photo" href="${htmlEscapeAttribute(legacyPhotoTarget(pageRoute))}" data-photo-cta data-cta-location="sticky" aria-label="View the unavailable door photo request form">Send a Door Photo</a>
+</nav>`;
+  return /<\/body\s*>/i.test(withoutOldStickyCalls)
+    ? withoutOldStickyCalls.replace(/<\/body\s*>/i, `${actions}\n</body>`)
+    : `${withoutOldStickyCalls}\n${actions}`;
 }
 
 function ensureMainLandmark(html) {
@@ -1387,6 +1450,7 @@ function sanitizeLegacyPage(html, file, pageRoute) {
   output = ensureSocialMetadata(output, pageRoute);
   output = neutralizeVisibleClaims(output, pageRoute);
   output = neutralizeFireAndCodeClaims(output, pageRoute);
+  output = disableForms(output);
   output = accessibleLegacyControls(output);
   output = enrichImages(output, file);
   output = configureLegacyBody(output, pageRoute);
@@ -1394,7 +1458,7 @@ function sanitizeLegacyPage(html, file, pageRoute) {
   output = ensureMainLandmark(output);
   output = addComplianceDisclaimer(output, file, pageRoute);
   output = addNewYorkClusterLink(output, pageRoute);
-  output = addTransactionalStickyCall(output, pageRoute);
+  output = addTransactionalStickyActions(output, pageRoute);
   output = addSharedAssetsAndSchema(output, pageRoute);
   return output;
 }
@@ -1414,6 +1478,11 @@ for (const file of files) {
   const html = fs.readFileSync(file, 'utf8');
 
   if (redirectSources.has(redirectKey(pageRoute))) {
+    const output = disableForms(html).replace(/[ \t]+$/gm, '');
+    if (output !== html) {
+      results.changed += 1;
+      if (!DRY_RUN) fs.writeFileSync(file, output);
+    }
     results.skippedRedirectSources += 1;
     continue;
   }

@@ -292,9 +292,9 @@ export default [
   {
     slug: 'door-closer-repair-washington-dc',
     service: 'door_closer_repair',
-    title: 'Commercial Door Closer Repair DC | Leaks & Slamming',
+    title: 'Commercial Door Closer Repair DC | Leaks, Slamming & Latching',
     description:
-      'Commercial door closer repair in Washington DC for leaking, slamming, slow-closing and non-latching doors. Request diagnosis for your business property.',
+      'Commercial door closer repair in Washington DC for leaking, slamming, slow-closing and non-latching doors at businesses and managed properties.',
     h1: 'Commercial Door Closer Repair in Washington DC',
     eyebrow: 'Leaks, slamming and latching problems',
     subtitle:

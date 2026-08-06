@@ -56,7 +56,7 @@ const keyMeta = {
   'service-access-control.html': {
     title: 'Access Control Installation DC | Commercial Locksmith',
     description:
-      'Commercial Locksmith DC access control installation for keypads, card readers, and electric strikes. Get a free estimate and secure your property fast.'
+      'Commercial access control planning for keypads, card readers, door hardware, credentials and safe egress coordination.'
   },
   'service-fire-doors.html': {
     title: 'Fire Door Inspection DC | Commercial Locksmith 24/7',

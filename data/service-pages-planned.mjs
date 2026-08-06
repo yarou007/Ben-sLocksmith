@@ -29,7 +29,7 @@ export default [
     intro: {
       heading: 'Scope the inspection before anyone arrives',
       paragraphs: [
-        'A fire door inspection request is scheduled work, so the best first step is a clear opening count and building contact—not an emergency-only call path. Property managers, facility teams, building engineers, schools, medical facilities and contractors can use the request form to describe the property, the number of openings and any deadline or authority request.',
+        'A fire door inspection request is scheduled work, so the best first step is a clear opening count and building contact—not an emergency-only call path. Property managers, facility teams, building engineers, schools, medical facilities and contractors should prepare the property type, number of openings and any deadline or authority request before calling.',
         'NFPA 80 addresses inspection, testing and maintenance of fire door assemblies, but the standard, adopted code and authority having jurisdiction can affect what a specific building needs. This page is service-planning information, not a legal determination. Share the governing request or project documents when available.'
       ]
     },
@@ -52,7 +52,7 @@ export default [
         heading: 'Inspection and repair are different scopes',
         paragraphs: [
           'An inspection records observed conditions against the agreed scope. Repair changes an opening or its hardware. Keeping those steps distinct makes documentation clearer and lets the property decide how corrections will be authorized.',
-          'If a door does not close, latch or secure now, identify that condition in the form. A separate repair visit may be more appropriate than waiting for a broader inspection. Written reports and deficiency-correction services must be confirmed in the estimate because those business capabilities are not assumed.'
+          'If a door does not close, latch or secure now, identify that condition when calling. A separate repair visit may be more appropriate than waiting for a broader inspection. Written reports and deficiency-correction services must be confirmed in the estimate because those business capabilities are not assumed.'
         ],
         bullets: [
           'Requested inspection scope: observe, operate and document agreed items',
@@ -113,7 +113,7 @@ export default [
       },
       {
         question: 'Are written reports available?',
-        answer: 'Report availability, format, photos and follow-up requirements must be confirmed in the written service scope before scheduling. Use the form to describe what the requesting party needs.'
+        answer: 'Report availability, format, photos and follow-up requirements must be confirmed in the written service scope before scheduling. Prepare what the requesting party needs before calling.'
       },
       {
         question: 'What does NFPA 80 mean for my Washington DC property?',
@@ -184,7 +184,7 @@ export default [
           'If there is no report, describe the observed behavior: whether the door closes from a few inches, whether the latch projects, whether the leaves sequence correctly and whether anything rubs or obstructs the swing.'
         ],
         bullets: [
-          'Attach or quote the deficiency wording',
+          'Have the exact deficiency wording ready',
           'Identify each opening consistently',
           'State whether parts, labor and follow-up should be separate',
           'Confirm who can approve additional work onsite'
@@ -213,7 +213,7 @@ export default [
     propertyTypes: ['Offices', 'Schools', 'Medical facilities', 'Warehouses', 'Restaurants and retail', 'Commercially managed multifamily common areas'],
     faqs: [
       { question: 'Can a fire door that will not latch be adjusted?', answer: 'Sometimes. The cause may be closer force, hinge wear, binding, strike position, latch condition or frame alignment. Diagnosis determines whether adjustment is appropriate.' },
-      { question: 'Do you repair deficiencies from an inspection report?', answer: 'Use the scheduled request form to attach or describe the listed items. Deficiency-correction availability, documentation and follow-up scope must be confirmed in the estimate.' },
+      { question: 'Do you repair deficiencies from an inspection report?', answer: 'Call with the listed items or exact deficiency wording. Correction availability, documentation and follow-up scope must be confirmed in the estimate.' },
       { question: 'Is a fire door repair the same as an inspection?', answer: 'No. Repair changes or restores components; inspection observes and documents conditions under an agreed checklist. They should be scoped separately.' },
       { question: 'What should I do if the opening will not secure now?', answer: 'Call and identify it as an active commercial security or egress problem. Explain whether the opening can close, latch and be safely monitored until service.' }
     ],
@@ -256,7 +256,7 @@ export default [
       heading: 'Treat the opening as a coordinated system',
       paragraphs: [
         'A commercial door installation is more than a slab and hinges. Door material, frame preparation, wall condition, handing, swing, clearances, latching, closer, exit hardware, electrified hardware and finish all affect the result. A measured site assessment helps prevent incompatible parts and change orders.',
-        'Use the scheduled form for a single replacement, tenant improvement or multi-opening project. Include drawings, hardware schedules or fire-rating information when they exist.'
+        'Call about a single replacement, tenant improvement or multi-opening project. Have drawings, hardware schedules or fire-rating information ready when they exist.'
       ]
     },
     sections: [
@@ -277,7 +277,7 @@ export default [
       {
         heading: 'What to include in an estimate request',
         paragraphs: [
-          'Photos are useful for the first conversation, but final selection usually needs field dimensions and verification of the existing opening. If a general contractor or architect controls the project, attach the relevant door schedule and hardware set.'
+          'Photos are useful for the first conversation, but final selection usually needs field dimensions and verification of the existing opening. If a general contractor or architect controls the project, have the relevant door schedule and hardware set ready.'
         ],
         bullets: [
           'Opening location, quantity and approximate size',
@@ -327,7 +327,7 @@ export default [
     slug: 'access-control-systems-washington-dc',
     service: 'access_control',
     title: 'Commercial Access Control Washington DC | Door Hardware',
-    description: 'Plan commercial access control for Washington DC doors. Coordinate locks, strikes, exit hardware, door condition and system responsibilities.',
+    description: 'Plan commercial access control for Washington DC doors. Coordinate locks, exit hardware, door condition, credentials and system responsibilities.',
     h1: 'Access Control for Commercial Doors in Washington DC',
     eyebrow: 'Scheduled security coordination',
     subtitle: 'Commercial access-control door and hardware assessment for businesses, facilities and managed properties.',
@@ -342,7 +342,7 @@ export default [
     },
     symptoms: [
       'Convert a keyed opening to controlled entry',
-      'Electric strike and latch do not align',
+      'Controlled-entry hardware and latch do not align',
       'Door will not close or latch after release',
       'Reader works but door hardware does not',
       'Exit hardware must remain operable',
@@ -354,7 +354,7 @@ export default [
       heading: 'Start with the door before selecting electronics',
       paragraphs: [
         'An access-control system depends on a door that closes, aligns and latches consistently. A reader or controller cannot compensate for a dragging door, failed closer, damaged frame or incompatible lock. A door-side assessment identifies those conditions before equipment is specified.',
-        'Use the scheduled request form to describe the number of doors, existing system, desired credential workflow and who is providing electrical, cabling, controls and life-safety review.'
+        'Call with the number of doors, existing system, desired credential workflow and the parties providing electrical, cabling, controls and life-safety review.'
       ]
     },
     sections: [
@@ -365,7 +365,7 @@ export default [
         ],
         bullets: [
           'Mechanical and electrified lock functions',
-          'Electric strikes and frame preparation',
+          'Electrified lock functions and door preparation',
           'Request-to-exit and door-position interfaces',
           'Panic or exit hardware coordination',
           'Door closers, hinges and alignment',
@@ -410,7 +410,7 @@ export default [
     propertyTypes: ['Offices and coworking spaces', 'Retail and restaurants', 'Medical and education facilities', 'Warehouses and service areas', 'Commercially managed multifamily common areas', 'Multi-tenant commercial properties'],
     faqs: [
       { question: 'Can access control be added to an existing commercial door?', answer: 'Often, but the door, frame, lock function, exit method, closer and available wiring path must be assessed before compatible hardware is selected.' },
-      { question: 'Do you provide the reader and software?', answer: 'System supply, programming and ongoing software support must be confirmed for each project. Use the form to identify an existing integrator or describe the complete scope you need quoted.' },
+      { question: 'Do you provide the reader and software?', answer: 'System supply, programming and ongoing software support must be confirmed for each project. Call with the existing integrator or complete scope that needs review.' },
       { question: 'Why does the controlled door fail to latch?', answer: 'Common causes include door/frame misalignment, closer problems, strike position, preload, hinge wear or incompatible hardware. Diagnose the opening before changing programming.' },
       { question: 'Can panic hardware work with access control?', answer: 'There are configurations that coordinate controlled entry with exit hardware, but the specific opening, hardware, egress function and project requirements must be reviewed.' }
     ],

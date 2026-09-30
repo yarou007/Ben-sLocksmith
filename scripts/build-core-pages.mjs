@@ -195,7 +195,7 @@ function head({ title, description, pathName, image, schema, robots = 'index,fol
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  ${business.siteVerification?.google ? `<meta name="google-site-verification" content="${escapeAttribute(business.siteVerification.google)}">` : ''}
+  ${business.siteVerification?.google ? `<meta name="google-site-verification" content="${escapeAttribute(business.siteVerification.google)}" />` : ''}
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeAttribute(description)}">
   <meta name="robots" content="${escapeAttribute(robots)}">

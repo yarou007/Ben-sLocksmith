@@ -1424,7 +1424,7 @@ function addSharedAssetsAndSchema(html, pageRoute) {
   }
   if (!/rel\s*=\s*["'][^"']*manifest/i.test(html)) additions.push('<link rel="manifest" href="/site.webmanifest">');
   if (business.siteVerification?.google && !/name\s*=\s*["']google-site-verification["']/i.test(html)) {
-    additions.push(`<meta name="google-site-verification" content="${htmlEscapeAttribute(business.siteVerification.google)}">`);
+    additions.push(`<meta name="google-site-verification" content="${htmlEscapeAttribute(business.siteVerification.google)}" />`);
   }
   additions.push(safeSchema(html, pageRoute));
   if (!/src\s*=\s*["']\/assets\/business-config\.js(?:\?[^"']*)?["']/i.test(html)) {

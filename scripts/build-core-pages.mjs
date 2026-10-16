@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { googleAnalyticsTag } from './google-analytics-tag.mjs';
 
 import plannedPages from '../data/service-pages-planned.mjs';
 import locksmithPages from '../data/service-pages-locksmith.mjs';
@@ -194,6 +195,7 @@ function head({ title, description, pathName, image, schema, robots = 'index,fol
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
+  ${googleAnalyticsTag(business.analytics)}
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   ${business.siteVerification?.google ? `<meta name="google-site-verification" content="${escapeAttribute(business.siteVerification.google)}" />` : ''}
   <title>${escapeHtml(title)}</title>
@@ -730,7 +732,7 @@ function privacyPage() {
       alt: 'Commercial door closer mounted above a door',
       caption: 'Commercial door hardware shown; the image location is not published.'
     },
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Online service forms are disabled</h2><p>The visible forms are reference-only and cannot be completed, uploaded to or submitted. They have no configured submission endpoint or recipient. Call the displayed business number to discuss service, and do not send confidential building, credential or personal information through general analytics channels.</p><p><strong>Policy review status:</strong> the legal business identity, effective date, dedicated privacy contact, retention terms and required consent language still need owner or legal approval before deployment.</p></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site may retain landing page, referrer and UTM parameters in the browser session. Phone and CTA clicks may be placed in a local data layer; they are not treated as booked jobs and do not include form messages or uploaded files.</p></article><article class="card"><h3>Form processor</h3><p>No form processor or submission recipient is active. Re-enabling online requests requires a verified handler, server-side validation, upload controls, spam protection and an approved privacy disclosure.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load. Its continued use and the corresponding disclosure or consent requirements need owner or legal review. GTM, GA4, Google Ads and call-tracking IDs are not active; this policy must be updated before those tools are enabled.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. Legal business identity, mailing address and a dedicated privacy contact still require confirmation.</p></article></div></div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Online service forms are disabled</h2><p>The visible forms are reference-only and cannot be completed, uploaded to or submitted. They have no configured submission endpoint or recipient. Call the displayed business number to discuss service, and do not send confidential building, credential or personal information through general analytics channels.</p><p><strong>Policy review status:</strong> the legal business identity, effective date, dedicated privacy contact, retention terms and required consent language still need owner or legal approval before deployment.</p></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site may retain landing page, referrer and UTM parameters in the browser session. Phone and CTA clicks may be placed in a local data layer; they are not treated as booked jobs and do not include form messages or uploaded files.</p></article><article class="card"><h3>Form processor</h3><p>No form processor or submission recipient is active. Re-enabling online requests requires a verified handler, server-side validation, upload controls, spam protection and an approved privacy disclosure.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load. Its continued use and the corresponding disclosure or consent requirements need owner or legal review. Google Analytics 4 is configured to measure website usage. GTM, Google Ads and call-tracking IDs are not active.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. Legal business identity, mailing address and a dedicated privacy contact still require confirmation.</p></article></div></div></section>`
   });
 }
 

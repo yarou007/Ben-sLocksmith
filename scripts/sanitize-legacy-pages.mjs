@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { googleAnalyticsTag } from './google-analytics-tag.mjs';
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(SCRIPT_DIR, '..');
@@ -1442,6 +1443,10 @@ function addSharedAssetsAndSchema(html, pageRoute) {
 
 function sanitizeLegacyPage(html, file, pageRoute) {
   let output = removeLegacyScriptsAndSchema(html);
+  const analyticsTag = googleAnalyticsTag(business.analytics);
+  if (analyticsTag && !output.includes('https://www.googletagmanager.com/gtag/js?id=')) {
+    output = output.replace(/<head\b[^>]*>/i, (tag) => `${tag}\n${analyticsTag}`);
+  }
   output = removeUnverifiedSocialProfiles(output);
   output = rewriteInternalLinks(output, pageRoute);
   output = removeNewYorkPromotion(output, pageRoute);

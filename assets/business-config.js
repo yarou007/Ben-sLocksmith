@@ -67,7 +67,7 @@ window.DCELD_CONFIG = {
   },
   "analytics": {
     "gtmContainerId": null,
-    "ga4MeasurementId": null,
+    "ga4MeasurementId": "G-BLNFJYD9RP",
     "googleAdsConversionId": null,
     "googleAdsCallLabel": null,
     "googleAdsCallIntegrationMode": null,

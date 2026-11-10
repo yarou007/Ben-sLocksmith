@@ -14,7 +14,11 @@
 
   function safeStorage(type) {
     try {
-      return window[type];
+      var storage = window[type];
+      var probe = '__dceld_storage_check';
+      storage.setItem(probe, '1');
+      storage.removeItem(probe);
+      return storage;
     } catch (error) {
       return null;
     }
@@ -88,16 +92,27 @@
     if (!eventName) return;
     eventSequence += 1;
     window.dataLayer = window.dataLayer || [];
+    var eventId = uniqueId('event');
     window.dataLayer.push(
       Object.assign(
         {
           event: eventName,
           event_sequence: eventSequence,
-          event_id: uniqueId('event')
+          event_id: eventId
         },
         basePayload(parameters)
       )
     );
+    // Object pushes support GTM custom-event triggers. A direct Google tag
+    // needs an explicit event command; use only one delivery path per event.
+    var analytics = config.analytics || {};
+    if (!analytics.gtmContainerId && /^G-[A-Z0-9]+$/.test(analytics.ga4MeasurementId || '') && typeof window.gtag === 'function') {
+      window.gtag('event', eventName, Object.assign({}, basePayload(parameters), {
+        event_id: eventId,
+        send_to: analytics.ga4MeasurementId,
+        transport_type: 'beacon'
+      }));
+    }
   }
 
   window.DCELDAnalytics = {
@@ -207,7 +222,7 @@
       }
     });
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 760 && button.getAttribute('aria-expanded') === 'true') setOpen(false);
+      if (window.innerWidth > 1100 && button.getAttribute('aria-expanded') === 'true') setOpen(false);
     });
   }
 
@@ -325,10 +340,12 @@
       }
 
       if (target.matches('[data-photo-cta]')) {
-        track('photo_cta_click', {
+        var photoPayload = {
           cta_location: inferCtaLocation(target),
-          destination: target.getAttribute('href') || ''
-        });
+          contact_channel: target.dataset.contactChannel || 'whatsapp'
+        };
+        track('photo_cta_click', photoPayload);
+        if (target.dataset.contactChannel === 'whatsapp') track('whatsapp_click', photoPayload);
       }
 
       if (target.matches('[data-service-card]')) {
@@ -366,6 +383,7 @@
 
   function configureForms() {
     document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
+      populateFormAttribution(form);
       if (form.dataset.formDisabled === 'true') {
         form.removeAttribute('action');
         form.removeAttribute('method');
@@ -376,12 +394,11 @@
         });
         form.addEventListener('submit', function (event) {
           event.preventDefault();
-          showFormStatus(form, 'error', 'Online submissions are disabled. Call to discuss commercial service.');
+          showFormStatus(form, 'error', 'Online requests are coming soon. Call or send a photo on WhatsApp.');
         });
         return;
       }
 
-      populateFormAttribution(form);
       var formType = value(form.dataset.formType) || 'service_request';
       var started = false;
       var invalidTracked = false;
@@ -513,6 +530,7 @@
   }
 
   function announceSubmissionResult() {
+    if (!config.form || config.form.enabled !== true) return;
     var params = new URLSearchParams(window.location.search);
     var success = params.get('submitted') === '1';
     var failure = params.get('form_error') === '1';

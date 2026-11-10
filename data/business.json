@@ -13,9 +13,9 @@
     "enabled": false,
     "endpoint": null,
     "recipient": null,
-    "disabledMessage": "Online requests are currently unavailable. Call to discuss commercial service.",
+    "disabledMessage": "Online requests are coming soon. Call or send a photo on WhatsApp.",
     "verificationStatus": "disabled_by_owner_request",
-    "photoChannel": "form_file_upload"
+    "photoChannel": "whatsapp"
   },
   "serviceAreas": [
     {
@@ -227,5 +227,49 @@
       "locationVerified": false,
       "clientVerified": false
     }
-  ]
+  ],
+  "photoContact": {
+    "channel": "whatsapp",
+    "whatsappNumber": "+17032440559",
+    "accountVerified": false
+  },
+  "coverage": {
+    "washington-dc": {
+      "verified": [],
+      "pending": [
+        "Downtown",
+        "Capitol Hill",
+        "Georgetown",
+        "Navy Yard",
+        "NoMa",
+        "Dupont Circle",
+        "Adams Morgan",
+        "U Street"
+      ]
+    },
+    "northern-virginia": {
+      "verified": [],
+      "pending": [
+        "Arlington",
+        "Alexandria"
+      ]
+    },
+    "maryland": {
+      "verified": [],
+      "pending": [
+        "Bethesda",
+        "Silver Spring"
+      ]
+    }
+  },
+  "googleRating": {
+    "verified": false,
+    "value": null,
+    "count": null,
+    "url": null
+  },
+  "warranty": {
+    "verified": false,
+    "text": null
+  }
 }

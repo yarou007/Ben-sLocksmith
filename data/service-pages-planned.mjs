@@ -6,7 +6,7 @@ export default [
     description: 'Request a scoped fire door inspection quote in Washington DC. Share opening counts, building details, deadlines and reporting needs.',
     h1: 'Fire Door Inspection Service Requests in Washington DC',
     eyebrow: 'Scheduled life-safety service',
-    subtitle: 'Plan a commercial fire door inspection request. Provider qualifications, reporting and corrective scope must be confirmed in writing.',
+    subtitle: 'Plan your commercial fire door inspection request around opening counts, access and the reporting requirements for your property.',
     intent: 'scheduled',
     form: 'scheduled',
     heroImage: {
@@ -52,7 +52,7 @@ export default [
         heading: 'Inspection and repair are different scopes',
         paragraphs: [
           'An inspection records observed conditions against the agreed scope. Repair changes an opening or its hardware. Keeping those steps distinct makes documentation clearer and lets the property decide how corrections will be authorized.',
-          'If a door does not close, latch or secure now, identify that condition when calling. A separate repair visit may be more appropriate than waiting for a broader inspection. Written reports and deficiency-correction services must be confirmed in the estimate because those business capabilities are not assumed.'
+          'If a door does not close, latch or secure now, identify that condition when calling. A separate repair visit may be more appropriate than waiting for a broader inspection. Include the inspection report, correction items and documentation you need when discussing the scope.'
         ],
         bullets: [
           'Requested inspection scope: observe, operate and document agreed items',
@@ -113,7 +113,7 @@ export default [
       },
       {
         question: 'Are written reports available?',
-        answer: 'Report availability, format, photos and follow-up requirements must be confirmed in the written service scope before scheduling. Prepare what the requesting party needs before calling.'
+        answer: 'Tell us which report format, photos and follow-up items the requesting party needs. We will review the reporting scope before scheduling.'
       },
       {
         question: 'What does NFPA 80 mean for my Washington DC property?',
@@ -213,7 +213,7 @@ export default [
     propertyTypes: ['Offices', 'Schools', 'Medical facilities', 'Warehouses', 'Restaurants and retail', 'Commercially managed multifamily common areas'],
     faqs: [
       { question: 'Can a fire door that will not latch be adjusted?', answer: 'Sometimes. The cause may be closer force, hinge wear, binding, strike position, latch condition or frame alignment. Diagnosis determines whether adjustment is appropriate.' },
-      { question: 'Do you repair deficiencies from an inspection report?', answer: 'Call with the listed items or exact deficiency wording. Correction availability, documentation and follow-up scope must be confirmed in the estimate.' },
+      { question: 'Do you repair deficiencies from an inspection report?', answer: 'Call with the listed items or exact deficiency wording. We will discuss the correction, documentation and follow-up scope with you before approval.' },
       { question: 'Is a fire door repair the same as an inspection?', answer: 'No. Repair changes or restores components; inspection observes and documents conditions under an agreed checklist. They should be scoped separately.' },
       { question: 'What should I do if the opening will not secure now?', answer: 'Call and identify it as an active commercial security or egress problem. Explain whether the opening can close, latch and be safely monitored until service.' }
     ],
@@ -311,7 +311,7 @@ export default [
     propertyTypes: ['Office and tenant build-outs', 'Retail and restaurant storefronts', 'Schools and medical facilities', 'Warehouses and service buildings', 'Commercial common-area doors', 'General contractor projects'],
     faqs: [
       { question: 'Can I get a commercial door estimate from photos?', answer: 'Photos can start the scope, but final pricing or ordering may require field measurement, handing, frame/wall review and hardware verification.' },
-      { question: 'Do you install hollow metal doors and frames?', answer: 'Hollow metal openings are within the planning scope described here. Final availability, fire rating, preparation and related trade work must be confirmed in the estimate.' },
+      { question: 'Do you install hollow metal doors and frames?', answer: 'Call with the opening measurements, door condition and any required fire rating. We will review door preparation, frame work and related trades with you.' },
       { question: 'Can access control be coordinated with a new door?', answer: 'Yes, the door-side preparation can be discussed with the access-control requirements. The scope must identify who provides power, controls, cabling, devices and commissioning.' },
       { question: 'When is repair better than replacement?', answer: 'Repair is often preferable when the door/frame is sound and the failure is limited to serviceable hardware or alignment. A site assessment helps compare the two options.' }
     ],
@@ -410,7 +410,7 @@ export default [
     propertyTypes: ['Offices and coworking spaces', 'Retail and restaurants', 'Medical and education facilities', 'Warehouses and service areas', 'Commercially managed multifamily common areas', 'Multi-tenant commercial properties'],
     faqs: [
       { question: 'Can access control be added to an existing commercial door?', answer: 'Often, but the door, frame, lock function, exit method, closer and available wiring path must be assessed before compatible hardware is selected.' },
-      { question: 'Do you provide the reader and software?', answer: 'System supply, programming and ongoing software support must be confirmed for each project. Call with the existing integrator or complete scope that needs review.' },
+      { question: 'Do you provide the reader and software?', answer: 'Share the existing integrator contact and the system work you need. We will discuss door hardware, programming responsibilities and software support as part of the project scope.' },
       { question: 'Why does the controlled door fail to latch?', answer: 'Common causes include door/frame misalignment, closer problems, strike position, preload, hinge wear or incompatible hardware. Diagnose the opening before changing programming.' },
       { question: 'Can panic hardware work with access control?', answer: 'There are configurations that coordinate controlled entry with exit hardware, but the specific opening, hardware, egress function and project requirements must be reviewed.' }
     ],

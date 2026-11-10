@@ -642,6 +642,19 @@ for (const filePath of htmlFiles) {
     checked(3);
   }
 
+  // A photo CTA must reach the photo channel, rather than a coming-soon form.
+  for (const anchor of anchors.filter((item) => Object.hasOwn(item.attrs, 'data-photo-cta'))) {
+    const destination = safeUrl(decodeEntities(anchor.attrs.href || ''), origin);
+    if (!destination || destination.protocol !== 'https:' || destination.hostname !== 'wa.me'
+      || !/^\/\d{10,15}$/.test(destination.pathname) || !destination.searchParams.get('text')) {
+      addIssue('photo-funnel', route, 'door-photo CTA does not open a prefilled WhatsApp conversation');
+    }
+    if (/unavailable|disabled/i.test(anchor.attrs['aria-label'] || '')) {
+      addIssue('photo-funnel', route, 'door-photo CTA has an obsolete unavailable-form label');
+    }
+    checked(2);
+  }
+
   if (!redirect && isDcPrimaryRoute(route)) {
     const promotionalAnchors = anchors.filter((anchor) => {
       const target = (anchor.attrs.href || '').toLowerCase();

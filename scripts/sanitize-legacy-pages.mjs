@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { googleAnalyticsTag } from './google-analytics-tag.mjs';
+import { conversionComponents } from './conversion-components.mjs';
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(SCRIPT_DIR, '..');
@@ -13,6 +14,7 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const business = JSON.parse(fs.readFileSync(BUSINESS_FILE, 'utf8'));
 const redirects = JSON.parse(fs.readFileSync(REDIRECTS_FILE, 'utf8'));
 const origin = business.origin.replace(/\/$/, '');
+const conversion = conversionComponents(business);
 const assetVersion = createHash('sha256')
   .update(JSON.stringify(business))
   .update(fs.readFileSync(path.join(ROOT_DIR, 'assets', 'site.js')))
@@ -1325,6 +1327,22 @@ function addTransactionalStickyActions(html, pageRoute) {
     : `${withoutOldStickyCalls}\n${actions}`;
 }
 
+function upgradeContactActions(html) {
+  let output = html.replace(/<a\b[^>]*>[\s\S]*?<\/a\s*>/gi, (anchor) => {
+    const start = anchor.match(/<a\b[^>]*>/i)?.[0] || '';
+    if (!hasAttribute(start, 'data-photo-cta')) return anchor;
+    let updated = setAttribute(start, 'href', conversion.whatsappUrl());
+    updated = setAttribute(updated, 'data-contact-channel', 'whatsapp');
+    updated = setAttribute(updated, 'aria-label', 'Send a door photo on WhatsApp');
+    return anchor.replace(start, updated);
+  });
+  if (/has-sticky-actions/.test(output) && !/class="desktop-call"/.test(output)) {
+    const floating = conversion.stickyActions().match(/<a class="desktop-call"[\s\S]*?<\/a>/)?.[0] || '';
+    output = output.replace(/<\/body\s*>/i, floating + '\n</body>');
+  }
+  return output;
+}
+
 function ensureMainLandmark(html) {
   const mainMatch = html.match(/<main\b[^>]*>/i);
   if (mainMatch) {
@@ -1464,6 +1482,7 @@ function sanitizeLegacyPage(html, file, pageRoute) {
   output = addComplianceDisclaimer(output, file, pageRoute);
   output = addNewYorkClusterLink(output, pageRoute);
   output = addTransactionalStickyActions(output, pageRoute);
+  output = upgradeContactActions(output);
   output = addSharedAssetsAndSchema(output, pageRoute);
   return output;
 }

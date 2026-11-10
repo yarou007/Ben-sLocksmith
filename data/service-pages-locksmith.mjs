@@ -269,7 +269,7 @@ export default [
       {
         question: "What should a business report after break-in damage?",
         answer:
-          "Describe whether the opening can close and secure, where the impact occurred, and whether the frame or lock area is distorted. A door photo may help define the initial scope when an approved sharing channel is confirmed by phone."
+          "Describe whether the opening can close and secure, where the impact occurred, and whether the frame or lock area is distorted. A door photo may help define the initial scope on WhatsApp, along with the business address and urgency."
       },
       {
         question: "How is an urgent commercial door repair scoped?",
@@ -1072,7 +1072,7 @@ export default [
       heading: "Turn property requests into door-specific scopes",
       paragraphs: [
         "Property managers coordinate tenants, site access, approvals and commercial door or lock problems across different openings. A useful request identifies the property, exact door, observed failure, authorization and work-order reference before scope is approved.",
-        "Administrative and portfolio requirements should be stated in the request and confirmed before assignment. Listing written estimates, photos, invoicing, W-9, COI, multi-location coverage, emergency dispatch or maintenance here does not represent that those capabilities are available."
+        "Share your work-order process, vendor documents, billing requirements and portfolio needs. We will review the requested scope and administrative arrangements with you before scheduling."
       ]
     },
     sections: [
@@ -1082,7 +1082,7 @@ export default [
           "Each request should distinguish the affected opening from a general building reference and name the person authorized to provide access. Include the property team's required reference format for confirmation."
         ],
         bullets: [
-          "Work-order reference requirement to confirm",
+          "Work-order reference and authorization",
           "Property, suite and door identifier",
           "Site contact and access authorization",
           "Observed lock, latch, closer or door symptom",
@@ -1092,26 +1092,26 @@ export default [
       {
         heading: "State documentation and billing requirements",
         paragraphs: [
-          "Vendor administration varies by property. Treat every document, deliverable and payment term as a requested requirement whose availability, format and acceptance must be confirmed before scheduling."
+          "Send your vendor setup and billing requirements with the work order. Discuss estimates, photos, invoice references, COI and W-9 needs before approving the work."
         ],
         bullets: [
-          "Written-estimate requirement to confirm before approval",
-          "Before-and-after photo requirement to confirm per work order",
-          "Commercial invoicing and purchase-order terms to confirm",
-          "W-9 requirement to confirm during vendor setup",
-          "Certificate of insurance (COI) requirement to confirm before assignment"
+          "Requested estimate and approval format",
+          "Requested before-and-after photos by opening",
+          "Commercial invoicing and purchase-order requirements",
+          "W-9 requirements for vendor setup",
+          "Certificate of insurance (COI) requirements"
         ]
       },
       {
         heading: "Confirm portfolio and ongoing-service needs",
         paragraphs: [
-          "Portfolio-wide expectations should be evaluated separately from a single repair. No coverage model, dispatch option or recurring program should be assumed until its geography, scope and operating terms are confirmed."
+          "Planning work across several buildings? List the addresses, opening counts, escalation contacts and maintenance goals so the locations and ongoing-service needs can be reviewed together."
         ],
         bullets: [
-          "Multi-location coverage to confirm property by property",
-          "Emergency dispatch expectations and escalation contacts to confirm",
-          "Scheduled maintenance scope and frequency to confirm",
-          "Door and hardware inventory requirements to confirm",
+          "Property addresses and multi-location scope",
+          "Urgent service needs and escalation contacts",
+          "Recurring maintenance goals and frequency",
+          "Door and hardware inventory requirements",
           "Approved contacts and authorization rules by location"
         ]
       }
@@ -1123,7 +1123,7 @@ export default [
       },
       {
         title: "State administrative requirements",
-        text: "List required estimates, photos, invoicing terms, W-9, COI and approval steps without assuming availability."
+        text: "Share required estimates, photos, invoicing terms, W-9, COI and approval steps for review."
       },
       {
         title: "Confirm scope and capabilities",
@@ -1153,12 +1153,12 @@ export default [
       {
         question: "Can a request require estimates, photos and commercial invoicing?",
         answer:
-          "List each item as a required deliverable or term. Its availability, format, timing and acceptance must be confirmed before the work is assigned or scheduled."
+          "Include the estimate format, photos, invoicing terms and vendor documents your property needs. We will discuss these requirements with you before scheduling."
       },
       {
         question: "How should multi-location, emergency dispatch or maintenance needs be handled?",
         answer:
-          "Provide the locations, expected scope, escalation path and maintenance frequency. Coverage and each requested capability must be confirmed rather than assumed from this page."
+          "Send the locations, expected scope, escalation path and maintenance frequency. We will review the service options and arrangements for your properties."
       },
       {
         question: "How should several commercial openings be included in one request?",

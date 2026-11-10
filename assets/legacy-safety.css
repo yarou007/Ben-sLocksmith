@@ -345,3 +345,27 @@ body:not(.has-sticky-call) img {
     display: none !important;
   }
 }
+
+/* Persistent contact action on retained pages, matching the shared site UI. */
+.desktop-call {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  min-height: 56px;
+  padding: .9rem 1.15rem;
+  border: 2px solid #fff;
+  border-radius: 2rem;
+  background: #b42318;
+  color: #fff;
+  font: 800 16px/1.4 system-ui, sans-serif;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgb(11 29 45 / 24%);
+}
+.desktop-call:hover { background: #8f1d15; color: #fff; }
+.desktop-call svg { width: 24px; height: 24px; flex: 0 0 auto; }
+@media (max-width:760px) { .desktop-call { display: none; } }
+@media print { .desktop-call { display: none !important; } }

@@ -65,6 +65,14 @@ window.DCELD_CONFIG = {
       "verified": false
     }
   },
+  "photoContact": {
+    "channel": "whatsapp",
+    "whatsappNumber": "+17032440559",
+    "accountVerified": false
+  },
+  "form": {
+    "enabled": false
+  },
   "analytics": {
     "gtmContainerId": null,
     "ga4MeasurementId": "G-BLNFJYD9RP",

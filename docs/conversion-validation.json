@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-10",
+  "lighthouse": {
+    "version": "12.8.2",
+    "formFactor": "mobile",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": "1.1\u00a0s",
+      "largest-contentful-paint": "1.8\u00a0s",
+      "cumulative-layout-shift": "0",
+      "total-blocking-time": "0\u00a0ms",
+      "speed-index": "1.1\u00a0s"
+    },
+    "blockedExternalRequests": [
+      "googletagmanager.com",
+      "analytics.ahrefs.com"
+    ]
+  },
+  "staticQA": {
+    "pages": 128,
+    "sitemapUrls": 59,
+    "serviceConfigurations": 17,
+    "canonicalRedirects": 63,
+    "checks": 5660,
+    "issues": 0
+  },
+  "browserQA": {
+    "responsiveRoutes": 21,
+    "responsiveViewportSizes": [
+      [
+        360,
+        640
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        800,
+        800
+      ],
+      [
+        1100,
+        800
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "navigationBoundaryWidths": [
+      1101,
+      1150
+    ],
+    "layoutFailures": 0,
+    "javascriptErrors": 0,
+    "axeResults": [
+      {
+        "route": "/",
+        "violations": []
+      },
+      {
+        "route": "/commercial-door-repair-washington-dc",
+        "violations": []
+      },
+      {
+        "route": "/service-property-manager-locksmith",
+        "violations": []
+      }
+    ],
+    "ga4PhoneCommandsPerClick": 1,
+    "ga4WhatsAppCommandsPerClick": 1,
+    "utmAndGclidHiddenFields": "passed",
+    "restrictedSessionStorage": "passed",
+    "gtmDirectDeliveryDeduplication": "passed"
+  },
+  "deployment": {
+    "output": "public",
+    "copiedFiles": 196,
+    "published": false
+  }
+}

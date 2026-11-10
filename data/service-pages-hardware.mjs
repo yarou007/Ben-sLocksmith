@@ -208,7 +208,7 @@ export default [
       {
         heading: 'Coordinate the complete door package',
         paragraphs: [
-          'A new panic bar still depends on hinges, pivots, the closer and the frame. Fire-rated or designated egress openings may add project requirements that must be confirmed for that property; installation should not be presented as an automatic approval guarantee.'
+          'A new panic bar still depends on hinges, pivots, the closer and the frame. For a fire-rated or designated exit opening, include the inspection report and project requirements so the installation scope supports the approved opening design.'
         ],
         bullets: [
           'Closer strength and reliable relatching',
@@ -644,7 +644,7 @@ export default [
       {
         heading: 'Glass conditions require scope confirmation',
         paragraphs: [
-          'Glass condition can affect whether door and frame work can proceed safely, but glass replacement is not assumed in this service scope. Cracked, loose or displaced glazing should be assessed and may require a qualified glazing provider before or alongside door repair.'
+          'Glass condition can affect whether door and frame work can proceed safely, and glass replacement can require a separate glazing scope. Cracked, loose or displaced glazing should be assessed and may require a qualified glazing provider before or alongside door repair.'
         ],
         bullets: [
           'Photograph visible cracks or movement before service',
@@ -694,7 +694,7 @@ export default [
       {
         question: 'Does storefront door repair include broken glass replacement?',
         answer:
-          'Not automatically. Glass condition is assessed because it affects safe door work, but replacement may require a qualified glazing provider and must be confirmed separately.'
+          'Not automatically. Glass condition is assessed because it affects safe door work, and replacement may require a qualified glazing provider. Mention damaged glass when requesting service.'
       },
       {
         question: 'What details help scope a commercial storefront door repair?',

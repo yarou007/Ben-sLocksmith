@@ -13,9 +13,10 @@
     "enabled": false,
     "endpoint": null,
     "recipient": null,
-    "disabledMessage": "Online requests are coming soon. Call or send a photo on WhatsApp.",
+    "disabledMessage": "Use the WhatsApp quote form or call 24/7. Direct online submissions are coming soon.",
     "verificationStatus": "disabled_by_owner_request",
-    "photoChannel": "whatsapp"
+    "photoChannel": "whatsapp",
+    "contactMode": "whatsapp"
   },
   "serviceAreas": [
     {
@@ -47,8 +48,8 @@
       "verified": false
     },
     "availability24x7": {
-      "value": null,
-      "verified": false
+      "value": true,
+      "verified": true
     },
     "sameDayService": {
       "value": null,
@@ -75,8 +76,12 @@
       "verified": false
     },
     "serviceHours": {
-      "value": null,
-      "verified": false
+      "value": "24/7",
+      "verified": true
+    },
+    "freeEstimates": {
+      "value": true,
+      "verified": true
     }
   },
   "address": {
@@ -231,12 +236,12 @@
   "photoContact": {
     "channel": "whatsapp",
     "whatsappNumber": "+17032440559",
-    "accountVerified": false
+    "accountVerified": true,
+    "verificationSource": "Owner confirmation, 2026-11-11"
   },
   "coverage": {
     "washington-dc": {
-      "verified": [],
-      "pending": [
+      "verified": [
         "Downtown",
         "Capitol Hill",
         "Georgetown",
@@ -245,21 +250,25 @@
         "Dupont Circle",
         "Adams Morgan",
         "U Street"
-      ]
+      ],
+      "pending": [],
+      "verificationSource": "Owner confirmed targeting/service locations, 2026-11-11"
     },
     "northern-virginia": {
-      "verified": [],
-      "pending": [
+      "verified": [
         "Arlington",
         "Alexandria"
-      ]
+      ],
+      "pending": [],
+      "verificationSource": "Owner confirmed targeting/service locations, 2026-11-11"
     },
     "maryland": {
-      "verified": [],
-      "pending": [
+      "verified": [
         "Bethesda",
         "Silver Spring"
-      ]
+      ],
+      "pending": [],
+      "verificationSource": "Owner confirmed targeting/service locations, 2026-11-11"
     }
   },
   "googleRating": {
@@ -271,5 +280,23 @@
   "warranty": {
     "verified": false,
     "text": null
+  },
+  "ownerVerification": {
+    "date": "2026-11-11",
+    "confirmed": [
+      "24/7 availability",
+      "Free estimates",
+      "WhatsApp number",
+      "All requested target locations"
+    ],
+    "notProvided": [
+      "Response/callback time",
+      "Licensing/insurance details",
+      "Google rating/reviews",
+      "Hardware brands",
+      "Warranty terms",
+      "COI/W-9 availability",
+      "Maintenance programs"
+    ]
   }
 }

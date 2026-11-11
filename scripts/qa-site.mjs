@@ -574,6 +574,29 @@ for (const filePath of htmlFiles) {
     const labels = pairedTagMatches(form.inner, 'label');
     const formIds = idValues(form.inner);
 
+    const whatsappQuote = Object.hasOwn(form.attrs, 'data-quote-form');
+    if (whatsappQuote) {
+      if (Object.hasOwn(form.attrs, 'action') || Object.hasOwn(form.attrs, 'method') || Object.hasOwn(form.attrs, 'enctype')) {
+        addIssue('forms', route, formName + ' must use the explicit WhatsApp handoff rather than an unconfigured submission endpoint');
+      }
+      if (!Object.hasOwn(form.attrs, 'hidden') || form.attrs['aria-disabled'] !== 'true') {
+        addIssue('forms', route, formName + ' must stay hidden and disabled until its client handler is ready');
+      }
+      if (!tagMatches(form.inner, 'fieldset').some(fieldset => Object.hasOwn(fieldset.attrs, 'disabled'))) {
+        addIssue('forms', route, formName + ' needs disabled source controls for its no-JavaScript fallback');
+      }
+      if (!html.includes('/assets/quote-form.js')) addIssue('forms', route, formName + ' lacks the quote-form handler');
+      for (const requiredName of ['contact_name', 'phone', 'business_type', 'service_location', 'problem_type', 'urgency']) {
+        if (!controls.some(c => c.attrs.name === requiredName && Object.hasOwn(c.attrs, 'required'))) {
+          addIssue('forms', route, formName + ' lacks required contact field ' + requiredName);
+        }
+      }
+      for (const attributionName of ['utm_source', 'utm_medium', 'utm_campaign', 'gclid', 'landing_page']) {
+        if (!controls.some(c => c.attrs.name === attributionName && c.attrs.type === 'hidden')) {
+          addIssue('forms', route, formName + ' lacks attribution field ' + attributionName);
+        }
+      }
+    } else {
     if (Object.hasOwn(form.attrs, 'action')) {
       addIssue('forms', route, formName + ' must not expose an action while forms are disabled');
     }
@@ -601,6 +624,7 @@ for (const filePath of htmlFiles) {
     ];
     if (submitControls.some((control) => !Object.hasOwn(control.attrs, 'disabled')) && !disabledFieldsets.length) {
       addIssue('forms', route, formName + ' has an enabled submit control');
+    }
     }
     checked(6);
 

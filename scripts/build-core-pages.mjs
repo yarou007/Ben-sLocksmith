@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { googleAnalyticsTag } from './google-analytics-tag.mjs';
 import { conversionComponents } from './conversion-components.mjs';
-import { coverageCandidates } from '../data/conversion-content.mjs';
+import { coverageCandidates, locationProfiles } from '../data/conversion-content.mjs';
 
 import plannedPages from '../data/service-pages-planned.mjs';
 import locksmithPages from '../data/service-pages-locksmith.mjs';
@@ -23,6 +23,7 @@ const assetVersion = createHash('sha256')
   .update(JSON.stringify(business))
   .update(fs.readFileSync(path.join(root, 'assets/site.css')))
   .update(fs.readFileSync(path.join(root, 'assets/site.js')))
+  .update(fs.readFileSync(path.join(root, 'assets/quote-form.js')))
   // Bust browser caches when the Vercel publish pipeline changes, even if the
   // CSS bytes did not. This prevents a previously cached missing asset from
   // surviving the deployment that restores the public asset directory.
@@ -60,7 +61,7 @@ function formatList(items, className = 'check-list') {
 }
 
 function commercialBadge() {
-  return '<p class="commercial-badge" data-component="CommercialServiceBadge">Commercial door &amp; locksmith service</p>';
+  return '<p class="commercial-badge" data-component="CommercialServiceBadge">24/7 commercial door &amp; lock service</p>';
 }
 
 function qualificationNotice(location = 'form') {
@@ -98,13 +99,15 @@ function header() {
 }
 
 function verifiedTrustItems() {
-  const items = ['Commercial-only specialists', 'Doors, locks & exit hardware', 'Washington DC · nearby VA & MD'];
+  const items = ['Commercial-only specialists'];
+  if (business.trust.availability24x7?.verified && business.trust.availability24x7.value) items.push('24/7 service');
+  if (business.trust.freeEstimates?.verified && business.trust.freeEstimates.value) items.push('Free estimates');
+  items.push('Washington DC · nearby VA & MD');
   const labels = {
     responseTime: 'Response target',
-    serviceHours: 'Service hours',
+    ...(!business.trust.availability24x7?.value ? { serviceHours: 'Service hours' } : {}),
     licensed: 'Licensed',
     insured: 'Insured',
-    availability24x7: '24/7 availability',
     sameDayService: 'Same-day service',
     writtenEstimates: 'Written estimates',
     coiAvailable: 'COI availability',
@@ -123,7 +126,7 @@ function verifiedTrustItems() {
 function trustBar() {
   return `<aside class="trust-bar" aria-label="Verified business information" data-component="CommercialTrustBar">
   <ul class="trust-items wrap">${verifiedTrustItems().map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-  <!-- [ADD: RESPONSE_TIME] [ADD: SERVICE_HOURS] [ADD: LICENSE_INSURANCE] -->
+  <!-- Response-time and credential claims omitted: not supplied by the owner. -->
 </aside>`;
 }
 
@@ -178,6 +181,7 @@ function head({ title, description, pathName, image, schema, robots = 'index,fol
   <script type="application/ld+json">${jsonScript(schema)}</script>
   <script src="/assets/business-config.js?v=${assetVersion}" defer></script>
   <script src="/assets/site.js?v=${assetVersion}" defer></script>
+  <script src="/assets/quote-form.js?v=${assetVersion}" defer></script>
 </head>`;
 }
 
@@ -189,6 +193,7 @@ function organizationSchema() {
     url: `${origin}/`,
     logo: absolute('/assets/locksmith.png'),
     telephone: phone.e164,
+    ...(business.trust.availability24x7?.verified && business.trust.availability24x7.value ? { openingHoursSpecification: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' } } : {}),
     ...(business.address?.verified && business.address.value ? { address: business.address.value } : {}),
     contactPoint: {
       '@type': 'ContactPoint',
@@ -197,7 +202,7 @@ function organizationSchema() {
       areaServed: business.serviceAreas.map((area) => area.name),
       availableLanguage: ['en']
     },
-    areaServed: business.serviceAreas.map((area) => ({ '@type': 'AdministrativeArea', name: area.name }))
+    areaServed: [...business.serviceAreas.map((area) => ({ '@type': 'AdministrativeArea', name: area.name })), ...Object.entries(business.coverage || {}).flatMap(([region, item]) => item.verified.map(name => ({ '@type': 'Place', name, ...(region === 'washington-dc' ? { containedInPlace: { '@type': 'City', name: 'Washington DC' } } : {}) })))]
   };
 }
 
@@ -261,7 +266,7 @@ function footer() {
   return `<footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <section><h2 class="brand">DC Emergency <span>Lock &amp; Door</span></h2><p>Commercial door, lock and life-safety hardware service for businesses and commercial properties in Washington DC and nearby service areas.</p>${callButton('Call Commercial Dispatch', 'footer')}</section>
+      <section><h2 class="brand">DC Emergency <span>Lock &amp; Door</span></h2><p>Commercial door, lock and life-safety hardware service for businesses and commercial properties in Washington DC and nearby service areas.</p><p><strong>24/7 service · Free estimates</strong></p>${callButton('Call Commercial Dispatch', 'footer')}</section>
       <nav class="footer-links" aria-label="Commercial services"><h3>Commercial services</h3><a href="/commercial-door-repair-washington-dc">Emergency commercial door repair</a><a href="/commercial-locksmith-washington-dc">Commercial locksmith</a><a href="/panic-bar-repair-washington-dc">Panic bar repair</a><a href="/door-closer-repair-washington-dc">Door closer repair</a><a href="/fire-door-inspection-washington-dc">Fire door inspection</a></nav>
       <nav class="footer-links" aria-label="Service areas and resources"><h3>Areas &amp; resources</h3><a href="/washington-dc">Washington DC</a><a href="/northern-virginia">Nearby Northern Virginia</a><a href="/maryland">Nearby Maryland</a><a href="/blog">Commercial door resources</a><a href="/gallery">Commercial hardware photos</a><a href="/about">About this service</a><a href="/privacy-policy">Privacy policy</a><a href="/terms-of-service">Terms of service</a><a href="/sitemap">Sitemap</a></nav>
     </div>
@@ -363,7 +368,7 @@ const homeFaqs = [
   },
   {
     question: 'How do I request planned commercial service?',
-    answer: 'Call or send the project details on WhatsApp. Include the business address, number of openings, requested work, access window and any work-order or inspection requirements. The online form is coming soon.'
+    answer: 'Use the WhatsApp quote form, or call 24/7 for a free estimate. Include the business address, opening count, requested work, access window and any work-order or inspection requirements. Send the prepared message in WhatsApp to request service.'
   },
   {
     question: 'What areas are prioritized?',
@@ -431,7 +436,7 @@ function photoCards() {
 function homepage() {
   return `${head({
     title: 'Emergency Commercial Door Repair & Locksmith | Washington DC',
-    description: 'Commercial door repair and locksmith service in Washington DC. Call 703-244-0559 or send a door photo for panic bars, closers, locks and business lockouts.',
+    description: '24/7 commercial door repair and locksmith service in Washington DC. Free estimates for business doors, locks, panic bars and closers. Call 703-244-0559.',
     pathName: '/',
     image: homeImage,
     schema: homeSchema()
@@ -444,9 +449,9 @@ ${header()}
       <div class="hero-copy">
         ${commercialBadge()}
         <h1>Commercial Door &amp; Lock Service in Washington DC</h1>
-        <p class="hero-subtitle">Fast, reliable help to secure your business and restore safe exit operation. Commercial door repair, locks, panic bars and closers.</p>
-        <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Send a Door Photo for a Fast Quote')}</div>
-        <p class="service-area-line">Commercial only · DC first · Nearby VA &amp; MD</p>
+        <p class="hero-subtitle">24/7 commercial door and lock service to secure your business and restore safe exit operation. Call now or send photos for a free estimate.</p>
+        <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Send a Door Photo for a Free Estimate')}</div>
+        <p class="service-area-line">24/7 · Free estimates · DC and nearby VA &amp; MD</p><a class="hero-project-link" href="#service-request">Plan a project: get a free estimate</a>
       </div>
       ${heroImage(homeImage)}
     </div>
@@ -539,7 +544,7 @@ const locationPages = [
     service: 'washington_dc_commercial_service',
     location: 'Washington DC',
     title: 'Commercial Door & Locksmith Services Washington DC',
-    description: 'Commercial door repair, panic hardware, closer, lock, rekey, fire door and installation services for Washington DC business properties.',
+    description: '24/7 commercial door repair and locksmith service across Washington DC neighborhoods. Free estimates for business locks, panic bars, closers and door repair.',
     h1: 'Commercial Door & Locksmith Services in Washington DC',
     subtitle: 'The primary service-area hub for Washington DC businesses, facilities and managed properties.',
     image: homeImage,
@@ -550,7 +555,7 @@ const locationPages = [
     service: 'northern_virginia_commercial_service',
     location: 'Nearby Northern Virginia',
     title: 'Commercial Door & Locksmith Services Northern Virginia',
-    description: 'Request commercial door, lock, panic hardware, closer and fire door service for nearby Northern Virginia business and managed properties.',
+    description: '24/7 commercial door and locksmith service in Arlington, Alexandria and nearby Northern Virginia. Free estimates for locks, panic bars, closers and doors.',
     h1: 'Commercial Door & Locksmith Service in Northern Virginia',
     subtitle: 'Door and lock service requests for nearby Northern Virginia businesses. Call with your address to discuss current availability.',
     image: {
@@ -567,7 +572,7 @@ const locationPages = [
     service: 'maryland_commercial_service',
     location: 'Nearby Maryland',
     title: 'Commercial Door & Locksmith Services Maryland',
-    description: 'Request commercial door, lock, panic hardware, closer and fire door service for nearby Maryland businesses and managed properties.',
+    description: '24/7 commercial door repair and locksmith service in Bethesda, Silver Spring and nearby Maryland. Free estimates for business doors, locks and exit hardware.',
     h1: 'Commercial Door & Locksmith Service in Nearby Maryland',
     subtitle: 'Commercial door and lock service requests in nearby Maryland. Call with your address or ZIP to discuss current availability.',
     image: {
@@ -590,6 +595,21 @@ const locationServiceLinks = [
   { title: 'Commercial door installation', description: 'Door and frame measurement, replacement planning and hardware coordination.', href: '/commercial-door-installation-washington-dc', service: 'commercial_door_installation' }
 ];
 
+function locationFaqs(page) {
+  return [
+    { question: `Can I request commercial door service in ${page.location}?`, answer: `Yes. Call 24/7 or use the WhatsApp quote form with your business address in ${page.location}. Describe whether the door closes, latches, locks and releases, and request a free estimate.` },
+    { question: 'What should a property or facility manager include?', answer: 'Include the property address, affected door, work-order reference, opening count, onsite contact, access window and approval requirements. Add the exact report item for an inspection-related repair request.' },
+    { question: 'Can I request an estimate from door photos?', answer: 'Yes. Estimates are free. Send a full-opening photo, hardware close-ups, the business address and urgency. Photos help define the initial scope; measurements or an onsite assessment may be needed for the work.' }
+  ];
+}
+
+function locationDetailSections(page) {
+  const verified = new Set(business.coverage?.[page.slug]?.verified || []);
+  const profiles = (locationProfiles[page.slug] || []).filter(item => verified.has(item.name));
+  if (!profiles.length) return '';
+  return `<section class="section local-coverage" id="neighborhoods"><div class="wrap"><div class="section-heading"><p class="eyebrow">Neighborhoods and business districts</p><h2>Commercial door and lock service in ${escapeHtml(page.location)}</h2><p>24/7 service and free estimates for the commercial openings described below. Include your exact address and onsite contact when requesting work.</p></div><nav class="coverage-jump-links" aria-label="Local service locations">${profiles.map(p => `<a href="#${p.id}">${escapeHtml(p.name)}</a>`).join('')}</nav><div class="coverage-grid">${profiles.map(p => `<article class="coverage-card" id="${p.id}"><p class="eyebrow">${escapeHtml(p.name)}</p><h3>${escapeHtml(p.heading)}</h3><p>${escapeHtml(p.text)}</p>${formatList(p.benefits)}<a class="card-link" href="${p.href}" data-service-card="local_${p.id}">${escapeHtml(p.link)} →</a>${conversion.photoCta(`${p.name} commercial service`, 'local_area', `Request a free estimate in ${p.name}`)}</article>`).join('')}</div></div></section>`;
+}
+
 function locationSchema(page) {
   const currentPath = `/${page.slug}`;
   const base = simpleSchema(page.title, page.description, currentPath, 'WebPage', page.h1);
@@ -603,6 +623,9 @@ function locationSchema(page) {
     audience: { '@type': 'BusinessAudience', audienceType: 'Businesses and commercial property operators' },
     areaServed: page.location
   });
+  base['@graph'].push({ '@type': 'FAQPage', '@id': `${origin}${currentPath}#faq`, mainEntity: locationFaqs(page).map(f => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })) });
+  const area = base['@graph'].find(item => item['@type'] === 'Service');
+  area.areaServed = [page.location, ...(business.coverage?.[page.slug]?.verified || [])];
   return base;
 }
 
@@ -623,9 +646,9 @@ ${header()}
   ${trustBar()}
   <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Each service page explains a distinct buyer problem. Call with the exact commercial location so coverage can be confirmed.</p></div><div class="grid-3">${locationServiceLinks.map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
   <section class="section section-alt"><div class="wrap grid-2"><div><p class="eyebrow">Area context</p><h2>Commercial properties in ${escapeHtml(page.location)}</h2><p>Tell us the business address, property type and door problem. We will discuss the service options for your location.</p>${formatList(page.areas)}</div><aside class="callout" aria-label="Related commercial service information"><h3>What to include</h3>${formatList(['Business or organization name', 'Exact city, ZIP and service address', 'Affected door and hardware type', 'Whether the opening closes, latches and secures', 'Onsite contact and access window', 'Photo when it can be shared safely'])}${qualificationNotice('service_area')}</aside></div></section>
-  <!-- [ADD: ${page.slug === 'washington-dc' ? 'DC_NEIGHBORHOODS' : page.slug === 'maryland' ? 'MD_CITIES' : 'VA_CITIES'} — confirm: ${(coverageCandidates[page.slug] || []).join(', ')}] -->
-  ${business.coverage?.[page.slug]?.verified?.length ? `<section class="section"><div class="wrap"><h2>Neighborhoods and business districts</h2>${formatList(business.coverage[page.slug].verified)}</div></section>` : ''}
+  ${locationDetailSections(page)}
   ${conversion.requestSection(formConfig, 'area-request')}
+  <section class="section section-alt"><div class="wrap"><h2>Commercial service questions in ${escapeHtml(page.location)}</h2>${renderFaqs(locationFaqs(page))}</div></section>
   <section class="section final-cta"><div class="wrap"><h2>Need help with a commercial door or lock?</h2><p>Commercial door, lock and hardware service is available throughout this service area.</p><div class="button-row">${callButton('Call Commercial Dispatch', 'body')}${photoCta('#area-request', 'body')}</div></div></section>
 </main>${footer()}${stickyActions('#area-request')}</body></html>`;
 }
@@ -672,7 +695,7 @@ function privacyPage() {
   return supportPage({
     slug: 'privacy-policy',
     title: `Privacy Policy | ${business.publicName}`,
-    description: 'Privacy information for disabled service forms, phone-click measurement, campaign attribution and optional analytics on this commercial website.',
+    description: 'How commercial quote requests use WhatsApp, phone links, session attribution and website analytics. Request details are sent when you send them in WhatsApp.',
     h1: 'Privacy Policy',
     eyebrow: 'Website and lead data',
     service: 'privacy_policy',
@@ -683,7 +706,7 @@ function privacyPage() {
       alt: 'Commercial door closer mounted above a door',
       caption: 'Commercial door hardware shown; the image location is not published.'
     },
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Online service forms are disabled</h2><p>The visible forms are reference-only and cannot be completed, uploaded to or submitted. They have no configured submission endpoint or recipient. Call or use WhatsApp to discuss service. WhatsApp opens a third-party conversation; your message and attachments are sent only when you send them in that app. Avoid including confidential access credentials or documents in photos.</p><!-- [ADD: PRIVACY_DETAILS — legal identity, privacy contact, effective date, retention and consent details] --></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site may retain landing page, referrer and UTM parameters in the browser session. Phone and WhatsApp clicks are measured through Google Analytics 4. These events do not include form messages, door photos or personal contact details and do not indicate a booked job.</p></article><article class="card"><h3>Form processor</h3><p>The online form is coming soon and has no active submission destination. Use the telephone or WhatsApp links for current service requests.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load.  Google Analytics 4 is configured to measure website usage. Google Tag Manager, Google Ads conversion settings and call-tracking numbers are not configured.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. </p></article></div></div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>How quote requests are sent</h2><p>The quote form prepares a WhatsApp message with the details you enter. You send the message and photos in WhatsApp. Details entered in the form stay on the page until you choose to continue; they are not uploaded to a website submission service. Photo sharing lets you choose an app and recipient on your device. Keep access credentials and confidential documents out of door photos.</p><!-- [ADD: PRIVACY_DETAILS — legal identity, privacy contact, effective date, retention and consent details] --></div><div class="grid-2"><article class="card"><h3>Attribution and measurement</h3><p>The site may retain landing page, referrer and UTM parameters in the browser session. Phone and WhatsApp clicks are measured through Google Analytics 4. These events do not include form messages, door photos or personal contact details and do not indicate a booked job.</p></article><article class="card"><h3>Direct website delivery</h3><p>Direct website delivery is coming soon. The working quote form prepares a WhatsApp request; use the phone or WhatsApp conversation for service.</p></article><article class="card"><h3>Third-party tools</h3><p>The existing configuration loads Ahrefs Web Analytics after the page load.  Google Analytics 4 is configured to measure website usage. Google Tag Manager, Google Ads conversion settings and call-tracking numbers are not configured.</p></article><article class="card"><h3>Questions</h3><p>Call <a href="tel:${phone.e164}" data-business-phone-link data-cta-location="body"><span data-business-phone>${phone.display}</span></a> with privacy questions. </p></article></div></div></section>`
   });
 }
 
@@ -691,11 +714,11 @@ function termsPage() {
   return supportPage({
     slug: 'terms-of-service',
     title: `Website Terms | ${business.publicName}`,
-    description: 'Website terms for discussing commercial door, lock, inspection and installation service. Online forms are disabled and do not confirm service.',
+    description: 'Terms for commercial door and locksmith requests, free estimates, phone contact and WhatsApp quote preparation. Agree service arrangements directly.',
     h1: 'Website Terms of Service',
     eyebrow: 'Commercial service requests',
     service: 'terms',
-    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Website contact does not confirm an appointment</h2><p>The online forms are disabled. Calling or clicking a phone link does not guarantee dispatch, arrival time, price, scope, parts availability, inspection result or appointment. We agree availability and the authorized commercial scope directly with you.</p></div><div class="grid-2"><article class="card"><h3>Commercial authorization</h3><p>The requester should be authorized to seek work for the business or property and should provide accurate access, opening and contact information.</p></article><article class="card"><h3>Photos and files</h3><p>Send door photos through WhatsApp. Share files you are authorized to provide, and keep people, access credentials and confidential documents out of the images.</p></article><article class="card"><h3>Inspection and code information</h3><p>General website information is not legal, engineering or authority approval. Applicable requirements and final acceptance are project-specific.</p></article><article class="card"><h3>Agree the service scope</h3><p>Discuss operating hours, response estimates, vendor documentation, payment terms and project requirements before approving service. The agreed service scope controls the work.</p></article></div>${qualificationNotice('terms')}</div></section>`
+    bodyHtml: `<section class="section"><div class="wrap"><div class="section-heading"><h2>Website contact does not confirm an appointment</h2><p>Call 24/7 or prepare a WhatsApp request for a free estimate. Send the prepared message in WhatsApp, then agree the work, site access and service arrangements directly with us. Preparing the form does not reserve an appointment.</p></div><div class="grid-2"><article class="card"><h3>Commercial authorization</h3><p>The requester should be authorized to seek work for the business or property and should provide accurate access, opening and contact information.</p></article><article class="card"><h3>Photos and files</h3><p>Send door photos through WhatsApp. Share files you are authorized to provide, and keep people, access credentials and confidential documents out of the images.</p></article><article class="card"><h3>Inspection and code information</h3><p>General website information is not legal, engineering or authority approval. Applicable requirements and final acceptance are project-specific.</p></article><article class="card"><h3>Agree the service scope</h3><p>Discuss operating hours, response estimates, vendor documentation, payment terms and project requirements before approving service. The agreed service scope controls the work.</p></article></div>${qualificationNotice('terms')}</div></section>`
   });
 }
 
@@ -790,7 +813,7 @@ function notFoundPage() {
 }
 
 function thankYouPage() {
-  return supportPage({ slug: 'thank-you', title: 'Next Steps for Your Commercial Service Request', description: 'Keep your phone available after sending your commercial door details. For an unsecured door or urgent lockout, call 703-244-0559.', h1: 'Keep your phone available', eyebrow: 'After you send your details', service: 'request_follow_up', robots: 'noindex,follow', sticky: true, bodyHtml: `<section class="section"><div class="wrap"><h2>What happens next</h2><p>If you sent a WhatsApp message, continue in that conversation to attach your door photos and discuss availability, scope and the next step. Opening WhatsApp alone does not send a request.</p><p>For an unsecured commercial door or urgent business lockout, call ${escapeHtml(phone.display)}.</p><!-- [ADD: CALLBACK_WINDOW — approved callback promise before connecting a live form] --><div class="button-row">${compactCallButton('body')}${photoCta('', 'body')}</div></div></section>` });
+  return supportPage({ slug: 'thank-you', title: 'Next Steps for Your Commercial Service Request', description: 'Send the prepared WhatsApp message and keep your phone available to discuss your commercial door request. For an unsecured door or urgent lockout, call 703-244-0559.', h1: 'Keep your phone available', eyebrow: 'Complete your WhatsApp request', service: 'request_follow_up', robots: 'noindex,follow', sticky: true, bodyHtml: `<section class="section"><div class="wrap"><h2>What happens next</h2><p>After preparing the quote form, send its message in WhatsApp and attach your door photos. We discuss your commercial service request, scope and next step in that conversation or by phone. Opening the app alone does not send the message.</p><p>For an unsecured commercial door or urgent business lockout, call ${escapeHtml(phone.display)} 24/7. Estimates are free.</p><!-- [ADD: CALLBACK_WINDOW — approved callback promise before connecting a live form] --><div class="button-row">${compactCallButton('body')}${photoCta('', 'body')}</div></div></section>` });
 }
 
 function writeIfChanged(file, content) {
@@ -809,7 +832,7 @@ function browserConfig() {
     serviceAreas: business.serviceAreas,
     trust: business.trust,
     photoContact: business.photoContact,
-    form: { enabled: business.form.enabled },
+    form: { enabled: business.form.enabled, contactMode: 'whatsapp' },
     analytics: business.analytics
   };
 }

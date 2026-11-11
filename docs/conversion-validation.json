@@ -1,5 +1,55 @@
 {
-  "date": "2026-11-10",
+  "date": "2026-11-11",
+  "confirmedFacts": [
+    "WhatsApp +17032440559",
+    "24/7 availability",
+    "Free estimates",
+    "12 requested target locations"
+  ],
+  "staticQA": {
+    "checks": 5969,
+    "pages": 128,
+    "sitemapUrls": 59,
+    "serviceConfigurations": 17,
+    "redirectDefinitions": 63,
+    "issues": 0
+  },
+  "browserQA": {
+    "routes": 21,
+    "layoutCases": 126,
+    "failures": [],
+    "errors": [],
+    "events": {
+      "ready": 2,
+      "whatsapp": 1,
+      "fakeSuccess": 0,
+      "pii": false
+    },
+    "axe": [
+      {
+        "pathname": "/",
+        "violations": []
+      },
+      {
+        "pathname": "/commercial-door-repair-washington-dc",
+        "violations": []
+      },
+      {
+        "pathname": "/service-property-manager-locksmith",
+        "violations": []
+      },
+      {
+        "pathname": "/washington-dc",
+        "violations": []
+      }
+    ],
+    "formValidation": "passed",
+    "draftIncludesRequiredAndProjectFields": "passed",
+    "photoPreviewAndNativeShare": "passed",
+    "fileTypeAndSizeRejection": "passed",
+    "noJavaScriptContactFallback": "passed",
+    "blockedStorage": "passed"
+  },
   "lighthouse": {
     "version": "12.8.2",
     "formFactor": "mobile",
@@ -11,81 +61,14 @@
     },
     "metrics": {
       "first-contentful-paint": "1.1\u00a0s",
-      "largest-contentful-paint": "1.8\u00a0s",
+      "largest-contentful-paint": "2.0\u00a0s",
       "cumulative-layout-shift": "0",
-      "total-blocking-time": "0\u00a0ms",
-      "speed-index": "1.1\u00a0s"
+      "total-blocking-time": "0\u00a0ms"
     },
-    "blockedExternalRequests": [
-      "googletagmanager.com",
-      "analytics.ahrefs.com"
-    ]
+    "analyticsRequestsBlocked": true
   },
-  "staticQA": {
-    "pages": 128,
-    "sitemapUrls": 59,
-    "serviceConfigurations": 17,
-    "canonicalRedirects": 63,
-    "checks": 5660,
-    "issues": 0
-  },
-  "browserQA": {
-    "responsiveRoutes": 21,
-    "responsiveViewportSizes": [
-      [
-        360,
-        640
-      ],
-      [
-        390,
-        844
-      ],
-      [
-        430,
-        932
-      ],
-      [
-        800,
-        800
-      ],
-      [
-        1100,
-        800
-      ],
-      [
-        1440,
-        900
-      ]
-    ],
-    "navigationBoundaryWidths": [
-      1101,
-      1150
-    ],
-    "layoutFailures": 0,
-    "javascriptErrors": 0,
-    "axeResults": [
-      {
-        "route": "/",
-        "violations": []
-      },
-      {
-        "route": "/commercial-door-repair-washington-dc",
-        "violations": []
-      },
-      {
-        "route": "/service-property-manager-locksmith",
-        "violations": []
-      }
-    ],
-    "ga4PhoneCommandsPerClick": 1,
-    "ga4WhatsAppCommandsPerClick": 1,
-    "utmAndGclidHiddenFields": "passed",
-    "restrictedSessionStorage": "passed",
-    "gtmDirectDeliveryDeduplication": "passed"
-  },
-  "deployment": {
-    "output": "public",
-    "copiedFiles": 196,
-    "published": false
+  "publication": {
+    "publicOutputFiles": 197,
+    "publishedByThisRun": false
   }
 }

@@ -308,7 +308,7 @@
     var conversionId = value(analytics.googleAdsConversionId);
     var callLabel = value(analytics.googleAdsCallLabel);
     var integrationMode = value(analytics.googleAdsCallIntegrationMode);
-    if (integrationMode === 'direct_gtag' && conversionId && callLabel && typeof window.gtag === 'function') {
+    if (integrationMode === 'direct_gtag' && /^AW-\d+$/.test(conversionId) && /^[A-Za-z0-9_-]+$/.test(callLabel) && typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
         send_to: conversionId + '/' + callLabel,
         value: 1,

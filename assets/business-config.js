@@ -33,8 +33,8 @@ window.DCELD_CONFIG = {
       "verified": false
     },
     "availability24x7": {
-      "value": null,
-      "verified": false
+      "value": true,
+      "verified": true
     },
     "sameDayService": {
       "value": null,
@@ -61,17 +61,23 @@ window.DCELD_CONFIG = {
       "verified": false
     },
     "serviceHours": {
-      "value": null,
-      "verified": false
+      "value": "24/7",
+      "verified": true
+    },
+    "freeEstimates": {
+      "value": true,
+      "verified": true
     }
   },
   "photoContact": {
     "channel": "whatsapp",
     "whatsappNumber": "+17032440559",
-    "accountVerified": false
+    "accountVerified": true,
+    "verificationSource": "Owner confirmation, 2026-11-11"
   },
   "form": {
-    "enabled": false
+    "enabled": false,
+    "contactMode": "whatsapp"
   },
   "analytics": {
     "gtmContainerId": null,

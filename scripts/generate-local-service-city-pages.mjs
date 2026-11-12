@@ -3,8 +3,8 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const DOMAIN = 'https://dcemergencylockanddoor.com';
-const PHONE_RAW = '7032440559';
-const PHONE_LABEL = '703-244-0559';
+const PHONE_RAW = '+12026434062';
+const PHONE_LABEL = '1 202-643-4062';
 const LASTMOD = '2026-05-07';
 
 const SOCIAL = [
@@ -442,7 +442,7 @@ function localBusinessSchema(city, pageUrl, description) {
     '@type': ['LocalBusiness', 'Locksmith'],
     name: 'DC Emergency Lock & Door',
     url: pageUrl,
-    telephone: '+1-703-244-0559',
+    telephone: '+12026434062',
     description,
     sameAs: SOCIAL,
     address: {
@@ -468,7 +468,7 @@ function serviceSchema(service, city, pageUrl, description) {
     provider: {
       '@type': 'LocalBusiness',
       name: 'DC Emergency Lock & Door',
-      telephone: '+1-703-244-0559',
+      telephone: '+12026434062',
       url: DOMAIN
     },
     url: pageUrl

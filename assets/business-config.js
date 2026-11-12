@@ -2,8 +2,8 @@ window.DCELD_CONFIG = {
   "publicName": "DC Emergency Lock & Door",
   "origin": "https://dcemergencylockanddoor.com",
   "phone": {
-    "e164": "+17032440559",
-    "display": "703-244-0559",
+    "e164": "+12026434062",
+    "display": "1 202-643-4062",
     "verificationStatus": "consistent_existing_site_configuration"
   },
   "serviceAreas": [
@@ -71,7 +71,7 @@ window.DCELD_CONFIG = {
   },
   "photoContact": {
     "channel": "whatsapp",
-    "whatsappNumber": "+17032440559",
+    "whatsappNumber": "+12026434062",
     "accountVerified": true,
     "verificationSource": "Owner confirmation, 2026-11-11"
   },

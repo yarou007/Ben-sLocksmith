@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 
 const ROOT = process.cwd();
 const DOMAIN = 'https://dcemergencylockanddoor.com';
-const PHONE = '+1-703-244-0559';
+const PHONE = '+12026434062';
 const SOCIAL_LINKS = {
   x: 'https://x.com/dcemergencylock',
   linkedin: 'https://www.linkedin.com/company/dc-emergency-lock-and-door',

@@ -79,7 +79,7 @@ export const ownerPlaceholders = {
   RESPONSE_TIME: 'Not supplied: omit numeric arrival and response guarantees',
   SERVICE_HOURS: 'Confirmed by owner: 24/7 service',
   LICENSE_INSURANCE: 'Not supplied: no public license or insurance claim',
-  WHATSAPP_ACCOUNT: 'Confirmed by owner: WhatsApp receives messages on +17032440559',
+  WHATSAPP_ACCOUNT: 'Confirmed by owner: WhatsApp receives messages on +12026434062',
   GOOGLE_RATING: 'Not supplied: Google badge remains unpublished',
   TESTIMONIALS: 'Not supplied: testimonial placeholders remain unpublished',
   HARDWARE_BRANDS: 'Not supplied: no manufacturer service or affiliation claim',

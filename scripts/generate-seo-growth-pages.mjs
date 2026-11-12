@@ -3,8 +3,8 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const DOMAIN = 'https://dcemergencylockanddoor.com';
-const PHONE_RAW = '7032440559';
-const PHONE_LABEL = '703-244-0559';
+const PHONE_RAW = '+12026434062';
+const PHONE_LABEL = '1 202-643-4062';
 
 const sameAs = [
   'https://x.com/dcemergencylock',
@@ -462,7 +462,7 @@ const blogPosts = [
     faq: [
       ['Can a panic bar be repaired instead of replaced?', 'Often yes, depending on wear level, parts availability, and overall opening condition.'],
       ['Do you repair crash bars and push bars?', 'Yes. We service common commercial crash bar and push bar configurations.'],
-      ['What is the fastest way to request service?', 'Call 703-244-0559 for emergency and same-day dispatch options.'],
+      ['What is the fastest way to request service?', 'Call 1 202-643-4062 for emergency and same-day dispatch options.'],
       ['Do you work with property managers?', 'Yes. We regularly support portfolio teams and facility managers.']
     ]
   },
@@ -706,7 +706,7 @@ function localBusinessSchema(description, url) {
     '@type': ['LocalBusiness', 'Locksmith'],
     name: 'DC Emergency Lock & Door',
     description,
-    telephone: '+1-703-244-0559',
+    telephone: '+12026434062',
     url,
     openingHours: 'Mo-Su 00:00-23:59',
     address: {
@@ -728,7 +728,7 @@ function organizationSchema() {
     '@type': 'Organization',
     name: 'DC Emergency Lock & Door',
     url: DOMAIN,
-    telephone: '+1-703-244-0559',
+    telephone: '+12026434062',
     sameAs
   };
 }
@@ -744,7 +744,7 @@ function serviceSchema(page, description, url) {
     provider: {
       '@type': 'LocalBusiness',
       name: 'DC Emergency Lock & Door',
-      telephone: '+1-703-244-0559',
+      telephone: '+12026434062',
       url: DOMAIN
     },
     url

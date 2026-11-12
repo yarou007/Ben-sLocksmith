@@ -1,7 +1,7 @@
 (function () {
   var CONFIG = {
-    phoneRaw: '+17032440559',
-    phoneLabel: '703-244-0559',
+    phoneRaw: '+12026434062',
+    phoneLabel: '1 202-643-4062',
     formsEnabled: false,
     gtmId: 'GTM-XXXXXXX',
     ga4Id: 'G-XXXXXXXXXX',
@@ -311,7 +311,7 @@
       '@type': ['Locksmith', 'LocalBusiness'],
       name: 'DC Emergency Lock & Door',
       url: canonical,
-      telephone: '+1-703-244-0559',
+      telephone: '+12026434062',
       priceRange: '$$',
       image: 'https://dcemergencylockanddoor.com/assets/img-956a4955d1ddb21c.jpg',
       address: {

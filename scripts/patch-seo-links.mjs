@@ -148,7 +148,7 @@ for (const [file, data] of Object.entries(localSections)) {
       <h2>Area-Specific FAQs</h2>
       ${faqHtml}
       <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-        <a href="tel:7032440559" class="btn btn-primary" data-event="phone_click">Call 24/7: 703-244-0559</a>
+        <a href="tel:+12026434062" class="btn btn-primary" data-event="phone_click">Call 24/7: 1 202-643-4062</a>
         <a href="#request-service-form" class="btn btn-red" data-event="quote_form_open">Request a Free Estimate</a>
       </div>
     </div>

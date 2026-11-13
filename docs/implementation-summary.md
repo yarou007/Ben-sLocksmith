@@ -25,7 +25,7 @@ The full baseline and URL-by-URL decision table are in `docs/seo-cro-audit.md`. 
 
 - Static HTML on Vercel had no repeatable build, lint, configuration validation, or crawl-based test workflow.
 - Commercial search intent was fragmented among near-duplicate locksmith, door repair, panic/exit hardware, closer, fire-door, access-control, and city/service pages.
-- The only phone number consistently present in the audited source was `703-244-0559` (`+17032440559`). It is now centralized but still requires owner confirmation.
+- The only phone number consistently present in the audited source was `202-643-4062` (`+12026434062`). It is centralized and was confirmed by the owner on November 13, 2026.
 - Forms used an existing FormSubmit inbox while shared JavaScript suppressed parts of the intended request funnel. Recipient ownership and delivery were not proven.
 - GTM, GA4, Google Ads, and call-tracking values were placeholders. An existing Ahrefs key was present.
 - Repeated schema and copy exposed unsupported license, insurance, hours, response-time, review, address, certification, compliance, reporting, brand, and service claims.

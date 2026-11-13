@@ -393,8 +393,8 @@ function homeSchema() {
         '@type': 'WebPage',
         '@id': `${origin}/#webpage`,
         url: `${origin}/`,
-        name: 'Emergency Commercial Door Repair & Locksmith | Washington DC',
-        description: 'Commercial door, panic bar, closer and lock repair for businesses in Washington DC. Call 1 202-643-4062 for commercial dispatch.',
+        name: 'DC Emergency Lock & Door | Commercial Services 24/7',
+        description: 'DC Emergency Lock & Door provides 24/7 commercial door, lock and exit hardware services in DC and nearby VA and MD. Call 202-643-4062 for a free estimate.',
         isPartOf: { '@id': `${origin}/#website` },
         about: { '@id': `${origin}/#organization` }
       },
@@ -435,8 +435,8 @@ function photoCards() {
 
 function homepage() {
   return `${head({
-    title: 'Emergency Commercial Door Repair & Locksmith | Washington DC',
-    description: '24/7 commercial door repair and locksmith service in Washington DC. Free estimates for business doors, locks, panic bars and closers. Call 1 202-643-4062.',
+    title: 'DC Emergency Lock & Door | Commercial Services 24/7',
+    description: 'DC Emergency Lock & Door provides 24/7 commercial door, lock and exit hardware services in DC and nearby VA and MD. Call 202-643-4062 for a free estimate.',
     pathName: '/',
     image: homeImage,
     schema: homeSchema()
@@ -448,8 +448,8 @@ ${header()}
     <div class="hero-grid wrap">
       <div class="hero-copy">
         ${commercialBadge()}
-        <h1>Commercial Door &amp; Lock Service in Washington DC</h1>
-        <p class="hero-subtitle">24/7 commercial door and lock service to secure your business and restore safe exit operation. Call now or send photos for a free estimate.</p>
+        <h1>DC Emergency Lock &amp; Door: Commercial Services 24/7</h1>
+        <p class="hero-subtitle">Commercial door, lock and exit hardware services for businesses in Washington DC and nearby Virginia and Maryland. Choose the service you need, call 24/7 or send photos for a free estimate.</p>
         <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Send a Door Photo for a Free Estimate')}</div>
         <p class="service-area-line">24/7 · Free estimates · DC and nearby VA &amp; MD</p><a class="hero-project-link" href="#service-request">Plan a project: get a free estimate</a>
       </div>
@@ -543,10 +543,10 @@ const locationPages = [
     slug: 'washington-dc',
     service: 'washington_dc_commercial_service',
     location: 'Washington DC',
-    title: 'Commercial Door & Locksmith Services Washington DC',
-    description: '24/7 commercial door repair and locksmith service across Washington DC neighborhoods. Free estimates for business locks, panic bars, closers and door repair.',
-    h1: 'Commercial Door & Locksmith Services in Washington DC',
-    subtitle: 'The primary service-area hub for Washington DC businesses, facilities and managed properties.',
+    title: 'Washington DC Service Areas | DC Emergency Lock & Door',
+    description: 'Explore our Washington DC service areas, from Downtown and Capitol Hill to Georgetown and Navy Yard. Find commercial door and lock services for your neighborhood.',
+    h1: 'Washington DC Neighborhoods We Serve',
+    subtitle: 'Find your Washington DC neighborhood below, then choose the door repair, locksmith or exit hardware service your property needs. Include your exact business address when requesting availability.',
     image: homeImage,
     areas: ['Downtown and central business districts', 'Northwest, Northeast, Southwest and Southeast DC', 'Commercial offices and managed buildings', 'Retail, restaurant, education, medical and warehouse properties']
   },

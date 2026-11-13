@@ -10,7 +10,7 @@ The following status comes from `data/business.json`; none of these rows is an o
 
 | Item | Current repository value | Required decision |
 |---|---|---|
-| Public phone | `703-244-0559` / `+17032440559`, consistent with the prior site | Confirm ownership, call routing, display format, and commercial-call handling |
+| Public phone | `202-643-4062` / `+12026434062`, owner-confirmed November 13, 2026 | Number confirmed; verify live call routing and commercial-call handling |
 | Form destination | FormSubmit endpoint for `dc...@gmail.com` (full value remains in configuration) | Confirm recipient ownership, activate/approve the FormSubmit workflow, and test delivery and replies |
 | Legal name and address | `null` | Supply the legal name and decide whether schema/GBP should use a genuine public address or service-area-only setup |
 | Hours and operational trust claims | All unverified/disabled | Approve exact values and evidence, or leave unpublished |
@@ -24,7 +24,7 @@ The following status comes from `data/business.json`; none of these rows is an o
 ## Business identity and contact
 
 - [ ] Legal business name and approved public/display name
-- [ ] Verified public phone number (codebase currently uses `703-244-0559`)
+- [x] Verified public phone number: `202-643-4062`, confirmed by owner November 13, 2026
 - [ ] Confirmation that the phone line accepts and routes qualified commercial calls from every advertised service area and after-hours period
 - [ ] Genuine business address, or confirmation that the business is service-area-only and the address must be omitted/hidden
 - [ ] Primary service areas and any excluded areas, with Washington DC, nearby Northern Virginia, and nearby Maryland prioritized

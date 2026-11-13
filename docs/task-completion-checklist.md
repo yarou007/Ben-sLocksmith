@@ -6,7 +6,7 @@ Updated November 11, 2026. This checklist distinguishes implemented website feat
 
 The owner confirmed on November 11:
 
-- 703-244-0559 is the WhatsApp number.
+- 202-643-4062 is the WhatsApp number.
 - The business operates 24/7 and offers free estimates.
 - Detailed targeting should cover Downtown DC, Capitol Hill, Georgetown, Navy Yard, NoMa, Dupont Circle, Adams Morgan, U Street, Arlington, Alexandria, Bethesda and Silver Spring.
 - No additional response-time, credential, review, manufacturer, warranty or administrative claims were supplied. Those claims remain omitted from the public website. This does not assert that a credential does or does not exist.
@@ -76,7 +76,7 @@ Use the actual business name, canonical phone and website, accurate commercial s
 
 ### Call tracking and Google Ads
 
-The website keeps 703-244-0559 as its canonical phone and dedicated WhatsApp number. Tracking-number replacement hooks and Ads fields are ready, with no invented tracking number or account ID. Use connected/qualified-call conversion measurement as the primary business outcome; phone/WhatsApp clicks and form preparation are contact intent.
+The website keeps 202-643-4062 as its canonical phone and dedicated WhatsApp number. Tracking-number replacement hooks and Ads fields are ready, with no invented tracking number or account ID. Use connected/qualified-call conversion measurement as the primary business outcome; phone/WhatsApp clicks and form preparation are contact intent.
 
 Suggested landing views use existing routes with `?layout=paid`: emergency commercial door repair, commercial locksmith, panic-bar repair and door-closer repair. Keep each ad group aligned with its service, confirmed location and relevant local regional section. Schedule around the actual confirmed 24/7 availability. Do not imply an arrival time or a free repair visit from the free-estimate offer.
 

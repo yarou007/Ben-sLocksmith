@@ -1,4 +1,5 @@
 {
+  "archiveNote": "Historical performance results; textual phone references normalized to owner-confirmed 202-643-4062 on 2026-11-13. Embedded screenshots are historical.",
   "lighthouseVersion": "12.8.2",
   "requestedUrl": "http://127.0.0.1:4173/",
   "mainDocumentUrl": "http://127.0.0.1:4173/",
@@ -2012,8 +2013,8 @@
                 "width": 212,
                 "height": 39
               },
-              "snippet": "<a href=\"tel:+17032440559\" class=\"sticky-call track-phone-click track-emergency-service\" data-track=\"phone_click\" data-event=\"phone_click\" aria-label=\"Call now 703-244-0559\">",
-              "nodeLabel": "🚨 Emergency: 703-244-0559"
+              "snippet": "<a href=\"tel:+12026434062\" class=\"sticky-call track-phone-click track-emergency-service\" data-track=\"phone_click\" data-event=\"phone_click\" aria-label=\"Call now 202-643-4062\">",
+              "nodeLabel": "🚨 Emergency: 202-643-4062"
             },
             "subItems": {
               "type": "subitems",
@@ -5173,8 +5174,8 @@
                 "width": 212,
                 "height": 39
               },
-              "snippet": "<a href=\"tel:+17032440559\" class=\"sticky-call track-phone-click track-emergency-service\" data-track=\"phone_click\" data-event=\"phone_click\" aria-label=\"Call now 703-244-0559\">",
-              "nodeLabel": "🚨 Emergency: 703-244-0559",
+              "snippet": "<a href=\"tel:+12026434062\" class=\"sticky-call track-phone-click track-emergency-service\" data-track=\"phone_click\" data-event=\"phone_click\" aria-label=\"Call now 202-643-4062\">",
+              "nodeLabel": "🚨 Emergency: 202-643-4062",
               "explanation": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
             }
           }

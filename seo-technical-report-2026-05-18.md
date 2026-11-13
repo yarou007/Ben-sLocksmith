@@ -46,7 +46,7 @@ Each page includes:
 
 - Added/standardized `dceld-core-local-seo-schema` across site pages with:
   - `@type`: `Locksmith`, `LocalBusiness`
-  - `telephone`: `+1-703-244-0559`
+  - `telephone`: `+1 202-643-4062`
   - `areaServed`: Washington DC, Northern Virginia, Maryland, New York City
   - `openingHoursSpecification`: 24/7
   - `priceRange`

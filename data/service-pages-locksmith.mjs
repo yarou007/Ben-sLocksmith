@@ -5,10 +5,10 @@ export default [
     title: "Commercial Locksmith Washington DC | Business Locks & Rekeys",
     description:
       "Commercial lockouts, lock repair, rekeys and key-control help for Washington DC businesses. Call with the door type, symptoms and access concern.",
-    h1: "Commercial Locksmith Services in Washington DC",
+    h1: "Commercial Locksmith in Washington DC: Locks & Rekeys",
     eyebrow: "Business Locks & Key Control",
     subtitle:
-      "Commercial lock, rekey and key-control service for businesses, facilities and managed properties.",
+      "Business lockouts, lock repair, cylinder changes and rekeying for Washington DC offices, retail spaces and managed properties. Choose lock service based on the access problem and who needs a key.",
     intent: "hybrid",
     form: "emergency",
     heroImage: {

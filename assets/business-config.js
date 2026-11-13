@@ -4,7 +4,7 @@ window.DCELD_CONFIG = {
   "phone": {
     "e164": "+12026434062",
     "display": "1 202-643-4062",
-    "verificationStatus": "consistent_existing_site_configuration"
+    "verificationStatus": "owner_confirmed_2026-11-13"
   },
   "serviceAreas": [
     {

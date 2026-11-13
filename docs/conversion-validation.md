@@ -22,7 +22,7 @@ The 21 main pages have working client-side WhatsApp quote forms. Retained redire
 
 - Required fields and invalid phone-number handling passed.
 - Prepared WhatsApp requests include contact name/phone, business type, address/ZIP, problem and urgency, plus optional property/work-order, opening count and notes.
-- The destination is the confirmed WhatsApp number +1 703-244-0559.
+- The destination is the confirmed WhatsApp number +1 202-643-4062.
 - UTM and gclid hidden fields populate correctly.
 - Local photo preview works; the native photo-sharing branch was tested with a mocked device share API. Unsupported devices retain the attach-in-WhatsApp fallback.
 - Unsupported image types and files over 10 MB are rejected with usable guidance. Photo selection does not claim an upload or delivered message.

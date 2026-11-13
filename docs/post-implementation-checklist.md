@@ -34,7 +34,7 @@ These checks were run locally on 2026-07-14. They do not prove deployment behavi
 | Status | Check | Command | Evidence |
 |---|---|---|---|
 | [x] | Shared browser JavaScript parses | `node --check assets/site.js` | Exit code 0; no output |
-| [x] | Business configuration is valid JSON, the phone is valid E.164, and conversion integrations remain inactive | Node assertion against `data/business.json` | Parsed successfully; `+17032440559` is valid; GTM/GA4/Ads/call tracking are null; the existing production Ahrefs key is preserved separately |
+| [x] | Business configuration is valid JSON, the phone is valid E.164, and conversion integrations remain inactive | Node assertion against `data/business.json` | Parsed successfully; `+12026434062` is valid; GTM/GA4/Ads/call tracking are null; the existing production Ahrefs key is preserved separately |
 | [x] | Required event names and the diagnostic attempt event are present in source | Node source review against `assets/site.js` | Required call, form, photo, service-card, and qualification events plus `form_submit_attempt` are present |
 | [x] | Event semantics and configuration were compared with the measurement plan | Source review plus local headless-Chromium interaction checks | Source creates `event_id`/`lead_id`; the local browser checks confirmed hero/sticky call deduplication, form start/attempt behavior, matched recent provider-return success, and suppression of bare success URLs. GTM, GA4, Ads, and delivery verification remain pending. |
 
@@ -74,7 +74,7 @@ The checked rows below record successful local working-tree runs, not a release-
 | [x] | Patch hygiene | `git diff --check` | Exit code 0 | Recorded local working-tree run exited 0 with no output. Release-commit rerun pending. |
 | [x] | JavaScript/module syntax | `npm run lint` | Every checked file exits 0 | Recorded local run passed 23 JavaScript modules and 5 JSON files. Final-release rerun pending. |
 | [x] | Data/config validation | `npm run typecheck` and static QA | Exit code 0; no invented enabled trust values | Recorded local run passed 17 service configurations and 63 redirects and confirmed every generated Vercel redirect rule uses explicit status code 301; trust integrations remain null/disabled. Final-release rerun pending. |
-| [x] | Generated browser config | Generated-file comparison in build/static QA | Phone/integration values match `data/business.json`; no hand-edited drift | Recorded local QA passed with `+17032440559`; GTM/GA4/Ads/call tracking remain unconfigured. Final-release rerun pending. |
+| [x] | Generated browser config | Generated-file comparison in build/static QA | Phone/integration values match `data/business.json`; no hand-edited drift | Recorded local QA passed with `+12026434062`; GTM/GA4/Ads/call tracking remain unconfigured. Final-release rerun pending. |
 | [x] | Lint | `npm run lint` | Exit code 0; meaningful warnings resolved | Recorded local run exited 0. Final-release rerun pending. |
 | [x] | Type/config check | `npm run typecheck` | Exit code 0 | Recorded local run exited 0. Final-release rerun pending. |
 | [x] | Production build | `npm run build` | Exit code 0; generated core pages, redirects, sitemap, and Vercel output are current | Recorded local run exited 0 and generated 28 core/support pages, the redirect configuration, 59 sitemap URLs, and a 194-file `public/` deployment bundle. No deployment was performed; final-release rerun pending. |
@@ -96,7 +96,7 @@ The recorded local static crawl passed each criterion below. These are source-le
 - [x] Every sitemap URL maps to a final self-canonical, indexable source page.
 - [x] Every JSON-LD block parses, uses the configured phone/name/origin, and contains no fake address, hours, rating, review, license, or certification.
 - [x] FAQ JSON-LD appears only where the same questions and answers are visible.
-- [x] Every `tel:` link is exactly `tel:+17032440559` before any approved runtime replacement, and visible phone text matches it.
+- [x] Every `tel:` link is exactly `tel:+12026434062` before any approved runtime replacement, and visible phone text matches it.
 - [x] Every lead form contains exactly one hidden field for landing page, referrer, five UTMs, `gclid`, `gbraid`, and `wbraid`.
 - [x] Every form control has a programmatic label; `tel`/`email` input types and autofill attributes are appropriate.
 - [x] Every meaningful image has accurate alt text and intrinsic width/height; decorative images use empty alt.

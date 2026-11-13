@@ -7,7 +7,7 @@ The complete current task disposition is in `docs/task-completion-checklist.md`.
 ## Changelog
 
 - Shortened the homepage hero around securing a business and restoring safe exit operation. Added direct Call and photo-quote CTAs.
-- Connected photo buttons to the owner-confirmed WhatsApp number, +1 202-643-4062. Prefilled messages request business type/name, address or ZIP, problem, urgency and contact details. Photo attachment is completed in WhatsApp or through the optional device sharing action.
+- Connected photo buttons to the owner-confirmed WhatsApp number, +1 703-244-0559. Prefilled messages request business type/name, address or ZIP, problem, urgency and contact details. Photo attachment is completed in WhatsApp or through the optional device sharing action.
 - Kept the mobile contact bar, made the Call and Photo controls equal-width, and added a desktop floating call action.
 - Fixed the navigation breakpoint that caused tablet overflow; enlarged the menu target to 48px. Shortened phone heroes and removed portrait hero photos from the small-screen layout.
 - Added an icon-based commercial audience strip and reusable sections for property/facility managers, restaurants/retail, offices/medical buildings, and fire doors/exit hardware. Each includes pain points, benefits, mini FAQs and a specific CTA.
@@ -55,7 +55,7 @@ All `[ADD: ...]` keys used by this change are listed below. Replace facts in the
 | `[ADD: RESPONSE_TIME]` | Not supplied: omit numeric arrival and response guarantees |
 | `[ADD: SERVICE_HOURS]` | Confirmed by owner: 24/7 service |
 | `[ADD: LICENSE_INSURANCE]` | Not supplied: no public license or insurance claim |
-| `[ADD: WHATSAPP_ACCOUNT]` | Confirmed by owner: WhatsApp receives messages on +12026434062 |
+| `[ADD: WHATSAPP_ACCOUNT]` | Confirmed by owner: WhatsApp receives messages on +17032440559 |
 | `[ADD: GOOGLE_RATING]` | Not supplied: Google badge remains unpublished |
 | `[ADD: TESTIMONIALS]` | Not supplied: testimonial placeholders remain unpublished |
 | `[ADD: HARDWARE_BRANDS]` | Not supplied: no manufacturer service or affiliation claim |

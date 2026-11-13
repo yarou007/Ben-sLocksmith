@@ -90,7 +90,7 @@ function header() {
     <div class="nav-links" id="primary-menu" data-nav-menu data-open="false">
       <a href="/commercial-door-repair-washington-dc">Emergency door repair</a>
       <a href="/commercial-locksmith-washington-dc">Commercial locksmith</a>
-      <a href="/panic-bar-repair-washington-dc">Panic bars</a>
+      <a href="/storefront-door-repair-washington-dc">Glass doors &amp; storefronts</a>
       <a href="/fire-door-inspection-washington-dc">Fire doors</a>
       ${callButton('Call Dispatch', 'header')}
     </div>
@@ -408,6 +408,7 @@ function homeSchema() {
 }
 
 const homeProblems = [
+  ['Glass door or storefront glass is damaged', '/storefront-door-repair-washington-dc', 'storefront_door_repair'],
   ['Door will not close', '/commercial-door-repair-washington-dc', 'commercial_door_repair'],
   ['Door will not latch', '/commercial-door-repair-washington-dc', 'commercial_door_repair'],
   ['Panic bar is stuck', '/panic-bar-repair-washington-dc', 'panic_bar_repair'],
@@ -461,6 +462,7 @@ ${header()}
   <section class="section">
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Choose the problem</p><h2>What is the commercial door doing?</h2><p>Start with the symptom. Each option opens the page built for that specific repair or project.</p></div><div class="problem-grid">${homeProblems.map(([label, href, service]) => `<a class="problem-card" href="${href}" data-service-card="${service}"><span class="icon-box" aria-hidden="true">!</span><span>${escapeHtml(label)}</span></a>`).join('')}</div></div>
   </section>
+  <section class="section section-alt" id="glass-door-repair"><div class="wrap grid-2"><div><p class="eyebrow">Commercial glass and storefronts</p><h2>Glass door repair and storefront glass replacement</h2><p>Cracked or shattered glass, a dragging glass door or a failed closer can interrupt business access. We replace damaged commercial glass and repair storefront door pivots, closers, locks, handles and alignment.</p><p>Send photos of the full entrance, damaged area and hardware with your business address. Glass type, measurements, frame condition and material availability are reviewed before the work is scheduled.</p><a class="card-link" href="/storefront-door-repair-washington-dc">Explore glass door repair and glass replacement →</a></div><aside class="callout"><h3>Broken glass or an unsecured entrance?</h3><p>Keep customers and staff away from loose glass. Call to discuss the damaged opening, or send photos from a safe distance for a free estimate.</p><div class="button-row">${compactCallButton('glass_section')}${photoCta('Commercial glass door or storefront glass repair', 'glass_section')}</div></aside></div></section>
   ${conversion.requestSection({ service: 'homepage', symptoms: homeProblems.map(([label]) => label) })}
   <section class="section section-alt" id="services">
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Emergency repair</p><h2>Restore a door that will not close, latch or secure</h2><p>Commercial door calls are routed by the failed opening, lock and hardware condition.</p></div><div class="grid-3">${serviceCard('Emergency commercial door repair', 'Door, frame, hinge, latch, closer and break-in damage affecting a business opening.', '/commercial-door-repair-washington-dc', 'commercial_door_repair')}${serviceCard('Panic bar repair', 'Stuck bars, failed latch retraction, loose touchpads, strikes and relatching problems.', '/panic-bar-repair-washington-dc', 'panic_bar_repair')}${serviceCard('Door closer repair', 'Leaking, slamming, slow-closing or non-latching commercial door closers.', '/door-closer-repair-washington-dc', 'door_closer_repair')}</div></div>

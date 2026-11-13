@@ -583,13 +583,13 @@ export default [
   {
     slug: 'storefront-door-repair-washington-dc',
     service: 'storefront_door_repair',
-    title: 'Storefront Door Repair Washington DC | Commercial Entries',
+    title: 'Glass & Storefront Door Repair Washington DC | Replacement',
     description:
-      'Commercial storefront door repair in Washington DC for dragging, alignment, closer, pivot, latch and narrow-stile lock problems. Request an assessment.',
-    h1: 'Storefront Door Repair in Washington DC',
-    eyebrow: 'Commercial aluminum entry door service',
+      'Commercial glass door repair and storefront glass replacement in Washington DC. Help with cracked panes, broken glass, pivots, closers and door locks.',
+    h1: 'Commercial Glass & Storefront Door Repair in Washington DC',
+    eyebrow: 'Glass replacement & commercial door hardware',
     subtitle:
-      'Commercial storefront door, frame and hardware assessment for retail businesses and managed properties.',
+      'Glass replacement and glass-door hardware repair for storefronts, restaurants, offices and managed commercial properties. Send photos of the glass and the full entrance for a free estimate.',
     intent: 'hybrid',
     form: 'emergency',
     heroImage: {
@@ -607,13 +607,14 @@ export default [
       'Top or bottom pivot feels loose or uneven',
       'Door leaf is visibly out of alignment in the frame',
       'Latch and strike no longer meet consistently',
-      'Glass is loose or damaged and must be assessed before door work'
+      'Glass is cracked, shattered or loose in the storefront door',
+      'A storefront glass pane needs replacement after impact or break-in damage'
     ],
     intro: {
-      heading: 'Storefront repair is more than a lock change',
+      heading: 'Glass replacement and door repair for your business entrance',
       paragraphs: [
         'Aluminum storefront doors rely on narrow clearances and a connected set of pivots, closers, locks, latches and frame components. Treating only the most visible symptom can leave the door dragging, unsecured or difficult to use.',
-        'Service is designed for business and commercial entrances where the storefront door, frame, pivots, closer and locking hardware must operate together.'
+        'We replace cracked or shattered commercial glass and repair glass-door hardware. A broken pane, dragging door and failed lock can require different work; the assessment identifies the glass, frame and hardware scope before repairs are approved.'
       ]
     },
     sections: [
@@ -642,15 +643,15 @@ export default [
         ]
       },
       {
-        heading: 'Glass conditions require scope confirmation',
+        heading: 'Cracked glass and storefront glass replacement',
         paragraphs: [
-          'Glass condition can affect whether door and frame work can proceed safely, and glass replacement can require a separate glazing scope. Cracked, loose or displaced glazing should be assessed and may require a qualified glazing provider before or alongside door repair.'
+          'Request replacement for cracked, shattered or damaged glass in a commercial door or storefront. Share the full opening, visible damage and any existing glass markings from a safe distance. Glass dimensions, type, frame condition and applicable safety requirements must be checked before replacement is specified; material availability and installation timing are confirmed with the estimate.'
         ],
         bullets: [
-          'Photograph visible cracks or movement before service',
-          'Avoid operating a door with unstable glazing',
-          'Separate door-hardware work from glazing work',
-          'Confirm the responsible trade in the approved scope'
+          'Replacement of cracked or shattered commercial glass panes',
+          'Assessment of door glass, fixed storefront panels and retaining components',
+          'Glass and hardware scope reviewed together after break-in damage',
+          'Keep people clear of loose glass and avoid operating a damaged door'
         ]
       }
     ],
@@ -694,7 +695,7 @@ export default [
       {
         question: 'Does storefront door repair include broken glass replacement?',
         answer:
-          'Not automatically. Glass condition is assessed because it affects safe door work, and replacement may require a qualified glazing provider. Mention damaged glass when requesting service.'
+          'Yes. We handle commercial glass replacement as well as glass-door hardware repair. Send photos and your address so the glass type, dimensions, frame condition and repair scope can be assessed. Material availability and scheduling are confirmed with the estimate.'
       },
       {
         question: 'What details help scope a commercial storefront door repair?',

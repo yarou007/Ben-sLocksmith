@@ -670,7 +670,7 @@ for (const filePath of htmlFiles) {
   for (const anchor of anchors.filter((item) => Object.hasOwn(item.attrs, 'data-photo-cta'))) {
     const destination = safeUrl(decodeEntities(anchor.attrs.href || ''), origin);
     if (!destination || destination.protocol !== 'https:' || destination.hostname !== 'wa.me'
-      || !/^\/\d{10,15}$/.test(destination.pathname) || !destination.searchParams.get('text')) {
+      || destination.pathname !== '/' + String(business.photoContact?.whatsappNumber || '').replace(/\D/g, '') || !destination.searchParams.get('text')) {
       addIssue('photo-funnel', route, 'door-photo CTA does not open a prefilled WhatsApp conversation');
     }
     if (/unavailable|disabled/i.test(anchor.attrs['aria-label'] || '')) {

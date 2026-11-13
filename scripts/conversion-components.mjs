@@ -34,7 +34,7 @@ export function conversionComponents(business, proof = {}) {
   }
   function quoteForm(page) {
     const id = `${page.service || 'commercial'}-quote-form`;
-    const options = page.symptoms || ['Door will not close or latch', 'Panic bar / exit device', 'Door closer problem', 'Business lockout', 'Commercial lock / rekey', 'Fire door repair or inspection request', 'Door installation', 'Access-control door hardware'];
+    const options = page.symptoms || ['Glass door / storefront glass replacement', 'Door will not close or latch', 'Panic bar / exit device', 'Door closer problem', 'Business lockout', 'Commercial lock / rekey', 'Fire door repair or inspection request', 'Door installation', 'Access-control door hardware'];
     return `<form id="${escape(id)}" class="quote-form" data-quote-form data-form-type="whatsapp" aria-describedby="${id}-help" aria-disabled="true" hidden>
       <div class="quote-form-heading"><p class="eyebrow">Free commercial estimate</p><h3>Prepare your WhatsApp request</h3><p id="${id}-help">Fill in the details, then send the prepared message in WhatsApp. Call 24/7 for an urgent commercial door problem.</p></div>
       <fieldset class="quote-fieldset" data-quote-fields disabled><legend class="visually-hidden">Your commercial service request</legend><div class="form-grid">

@@ -71,9 +71,9 @@ window.DCELD_CONFIG = {
   },
   "photoContact": {
     "channel": "whatsapp",
-    "whatsappNumber": "+12026434062",
+    "whatsappNumber": "+17032440559",
     "accountVerified": true,
-    "verificationSource": "Owner confirmation, 2026-11-11"
+    "verificationSource": "Owner confirmation, 2026-11-13"
   },
   "form": {
     "enabled": false,

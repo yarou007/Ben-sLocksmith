@@ -27,7 +27,7 @@ function duplicates(values) {
 assert(business.origin === 'https://dcemergencylockanddoor.com', 'Business origin must use the canonical HTTPS non-www host.');
 assert(/^\+1\d{10}$/.test(business.phone?.e164 || ''), 'Business phone must be a US E.164 number.');
 assert(business.phone?.e164 === '+12026434062', 'Public phone must remain the owner-confirmed +12026434062.');
-assert(business.photoContact?.whatsappNumber === business.phone?.e164, 'WhatsApp must use the owner-confirmed public phone.');
+assert(business.photoContact?.whatsappNumber === '+17032440559', 'WhatsApp requests must use the owner-confirmed +17032440559.');
 assert(business.form?.enabled === false, 'Forms must remain disabled until the owner explicitly enables a verified handler.');
 assert(business.form?.endpoint === null, 'Disabled forms must not expose a submission endpoint.');
 assert(business.form?.recipient === null, 'Disabled forms must not expose a submission recipient.');

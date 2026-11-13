@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { googleAnalyticsTag } from './google-analytics-tag.mjs';
 import { conversionComponents } from './conversion-components.mjs';
-import { coverageCandidates, locationProfiles } from '../data/conversion-content.mjs';
+import { coverageCandidates, locationProfiles, dcStreetCorridors } from '../data/conversion-content.mjs';
 
 import plannedPages from '../data/service-pages-planned.mjs';
 import locksmithPages from '../data/service-pages-locksmith.mjs';
@@ -603,11 +603,17 @@ function locationFaqs(page) {
   ];
 }
 
+function streetCorridorDetails(page, profile) {
+  const corridor = page.slug === 'washington-dc' ? dcStreetCorridors[profile.id] : null;
+  if (!corridor) return '';
+  return `<div class="street-corridors"><h4>Commercial streets in ${escapeHtml(profile.name)}</h4><p>${corridor.streets.map(escapeHtml).join(', ')}.</p><p>${escapeHtml(corridor.guidance)}</p></div>`;
+}
+
 function locationDetailSections(page) {
   const verified = new Set(business.coverage?.[page.slug]?.verified || []);
   const profiles = (locationProfiles[page.slug] || []).filter(item => verified.has(item.name));
   if (!profiles.length) return '';
-  return `<section class="section local-coverage" id="neighborhoods"><div class="wrap"><div class="section-heading"><p class="eyebrow">Neighborhoods and business districts</p><h2>Commercial door and lock service in ${escapeHtml(page.location)}</h2><p>24/7 service and free estimates for the commercial openings described below. Include your exact address and onsite contact when requesting work.</p></div><nav class="coverage-jump-links" aria-label="Local service locations">${profiles.map(p => `<a href="#${p.id}">${escapeHtml(p.name)}</a>`).join('')}</nav><div class="coverage-grid">${profiles.map(p => `<article class="coverage-card" id="${p.id}"><p class="eyebrow">${escapeHtml(p.name)}</p><h3>${escapeHtml(p.heading)}</h3><p>${escapeHtml(p.text)}</p>${formatList(p.benefits)}<a class="card-link" href="${p.href}" data-service-card="local_${p.id}">${escapeHtml(p.link)} →</a>${conversion.photoCta(`${p.name} commercial service`, 'local_area', `Request a free estimate in ${p.name}`)}</article>`).join('')}</div></div></section>`;
+  return `<section class="section local-coverage" id="neighborhoods"><div class="wrap"><div class="section-heading"><p class="eyebrow">Neighborhoods and business districts</p><h2>${page.slug === 'washington-dc' ? 'Washington DC neighborhoods and commercial streets' : `Commercial door and lock service in ${escapeHtml(page.location)}`}</h2><p>24/7 service and free estimates for the commercial openings described below. Include your exact address and onsite contact when requesting work.</p>${page.slug === 'washington-dc' ? '<p>Use these street corridors to identify your location, then choose the service for your door or lock problem. Include the street number, NW, NE, SW or SE quadrant, nearest cross street and affected entrance. Call with your address to discuss current availability, including nearby streets not listed here.</p>' : ''}</div><nav class="coverage-jump-links" aria-label="Local service locations">${profiles.map(p => `<a href="#${p.id}">${escapeHtml(p.name)}</a>`).join('')}</nav><div class="coverage-grid">${profiles.map(p => `<article class="coverage-card" id="${p.id}"><p class="eyebrow">${escapeHtml(p.name)}</p><h3>${escapeHtml(p.heading)}</h3><p>${escapeHtml(p.text)}</p>${streetCorridorDetails(page, p)}${formatList(p.benefits)}<a class="card-link" href="${p.href}" data-service-card="local_${p.id}">${escapeHtml(p.link)} →</a>${conversion.photoCta(`${p.name} commercial service`, 'local_area', `Request a free estimate in ${p.name}`)}</article>`).join('')}</div></div></section>`;
 }
 
 function locationSchema(page) {

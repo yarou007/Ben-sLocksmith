@@ -54,6 +54,19 @@ export const coverageCandidates = {
   maryland: ['Bethesda', 'Silver Spring']
 };
 
+// Street references help identify a commercial entrance within existing DC coverage.
+// They describe geography, not branch locations, completed jobs or arrival times.
+export const dcStreetCorridors = {
+  downtown: { streets: ['K Street NW', 'H Street NW', '14th Street NW'], guidance: 'For an office tower or multi-tenant entrance, include the suite or floor, lobby check-in instructions and whether the affected door faces the street or a service alley.' },
+  'capitol-hill': { streets: ['Pennsylvania Avenue SE', '7th Street SE', '8th Street SE'], guidance: 'For a shop, office or restaurant entrance, identify the public entrance separately from the rear delivery or staff exit. Include the door identifier for any inspection-related request.' },
+  georgetown: { streets: ['M Street NW', 'Wisconsin Avenue NW', 'Prospect Street NW'], guidance: 'For a storefront opening, send a full-door photo and close-ups of the pivots, lock and closer. Mention steps, a shared entrance or alley access when describing the property.' },
+  'navy-yard': { streets: ['M Street SE', 'New Jersey Avenue SE', '1st Street SE'], guidance: 'For a restaurant, retail unit or shared building entrance, give the business name and entrance side. Mention delivery windows or event-related access restrictions that the building requires.' },
+  noma: { streets: ['First Street NE', 'M Street NE', 'North Capitol Street'], guidance: 'For a managed office or mixed-use property, distinguish the tenant door from the shared lobby entrance. If access control is involved, describe the lock and latch behavior separately from reader or software symptoms.' },
+  'dupont-circle': { streets: ['Connecticut Avenue NW', 'P Street NW', '19th Street NW'], guidance: 'For an office or medical suite, include the suite number and authorized onsite contact. For rekeying, list the affected doors and who should retain access.' },
+  'adams-morgan': { streets: ['18th Street NW', 'Columbia Road NW', 'Florida Avenue NW'], guidance: 'For a restaurant or retail opening, explain whether the customer entrance, staff door or service exit is affected. State whether the door can still secure and release and include your operating hours.' },
+  'u-street': { streets: ['U Street NW', '14th Street NW', 'Vermont Avenue NW'], guidance: 'For a busy commercial entrance or staff exit, describe whether the closer slams, the latch misses or the panic bar sticks. Include the nearest cross street and which side of the building has the affected door.' }
+};
+
 export const locationProfiles = {
   'washington-dc': [
     { name: 'Downtown', id: 'downtown', heading: 'Downtown offices and managed commercial entrances', text: 'Keep a failed entrance, tenant lock or shared exit from interrupting business access. For Downtown work orders, identify the building entrance, suite or floor and the person who can authorize access. Include delivery restrictions and any building check-in instructions when requesting a free estimate.', benefits: ['Office and tenant lockouts, rekeys and commercial locks', 'Door closers and panic hardware on shared exits', 'Work-order references, onsite contacts and access windows'], href: '/commercial-locksmith-washington-dc', link: 'Commercial locksmith service' },

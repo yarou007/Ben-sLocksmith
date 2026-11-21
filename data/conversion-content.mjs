@@ -87,27 +87,3 @@ export const locationProfiles = {
     { name: 'Silver Spring', id: 'silver-spring', heading: 'Silver Spring restaurant, retail and managed-property doors', text: 'Call about an unsecured entrance or business lockout in Silver Spring, or send photos for planned commercial door work. Include the address, affected entrance, urgency and whether the door closes, latches, locks and releases. Property teams can also include a work-order reference, site contact and an inspection item when requesting repair or fire-door scope review.', benefits: ['Commercial entrance and storefront repair', 'Panic-bar, exit-device and closer problems', 'Work-order coordination and fire-door repair requests'], href: '/commercial-door-repair-washington-dc', link: 'Commercial door repair service' }
   ]
 };
-
-export const ownerPlaceholders = {
-  RESPONSE_TIME: 'Not supplied: omit numeric arrival and response guarantees',
-  SERVICE_HOURS: 'Confirmed by owner: 24/7 service',
-  LICENSE_INSURANCE: 'Not supplied: no public license or insurance claim',
-  WHATSAPP_ACCOUNT: 'Confirmed by owner: WhatsApp receives messages on +17032440559',
-  GOOGLE_RATING: 'Not supplied: Google badge remains unpublished',
-  TESTIMONIALS: 'Not supplied: testimonial placeholders remain unpublished',
-  HARDWARE_BRANDS: 'Not supplied: no manufacturer service or affiliation claim',
-  BEFORE_AFTER: 'Not supplied: use reference photos without completed-job claims',
-  WARRANTY: 'Not supplied: no public guarantee or warranty claim',
-  VENDOR_DOCUMENTS: 'Not supplied: discuss requirements without promising administrative capabilities',
-  MAINTENANCE: 'Not supplied: no recurring maintenance program claim',
-  FIRE_INSPECTIONS: 'Inspection provider qualifications, reporting and correction scope',
-  DC_NEIGHBORHOODS: 'Confirmed target locations: Downtown, Capitol Hill, Georgetown, Navy Yard, NoMa, Dupont Circle, Adams Morgan and U Street',
-  VA_CITIES: 'Confirmed target locations: Arlington and Alexandria',
-  MD_CITIES: 'Confirmed target locations: Bethesda and Silver Spring',
-  FORM_DELIVERY: 'WhatsApp quote preparation is active; direct website submission remains coming soon',
-  CALLBACK_WINDOW: 'Realistic callback window in minutes, hours and operating conditions',
-  ADS_CONVERSIONS: 'Google Ads conversion ID/label and chosen call measurement method',
-  CALL_TRACKING: 'Call tracking provider, numbers and qualified-call definition',
-  PUBLIC_ADDRESS: 'Confirmed public business address, or keep the service-area setup',
-  PRIVACY_DETAILS: 'Legal identity, privacy contact, effective date, retention and applicable consent details'
-};

@@ -684,6 +684,12 @@ function neutralizeUnverifiedNewYorkText(text) {
     .replace(/\bserving\s+Washington DC, Northern Virginia, Maryland, and New York City\b/gi, 'serving verified DC-area markets; New York availability requires confirmation');
 }
 
+function removeUnverifiedProof(html) {
+  return html
+    .replace(/<article\b[^>]*>\s*<h2>Client Testimonial<\/h2>[\s\S]*?<\/article>/gi, '')
+    .replace(/<span\b[^>]*>\s*Credentials require confirmation\s*<\/span>/gi, '');
+}
+
 function neutralizeVisibleClaims(html, pageRoute) {
   // This targets text nodes only. It deliberately avoids broad replacements in
   // attributes, URLs, styles, and JavaScript; metadata is handled separately.
@@ -1298,16 +1304,6 @@ function configureLegacyBody(html, pageRoute) {
   return html.replace(bodyMatch[0], body);
 }
 
-function legacyPhotoTarget(pageRoute) {
-  if (/access-control/i.test(pageRoute)) return '/access-control-systems-washington-dc#service-request';
-  if (/door-closer/i.test(pageRoute)) return '/door-closer-repair-washington-dc#service-request';
-  if (/fire-door/i.test(pageRoute)) return '/fire-door-inspection-washington-dc#service-request';
-  if (/panic-bar|exit-device/i.test(pageRoute)) return '/panic-bar-repair-washington-dc#service-request';
-  if (/rekey/i.test(pageRoute)) return '/commercial-rekey-washington-dc#service-request';
-  if (/door-repair|door-wont-latch|door-not-locking/i.test(pageRoute)) return '/commercial-door-repair-washington-dc#service-request';
-  return '/commercial-locksmith-washington-dc#service-request';
-}
-
 function addTransactionalStickyActions(html, pageRoute) {
   if (pageRoute.includes('blog') || /^\/(?:about|gallery|privacy-policy|terms-of-service|sitemap|404)$/.test(pageRoute)) return html;
   if (/\bsticky-mobile-actions\b/i.test(html)) return html;
@@ -1320,7 +1316,7 @@ function addTransactionalStickyActions(html, pageRoute) {
   });
   const actions = `<nav class="sticky-mobile-actions" data-component="StickyMobileActionBar" aria-label="Quick contact actions">
   <a class="sticky-mobile-action sticky-mobile-call" href="tel:${htmlEscapeAttribute(business.phone.e164)}" data-business-phone-link data-dynamic-number-eligible data-cta-location="sticky" aria-label="Call ${htmlEscapeAttribute(business.phone.display)}">Call</a>
-  <a class="sticky-mobile-action sticky-mobile-photo" href="${htmlEscapeAttribute(legacyPhotoTarget(pageRoute))}" data-photo-cta data-cta-location="sticky" aria-label="View the unavailable door photo request form">Send a Door Photo</a>
+  <a class="sticky-mobile-action sticky-mobile-photo" href="${htmlEscapeAttribute(conversion.whatsappUrl())}" data-photo-cta data-cta-location="sticky" data-contact-channel="whatsapp">Message on WhatsApp</a>
 </nav>`;
   return /<\/body\s*>/i.test(withoutOldStickyCalls)
     ? withoutOldStickyCalls.replace(/<\/body\s*>/i, `${actions}\n</body>`)
@@ -1334,7 +1330,9 @@ function upgradeContactActions(html) {
     let updated = setAttribute(start, 'href', conversion.whatsappUrl());
     updated = setAttribute(updated, 'data-contact-channel', 'whatsapp');
     updated = setAttribute(updated, 'aria-label', 'Send a door photo on WhatsApp');
-    return anchor.replace(start, updated);
+    return /\bsticky-mobile-photo\b/.test(getAttribute(start, 'class') || '')
+      ? `${updated}Message on WhatsApp</a>`
+      : anchor.replace(start, updated);
   });
   if (/has-sticky-actions/.test(output) && !/class="desktop-call"/.test(output)) {
     const floating = conversion.stickyActions().match(/<a class="desktop-call"[\s\S]*?<\/a>/)?.[0] || '';
@@ -1471,7 +1469,7 @@ function sanitizeLegacyPage(html, file, pageRoute) {
   output = sanitizeMetadata(output, pageRoute);
   output = applyMarketIndexingGate(output, pageRoute);
   output = ensureSocialMetadata(output, pageRoute);
-  output = neutralizeVisibleClaims(output, pageRoute);
+  output = removeUnverifiedProof(neutralizeVisibleClaims(output, pageRoute));
   output = neutralizeFireAndCodeClaims(output, pageRoute);
   output = disableForms(output);
   output = accessibleLegacyControls(output);

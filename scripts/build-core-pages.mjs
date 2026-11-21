@@ -126,7 +126,6 @@ function verifiedTrustItems() {
 function trustBar() {
   return `<aside class="trust-bar" aria-label="Verified business information" data-component="CommercialTrustBar">
   <ul class="trust-items wrap">${verifiedTrustItems().map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-  <!-- Response-time and credential claims omitted: not supplied by the owner. -->
 </aside>`;
 }
 
@@ -436,7 +435,7 @@ function photoCards() {
 
 function homepage() {
   return `${head({
-    title: 'DC Emergency Lock & Door | Commercial Services 24/7',
+    title: 'Commercial Door Repair & Locksmith in Washington DC',
     description: 'DC Emergency Lock & Door provides 24/7 commercial door, lock and exit hardware services in DC and nearby VA and MD. Call 202-643-4062 for a free estimate.',
     pathName: '/',
     image: homeImage,
@@ -449,10 +448,10 @@ ${header()}
     <div class="hero-grid wrap">
       <div class="hero-copy">
         ${commercialBadge()}
-        <h1>DC Emergency Lock &amp; Door: Commercial Services 24/7</h1>
+        <h1>Commercial Door Repair &amp; Locksmith in Washington DC</h1>
         <p class="hero-subtitle">Commercial door, lock and exit hardware services for businesses in Washington DC and nearby Virginia and Maryland. Choose the service you need, call 24/7 or send photos for a free estimate.</p>
-        <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Send a Door Photo for a Free Estimate')}</div>
-        <p class="service-area-line">24/7 · Free estimates · DC and nearby VA &amp; MD</p><a class="hero-project-link" href="#service-request">Plan a project: get a free estimate</a>
+        <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Message on WhatsApp')}</div>
+        <p class="service-area-line">24/7 · Free estimates · DC and nearby VA &amp; MD</p>
       </div>
       ${heroImage(homeImage)}
     </div>
@@ -545,10 +544,10 @@ const locationPages = [
     slug: 'washington-dc',
     service: 'washington_dc_commercial_service',
     location: 'Washington DC',
-    title: 'Washington DC Service Areas | DC Emergency Lock & Door',
+    title: 'Washington DC Commercial Door & Locksmith Service Areas',
     description: 'Explore our Washington DC service areas, from Downtown and Capitol Hill to Georgetown and Navy Yard. Find commercial door and lock services for your neighborhood.',
     h1: 'Washington DC Neighborhoods We Serve',
-    subtitle: 'Find your Washington DC neighborhood below, then choose the door repair, locksmith or exit hardware service your property needs. Include your exact business address when requesting availability.',
+    subtitle: 'Find commercial door, lock and storefront glass repair by Washington DC neighborhood. For an unsecured entrance or business lockout, call dispatch. For planned work, send photos and your business address on WhatsApp.',
     image: homeImage,
     areas: ['Downtown and central business districts', 'Northwest, Northeast, Southwest and Southeast DC', 'Commercial offices and managed buildings', 'Retail, restaurant, education, medical and warehouse properties']
   },
@@ -589,6 +588,7 @@ const locationPages = [
 ];
 
 const locationServiceLinks = [
+  { title: 'Storefront glass and door repair', description: 'Cracked commercial glass, dragging glass doors and damaged storefront hardware.', href: '/storefront-door-repair-washington-dc', service: 'storefront_door_repair', location: 'washington-dc' },
   { title: 'Emergency commercial door repair', description: 'Doors that will not close, latch or secure; frame, hinge, closer and break-in problems.', href: '/commercial-door-repair-washington-dc', service: 'commercial_door_repair' },
   { title: 'Commercial locksmith', description: 'Business lockouts, commercial locks, rekeys, cylinders and key-control planning.', href: '/commercial-locksmith-washington-dc', service: 'commercial_locksmith' },
   { title: 'Panic bar repair', description: 'Stuck bars, failed latch retraction, strike alignment and relatching problems.', href: '/panic-bar-repair-washington-dc', service: 'panic_bar_repair' },
@@ -650,9 +650,9 @@ function locationPage(page) {
 <body class="has-sticky-actions" data-service="${escapeAttribute(page.service)}" data-location="${escapeAttribute(page.location)}">
 ${header()}
 <main id="main-content">
-  <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${breadcrumbs(page.h1, currentPath, null)}${commercialBadge()}<p class="eyebrow" style="color:#bcdcff">Commercial service area</p><h1>${escapeHtml(page.h1)}</h1><p class="hero-subtitle">${escapeHtml(page.subtitle)}</p><div class="hero-actions">${callButton('Call Commercial Dispatch', 'hero')}${photoCta('#area-request', 'hero')}</div></div>${heroImage(page.image)}</div></section>
+  <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${breadcrumbs(page.h1, currentPath, null)}${commercialBadge()}<p class="eyebrow" style="color:#bcdcff">Commercial service area</p><h1>${escapeHtml(page.h1)}</h1><p class="hero-subtitle">${escapeHtml(page.subtitle)}</p><div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta(page.location, 'hero', 'Message on WhatsApp')}</div></div>${heroImage(page.image)}</div></section>
   ${trustBar()}
-  <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Each service page explains a distinct buyer problem. Call with the exact commercial location so coverage can be confirmed.</p></div><div class="grid-3">${locationServiceLinks.map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
+  <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Call with your business address to confirm availability, or browse the repair options below.</p></div><div class="grid-3">${locationServiceLinks.filter((item) => !item.location || item.location === page.slug).map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
   <section class="section section-alt"><div class="wrap grid-2"><div><p class="eyebrow">Area context</p><h2>Commercial properties in ${escapeHtml(page.location)}</h2><p>Tell us the business address, property type and door problem. We will discuss the service options for your location.</p>${formatList(page.areas)}</div><aside class="callout" aria-label="Related commercial service information"><h3>What to include</h3>${formatList(['Business or organization name', 'Exact city, ZIP and service address', 'Affected door and hardware type', 'Whether the opening closes, latches and secures', 'Onsite contact and access window', 'Photo when it can be shared safely'])}${qualificationNotice('service_area')}</aside></div></section>
   ${locationDetailSections(page)}
   ${conversion.requestSection(formConfig, 'area-request')}
@@ -787,7 +787,6 @@ function sitemapPage() {
     { href: '/commercial-rekey-washington-dc', label: 'Commercial rekey' },
     { href: '/fire-door-repair-washington-dc', label: 'Fire door repair' },
     { href: '/access-control-systems-washington-dc', label: 'Commercial access control' },
-    { href: '/storefront-door-repair-washington-dc', label: 'Storefront door repair' },
     { href: '/master-key-systems', label: 'Master key systems' },
     { href: '/service-office-lockout', label: 'Office lockout service' },
     { href: '/service-property-manager-locksmith', label: 'Property manager service' },

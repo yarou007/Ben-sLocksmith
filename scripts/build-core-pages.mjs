@@ -88,9 +88,9 @@ function header() {
     <a class="brand" href="/" aria-label="${escapeAttribute(business.publicName)} home">DC Emergency <span>Lock &amp; Door</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation menu" data-nav-toggle>☰</button>
     <div class="nav-links" id="primary-menu" data-nav-menu data-open="false">
-      <a href="/commercial-door-repair-washington-dc">Emergency door repair</a>
-      <a href="/commercial-locksmith-washington-dc">Commercial locksmith</a>
-      <a href="/storefront-door-repair-washington-dc">Glass doors &amp; storefronts</a>
+      <a href="/commercial-door-repair-washington-dc">Door repair</a>
+      <a href="/commercial-locksmith-washington-dc">Locksmith</a>
+      <a href="/storefront-door-repair-washington-dc">Storefront glass</a>
       <a href="/fire-door-inspection-washington-dc">Fire doors</a>
       ${callButton('Call Dispatch', 'header')}
     </div>
@@ -863,7 +863,7 @@ function notFoundPage() {
 }
 
 function thankYouPage() {
-  return supportPage({ slug: 'thank-you', title: 'Next Steps for Your Commercial Service Request', description: 'Send the prepared WhatsApp message and keep your phone available to discuss your commercial door request. For an unsecured door or urgent lockout, call 1 202-643-4062.', h1: 'Keep your phone available', eyebrow: 'Complete your WhatsApp request', service: 'request_follow_up', robots: 'noindex,follow', sticky: true, bodyHtml: `<section class="section"><div class="wrap"><h2>What happens next</h2><p>After preparing the quote form, send its message in WhatsApp and attach your door photos. We discuss your commercial service request, scope and next step in that conversation or by phone. Opening the app alone does not send the message.</p><p>For an unsecured commercial door or urgent business lockout, call ${escapeHtml(phone.display)} 24/7. Estimates are free.</p><!-- [ADD: CALLBACK_WINDOW — approved callback promise before connecting a live form] --><div class="button-row">${compactCallButton('body')}${photoCta('', 'body')}</div></div></section>` });
+  return supportPage({ slug: 'thank-you', title: 'Next Steps for Your Commercial Service Request', description: 'Send the prepared WhatsApp message and keep your phone available to discuss your commercial door request. For an unsecured door or urgent lockout, call 1 202-643-4062.', h1: 'Keep your phone available', eyebrow: 'Complete your WhatsApp request', service: 'request_follow_up', robots: 'noindex,follow', sticky: true, bodyHtml: `<section class="section"><div class="wrap"><h2>What happens next</h2><p>After preparing the quote form, send its message in WhatsApp and attach your door photos. We discuss your commercial service request, scope and next step in that conversation or by phone. Opening the app alone does not send the message.</p><p>For an unsecured commercial door or urgent business lockout, call ${escapeHtml(phone.display)} 24/7. Estimates are free.</p><div class="button-row">${compactCallButton('body')}${photoCta('', 'body')}</div></div></section>` });
 }
 
 function writeIfChanged(file, content) {

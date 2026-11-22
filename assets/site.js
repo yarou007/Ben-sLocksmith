@@ -132,6 +132,29 @@
     document.head.appendChild(script);
   }
 
+  function loadVercelAnalytics() {
+    var origin = new URL(config.origin || window.location.origin);
+    var hostname = window.location.hostname;
+    if (hostname !== origin.hostname && !hostname.endsWith('.vercel.app')) return;
+
+    // Set the redaction hook before the hosted script sends its first pageview.
+    window.va = window.va || function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+    window.va('beforeSend', function (event) {
+      var url = new URL(event.url);
+      var canonical = document.querySelector('link[rel="canonical"]');
+      url.pathname = canonical ? new URL(canonical.href).pathname : url.pathname;
+      url.search = '';
+      url.hash = '';
+      return Object.assign({}, event, { url: url.href });
+    });
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = '/_vercel/insights/script.js';
+    document.head.appendChild(script);
+  }
+
   function loadAhrefsIfConfigured() {
     var analyticsKey = value(config.analytics && config.analytics.ahrefsAnalyticsKey);
     if (!analyticsKey) return;
@@ -320,30 +343,38 @@
     }
   }
 
+  function contactAttribution(element) {
+    var verified = config.verifiedContactAreas || [];
+    var selectedArea = value(element.dataset.serviceArea);
+    var pageArea = value(document.body.dataset.location);
+    return {
+      cta_location: inferCtaLocation(element),
+      landing_page: attribution.landing_page,
+      service_area: verified.includes(selectedArea) ? selectedArea : verified.includes(pageArea) ? pageArea : undefined
+    };
+  }
+
   function configureClickTracking() {
     document.addEventListener('click', function (event) {
       var target = event.target.closest('a,button');
       if (!target) return;
 
       if (target.matches('a[href^="tel:"]')) {
-        var location = inferCtaLocation(target);
-        var payload = {
-          cta_location: location,
+        var payload = Object.assign(contactAttribution(target), {
           link_text: value(target.textContent),
           phone_source: value(target.dataset.phoneSource) || 'configured_business_number'
-        };
+        });
         track('phone_click', payload);
-        var placementEvent = phoneEventName(location);
+        var placementEvent = phoneEventName(payload.cta_location);
         if (placementEvent) track(placementEvent, payload);
         googleAdsCallIntegration(target);
         return;
       }
 
       if (target.matches('[data-photo-cta]')) {
-        var photoPayload = {
-          cta_location: inferCtaLocation(target),
+        var photoPayload = Object.assign(contactAttribution(target), {
           contact_channel: target.dataset.contactChannel || 'whatsapp'
-        };
+        });
         track('photo_cta_click', photoPayload);
         if (target.dataset.contactChannel === 'whatsapp') track('whatsapp_click', photoPayload);
       }
@@ -631,6 +662,7 @@
 
   loadGtmIfConfigured();
   loadAhrefsIfConfigured();
+  loadVercelAnalytics();
 
   document.addEventListener('DOMContentLoaded', function () {
     enablePaidSearchLayout();

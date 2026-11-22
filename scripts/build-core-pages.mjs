@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { googleAnalyticsTag } from './google-analytics-tag.mjs';
 import { conversionComponents } from './conversion-components.mjs';
-import { coverageCandidates, locationProfiles, dcStreetCorridors } from '../data/conversion-content.mjs';
+import { locationProfiles, dcStreetCorridors } from '../data/conversion-content.mjs';
 
 import plannedPages from '../data/service-pages-planned.mjs';
 import locksmithPages from '../data/service-pages-locksmith.mjs';
@@ -340,6 +340,9 @@ ${header()}
   <section class="section">
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial FAQ</p><h2>Questions about this commercial service</h2></div>${renderFaqs(page.faqs)}</div>
   </section>
+  <section class="section section-alt" data-paid-hide>
+    <div class="wrap"><h2>Check service coverage for your business</h2><p>Call with your business address to confirm availability. Browse our service areas for local access and work-order guidance.</p>${renderRelated(locationPages.map(area => ({ href: `/${area.slug}#neighborhoods`, label: area.location })))}</div>
+  </section>
   <section class="section final-cta"><div class="wrap"><h2>${page.intent === 'scheduled' ? 'Ready to define the commercial scope?' : 'Is the commercial opening unsafe or unsecured?'}</h2><p>${page.intent === 'scheduled' ? 'Commercial installation, inspection and planned repair service for businesses and managed properties.' : 'Commercial door, lock and hardware repair service for businesses and managed properties.'}</p><div class="button-row">${compactCallButton('body')}${photoCta(page.h1, 'body')}</div></div></section>
 </main>
 ${footer()}
@@ -559,45 +562,47 @@ const locationPages = [
     service: 'washington_dc_commercial_service',
     location: 'Washington DC',
     title: 'Washington DC Commercial Door & Locksmith Service Areas',
-    description: 'Explore our Washington DC service areas, from Downtown and Capitol Hill to Georgetown and Navy Yard. Find commercial door and lock services for your neighborhood.',
-    h1: 'Washington DC Neighborhoods We Serve',
-    subtitle: 'Find commercial door, lock and storefront glass repair by Washington DC neighborhood. For an unsecured entrance or business lockout, call dispatch. For planned work, send photos and your business address on WhatsApp.',
-    image: homeImage,
-    areas: ['Downtown and central business districts', 'Northwest, Northeast, Southwest and Southeast DC', 'Commercial offices and managed buildings', 'Retail, restaurant, education, medical and warehouse properties']
+    description: 'Commercial door repair and locksmith coverage in Downtown DC, Capitol Hill, Georgetown, Navy Yard and nearby neighborhoods. Call 24/7 for availability.',
+    h1: 'Commercial Door & Locksmith Coverage in Washington DC',
+    coverageHeading: 'Washington DC neighborhoods we serve',
+    subtitle: 'Call 24/7 for a business lockout or an unsecured commercial entrance. Find your DC neighborhood below and have your business address ready when you call.',
+    image: homeImage
   },
   {
     slug: 'northern-virginia',
     service: 'northern_virginia_commercial_service',
     location: 'Nearby Northern Virginia',
-    title: 'Commercial Door & Locksmith Services Northern Virginia',
-    description: '24/7 commercial door and locksmith service in Arlington, Alexandria and nearby Northern Virginia. Free estimates for locks, panic bars, closers and doors.',
-    h1: 'Commercial Door & Locksmith Service in Northern Virginia',
-    subtitle: 'Door and lock service requests for nearby Northern Virginia businesses. Call with your address to discuss current availability.',
+    state: 'Virginia',
+    title: 'Commercial Door Repair & Locksmith | Arlington & Alexandria',
+    description: 'Commercial door and locksmith service in Arlington and Alexandria, VA. Call 24/7 to discuss lockouts, closers, panic bars, rekeys and current availability.',
+    h1: 'Commercial Door & Locksmith Service in Arlington and Alexandria',
+    coverageHeading: 'Arlington and Alexandria service areas',
+    subtitle: 'Call with your Arlington or Alexandria business address for a lockout, a door that will not latch, or a commercial hardware problem.',
     image: {
       src: '/assets/img-ac0dc74c141fc9b7.jpg',
       width: 525,
       height: 700,
       alt: 'Commercial exterior doors and metal frames',
       caption: 'Commercial exterior door and frame hardware.'
-    },
-    areas: ['Alexandria commercial properties', 'Arlington commercial properties', 'Nearby Northern Virginia offices and retail', 'Managed buildings, schools, medical facilities and warehouses']
+    }
   },
   {
     slug: 'maryland',
     service: 'maryland_commercial_service',
     location: 'Nearby Maryland',
-    title: 'Commercial Door & Locksmith Services Maryland',
-    description: '24/7 commercial door repair and locksmith service in Bethesda, Silver Spring and nearby Maryland. Free estimates for business doors, locks and exit hardware.',
-    h1: 'Commercial Door & Locksmith Service in Nearby Maryland',
-    subtitle: 'Commercial door and lock service requests in nearby Maryland. Call with your address or ZIP to discuss current availability.',
+    state: 'Maryland',
+    title: 'Commercial Door Repair & Locksmith | Bethesda & Silver Spring',
+    description: 'Commercial door and locksmith service in Bethesda and Silver Spring, MD. Call 24/7 about lockouts, door repair, rekeys, closers and exit hardware.',
+    h1: 'Commercial Door & Locksmith Service in Bethesda and Silver Spring',
+    coverageHeading: 'Bethesda and Silver Spring service areas',
+    subtitle: 'Call with your Bethesda or Silver Spring business address to discuss a lockout, a door repair, or planned lock and hardware work.',
     image: {
       src: '/assets/img-466c8958117610c9.jpg',
       width: 900,
       height: 506,
       alt: 'Commercial entry door and threshold area',
       caption: 'Commercial entry door and threshold.'
-    },
-    areas: ['Bethesda-area commercial properties', 'Silver Spring-area commercial properties', 'Nearby Maryland offices and retail', 'Managed buildings, schools, medical facilities and warehouses']
+    }
   }
 ];
 
@@ -619,35 +624,59 @@ function locationFaqs(page) {
   ];
 }
 
-function streetCorridorDetails(page, profile) {
-  const corridor = page.slug === 'washington-dc' ? dcStreetCorridors[profile.id] : null;
-  if (!corridor) return '';
-  return `<div class="street-corridors"><h4>Commercial streets in ${escapeHtml(profile.name)}</h4><p>${corridor.streets.map(escapeHtml).join(', ')}.</p><p>${escapeHtml(corridor.guidance)}</p></div>`;
+function locationProfilesFor(page) {
+  const verified = new Set(business.coverage?.[page.slug]?.verified || []);
+  return (locationProfiles[page.slug] || []).filter(profile => verified.has(profile.name));
 }
 
 function locationDetailSections(page) {
-  const verified = new Set(business.coverage?.[page.slug]?.verified || []);
-  const profiles = (locationProfiles[page.slug] || []).filter(item => verified.has(item.name));
+  const profiles = locationProfilesFor(page);
   if (!profiles.length) return '';
-  return `<section class="section local-coverage" id="neighborhoods"><div class="wrap"><div class="section-heading"><p class="eyebrow">Neighborhoods and business districts</p><h2>${page.slug === 'washington-dc' ? 'Washington DC neighborhoods and commercial streets' : `Commercial door and lock service in ${escapeHtml(page.location)}`}</h2><p>24/7 service and free estimates for the commercial openings described below. Include your exact address and onsite contact when requesting work.</p>${page.slug === 'washington-dc' ? '<p>Use these street corridors to identify your location, then choose the service for your door or lock problem. Include the street number, NW, NE, SW or SE quadrant, nearest cross street and affected entrance. Call with your address to discuss current availability, including nearby streets not listed here.</p>' : ''}</div><nav class="coverage-jump-links" aria-label="Local service locations">${profiles.map(p => `<a href="#${p.id}">${escapeHtml(p.name)}</a>`).join('')}</nav><div class="coverage-grid">${profiles.map(p => `<article class="coverage-card" id="${p.id}"><p class="eyebrow">${escapeHtml(p.name)}</p><h3>${escapeHtml(p.heading)}</h3><p>${escapeHtml(p.text)}</p>${streetCorridorDetails(page, p)}${formatList(p.benefits)}<a class="card-link" href="${p.href}" data-service-card="local_${p.id}">${escapeHtml(p.link)} →</a>${conversion.photoCta(`${p.name} commercial service`, 'local_area', `Request a free estimate in ${p.name}`)}</article>`).join('')}</div></div></section>`;
+  const cards = profiles.map(profile => {
+    const name = escapeHtml(profile.name);
+    const streets = dcStreetCorridors[profile.id];
+    return `<article class="coverage-card" id="${escapeAttribute(profile.id)}">
+      <h3>${escapeHtml(profile.heading)}</h3>
+      <p>${escapeHtml(profile.text)}</p>
+      ${streets ? `<p><strong>Nearby streets</strong> ${streets.map(escapeHtml).join(', ')}.</p>` : ''}
+      ${formatList(profile.benefits)}
+      <p><a class="card-link" href="${escapeAttribute(profile.href)}" data-service-card="local_${escapeAttribute(profile.id)}">${escapeHtml(profile.link)} →</a></p>
+      <a class="button button-primary" href="tel:${escapeAttribute(phone.e164)}" data-business-phone-link data-dynamic-number-eligible data-cta-location="local_area" data-service-area="${escapeAttribute(profile.name)}">Call for service in ${name}</a>
+    </article>`;
+  }).join('');
+  return `<section class="section local-coverage" id="neighborhoods">
+    <div class="wrap">
+      <div class="section-heading"><h2>${escapeHtml(page.coverageHeading)}</h2><p>Call with the exact commercial address and the affected entrance to confirm availability.</p></div>
+      <nav class="coverage-jump-links" aria-label="Local service locations">${profiles.map(profile => `<a href="#${escapeAttribute(profile.id)}">${escapeHtml(profile.name)}</a>`).join('')}</nav>
+      <div class="coverage-grid">${cards}</div>
+    </div>
+  </section>`;
 }
 
 function locationSchema(page) {
   const currentPath = `/${page.slug}`;
   const base = simpleSchema(page.title, page.description, currentPath, 'WebPage', page.h1);
+  const profiles = locationProfilesFor(page);
+  const parentPlace = page.state
+    ? { '@type': 'State', name: page.state }
+    : { '@type': 'City', name: 'Washington, DC' };
+  const areaServed = profiles.map(profile => ({
+    '@type': 'Place',
+    name: profile.name,
+    containedInPlace: parentPlace
+  }));
+  if (!page.state) areaServed.unshift(parentPlace);
   base['@graph'].push({
     '@type': 'Service',
     '@id': `${origin}${currentPath}#service`,
     name: page.h1,
-    serviceType: 'Commercial door and locksmith service',
+    serviceType: 'Commercial door repair and locksmith service',
     url: `${origin}${currentPath}`,
     provider: { '@id': `${origin}/#organization` },
     audience: { '@type': 'BusinessAudience', audienceType: 'Businesses and commercial property operators' },
-    areaServed: page.location
+    areaServed
   });
   base['@graph'].push({ '@type': 'FAQPage', '@id': `${origin}${currentPath}#faq`, mainEntity: locationFaqs(page).map(f => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })) });
-  const area = base['@graph'].find(item => item['@type'] === 'Service');
-  area.areaServed = [page.location, ...(business.coverage?.[page.slug]?.verified || [])];
   return base;
 }
 
@@ -664,14 +693,14 @@ function locationPage(page) {
 <body class="has-sticky-actions" data-service="${escapeAttribute(page.service)}" data-location="${escapeAttribute(page.location)}">
 ${header()}
 <main id="main-content">
-  <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${breadcrumbs(page.h1, currentPath, null)}${commercialBadge()}<p class="eyebrow" style="color:#bcdcff">Commercial service area</p><h1>${escapeHtml(page.h1)}</h1><p class="hero-subtitle">${escapeHtml(page.subtitle)}</p><div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta(page.location, 'hero', 'Message on WhatsApp')}</div></div>${heroImage(page.image)}</div></section>
+  <section class="hero"><div class="hero-grid wrap"><div class="hero-copy">${breadcrumbs(page.h1, currentPath, null)}${commercialBadge()}<h1>${escapeHtml(page.h1)}</h1><p class="hero-subtitle">${escapeHtml(page.subtitle)}</p><div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta(page.location, 'hero', 'Message on WhatsApp')}</div></div>${heroImage(page.image)}</div></section>
   ${trustBar()}
-  <section class="section"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial services</p><h2>Choose the failed opening or planned project</h2><p>Call with your business address to confirm availability, or browse the repair options below.</p></div><div class="grid-3">${locationServiceLinks.filter((item) => !item.location || item.location === page.slug).map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
-  <section class="section section-alt"><div class="wrap grid-2"><div><p class="eyebrow">Area context</p><h2>Commercial properties in ${escapeHtml(page.location)}</h2><p>Tell us the business address, property type and door problem. We will discuss the service options for your location.</p>${formatList(page.areas)}</div><aside class="callout" aria-label="Related commercial service information"><h3>What to include</h3>${formatList(['Business or organization name', 'Exact city, ZIP and service address', 'Affected door and hardware type', 'Whether the opening closes, latches and secures', 'Onsite contact and access window', 'Photo when it can be shared safely'])}${qualificationNotice('service_area')}</aside></div></section>
   ${locationDetailSections(page)}
+  <section class="section section-alt"><div class="wrap"><div class="section-heading"><h2>Find the repair you need</h2><p>Call with your business address to confirm availability, or browse the repair options below.</p></div><div class="grid-3">${locationServiceLinks.filter((item) => !item.location || item.location === page.slug).map((item) => serviceCard(item.title, item.description, item.href, item.service)).join('')}</div></div></section>
+  <section class="section"><div class="wrap grid-2"><div><h2>What happens when you call</h2><p>We ask for the business address and which door is affected. Tell us if the entrance is unsecured or an exit device will not release. We will discuss the likely scope and current availability for your address.</p><p>For planned work, ask for a free estimate and tell us about any access window, approval process or work-order requirement.</p></div><aside class="callout" aria-label="Related commercial service information"><h3>Have these details ready</h3>${formatList(['Business or organization name', 'Exact city, ZIP and service address', 'Affected door and hardware type', 'Whether the opening closes, latches and secures', 'Onsite contact and access window', 'Photo when it can be shared safely'])}${qualificationNotice('service_area')}</aside></div></section>
   ${conversion.requestSection(formConfig, 'area-request')}
   <section class="section section-alt"><div class="wrap"><h2>Commercial service questions in ${escapeHtml(page.location)}</h2>${renderFaqs(locationFaqs(page))}</div></section>
-  <section class="section final-cta"><div class="wrap"><h2>Need help with a commercial door or lock?</h2><p>Commercial door, lock and hardware service is available throughout this service area.</p><div class="button-row">${callButton('Call Commercial Dispatch', 'body')}${photoCta('#area-request', 'body')}</div></div></section>
+  <section class="section final-cta"><div class="wrap"><h2>Need help with a commercial door or lock?</h2><p>Call with your address, the affected opening and whether the door still secures.</p><div class="button-row">${compactCallButton('body')}${conversion.photoCta(page.location, 'body', 'Message on WhatsApp')}</div></div></section>
 </main>${footer()}${stickyActions('#area-request')}</body></html>`;
 }
 

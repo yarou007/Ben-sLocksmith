@@ -420,6 +420,12 @@ const homeProblems = [
   ['New commercial door or hardware needed', '/commercial-door-installation-washington-dc', 'commercial_door_installation']
 ];
 
+const mainServiceLinks = [
+  { title: 'Commercial door repair', description: 'Doors that won’t close, latch or lock.', href: '/commercial-door-repair-washington-dc', service: 'commercial_door_repair' },
+  { title: 'Commercial locksmith', description: 'Business lockouts, lock repairs and rekeying.', href: '/commercial-locksmith-washington-dc', service: 'commercial_locksmith' },
+  { title: 'Storefront glass repair', description: 'Cracked storefront glass and damaged glass doors.', href: '/storefront-door-repair-washington-dc', service: 'storefront_door_repair' }
+];
+
 function serviceCard(title, description, href, service) {
   return `<article class="card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(description)}</p><a class="card-link" href="${escapeAttribute(href)}" data-service-card="${escapeAttribute(service)}">${escapeHtml(title)} details →</a></article>`;
 }
@@ -436,7 +442,7 @@ function photoCards() {
 function homepage() {
   return `${head({
     title: 'Commercial Door Repair & Locksmith in Washington DC',
-    description: 'DC Emergency Lock & Door provides 24/7 commercial door, lock and exit hardware services in DC and nearby VA and MD. Call 202-643-4062 for a free estimate.',
+    description: 'Commercial door repair, locksmith and storefront glass service in Washington DC and nearby VA and MD. Call 202-643-4062 for 24/7 dispatch or a free estimate.',
     pathName: '/',
     image: homeImage,
     schema: homeSchema()
@@ -444,25 +450,33 @@ function homepage() {
 <body class="has-sticky-actions home-page" data-service="commercial_door_and_locksmith" data-location="Washington DC">
 ${header()}
 <main id="main-content">
-  <section class="hero">
+  <section class="hero home-hero">
     <div class="hero-grid wrap">
       <div class="hero-copy">
-        ${commercialBadge()}
+        <p class="eyebrow home-hero-status">24/7 commercial dispatch</p>
         <h1>Commercial Door Repair &amp; Locksmith in Washington DC</h1>
-        <p class="hero-subtitle">Commercial door, lock and exit hardware services for businesses in Washington DC and nearby Virginia and Maryland. Choose the service you need, call 24/7 or send photos for a free estimate.</p>
-        <div class="hero-actions">${compactCallButton('hero')}${conversion.photoCta('', 'hero', 'Message on WhatsApp')}</div>
-        <p class="service-area-line">24/7 · Free estimates · DC and nearby VA &amp; MD</p>
+        <p class="hero-subtitle">Locked out of your business? Dealing with broken storefront glass or a door that won’t secure? Call dispatch with your business address and what happened.</p>
+        <div class="hero-actions">${callButton('Call Dispatch', 'hero')}${conversion.photoCta('', 'hero', 'Message on WhatsApp')}</div>
+        <nav class="home-hero-areas" aria-label="Service areas"><a href="/washington-dc">Washington DC</a><a href="/northern-virginia">Northern Virginia</a><a href="/maryland">Nearby Maryland</a></nav>
       </div>
       ${heroImage(homeImage)}
     </div>
   </section>
   ${trustBar()}
-  ${conversion.whoWeServe()}
+  <section class="home-service-picker section" aria-labelledby="home-service-heading">
+    <div class="wrap">
+      <h2 id="home-service-heading">Find the right service</h2>
+      <div class="grid-3">
+        ${mainServiceLinks.map(({ title, description, href, service }) => `<a class="home-service-link" href="${escapeAttribute(href)}" data-service-card="${escapeAttribute(service)}"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(description)}</p></a>`).join('')}
+      </div>
+    </div>
+  </section>
   <section class="section">
-    <div class="wrap"><div class="section-heading"><p class="eyebrow">Choose the problem</p><h2>What is the commercial door doing?</h2><p>Start with the symptom. Each option opens the page built for that specific repair or project.</p></div><div class="problem-grid">${homeProblems.map(([label, href, service]) => `<a class="problem-card" href="${href}" data-service-card="${service}"><span class="icon-box" aria-hidden="true">!</span><span>${escapeHtml(label)}</span></a>`).join('')}</div></div>
+    <div class="wrap"><div class="section-heading"><h2>Find help by door or lock problem</h2></div><div class="problem-grid">${homeProblems.map(([label, href, service]) => `<a class="problem-card" href="${href}" data-service-card="${service}"><span class="icon-box" aria-hidden="true">!</span><span>${escapeHtml(label)}</span></a>`).join('')}</div></div>
   </section>
   <section class="section section-alt" id="glass-door-repair"><div class="wrap grid-2"><div><p class="eyebrow">Commercial glass and storefronts</p><h2>Glass door repair and storefront glass replacement</h2><p>Cracked or shattered glass, a dragging glass door or a failed closer can interrupt business access. We replace damaged commercial glass and repair storefront door pivots, closers, locks, handles and alignment.</p><p>Send photos of the full entrance, damaged area and hardware with your business address. Glass type, measurements, frame condition and material availability are reviewed before the work is scheduled.</p><a class="card-link" href="/storefront-door-repair-washington-dc">Explore glass door repair and glass replacement →</a></div><aside class="callout"><h3>Broken glass or an unsecured entrance?</h3><p>Keep customers and staff away from loose glass. Call to discuss the damaged opening, or send photos from a safe distance for a free estimate.</p><div class="button-row">${compactCallButton('glass_section')}${photoCta('Commercial glass door or storefront glass repair', 'glass_section')}</div></aside></div></section>
   ${conversion.requestSection({ service: 'homepage', symptoms: homeProblems.map(([label]) => label) })}
+  ${conversion.whoWeServe()}
   <section class="section section-alt" id="services">
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Emergency repair</p><h2>Restore a door that will not close, latch or secure</h2><p>Commercial door calls are routed by the failed opening, lock and hardware condition.</p></div><div class="grid-3">${serviceCard('Emergency commercial door repair', 'Door, frame, hinge, latch, closer and break-in damage affecting a business opening.', '/commercial-door-repair-washington-dc', 'commercial_door_repair')}${serviceCard('Panic bar repair', 'Stuck bars, failed latch retraction, loose touchpads, strikes and relatching problems.', '/panic-bar-repair-washington-dc', 'panic_bar_repair')}${serviceCard('Door closer repair', 'Leaking, slamming, slow-closing or non-latching commercial door closers.', '/door-closer-repair-washington-dc', 'door_closer_repair')}</div></div>
   </section>
@@ -489,7 +503,7 @@ ${header()}
     <div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial door photos</p><h2>Identify the hardware before the service conversation</h2><p>Photograph the whole door and then the problem hardware. These reference photos show useful details to include in your request.</p></div><div class="photo-grid">${photoCards()}</div></div>
   </section>
   <section class="section">
-    <div class="wrap grid-2"><div><p class="eyebrow">Service area</p><h2>Washington DC is the priority</h2><p>Requests are reviewed first for Washington DC, then nearby Northern Virginia and nearby Maryland. The exact commercial address or ZIP is required to confirm availability.</p></div><div class="grid-3">${serviceCard('Washington DC', 'Primary commercial door and locksmith service area.', '/washington-dc', 'washington_dc')}${serviceCard('Northern Virginia', 'Nearby Northern Virginia commercial service requests.', '/northern-virginia', 'northern_virginia')}${serviceCard('Maryland', 'Nearby Maryland commercial service requests.', '/maryland', 'maryland')}</div></div>
+    <div class="wrap grid-2"><div><p class="eyebrow">Service area</p><h2>Washington DC and nearby service areas</h2><p>Choose your area below. Call with your business address or ZIP to confirm service availability.</p></div><div class="grid-3">${serviceCard('Washington DC', 'From Downtown and Capitol Hill to Georgetown and Navy Yard.', '/washington-dc', 'washington_dc')}${serviceCard('Northern Virginia', 'Commercial properties in Arlington and Alexandria.', '/northern-virginia', 'northern_virginia')}${serviceCard('Maryland', 'Commercial properties in Bethesda and Silver Spring.', '/maryland', 'maryland')}</div></div>
   </section>
   <section class="section section-alt"><div class="wrap"><div class="section-heading"><p class="eyebrow">Commercial FAQ</p><h2>Commercial service questions</h2></div>${renderFaqs(homeFaqs)}</div></section>
   <section class="section final-cta"><div class="wrap"><h2>Commercial door and locksmith service in Washington DC</h2><p>Call for commercial door repair, lock service, panic hardware, closers, rekeys and planned door projects.</p><div class="button-row">${compactCallButton('body')}${photoCta('', 'body')}</div></div></section>

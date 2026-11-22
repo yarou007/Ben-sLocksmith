@@ -1299,3 +1299,154 @@ p {
   .quote-form .button,.coverage-card > .button { width: 100%; }
   .quote-emergency .button { margin-inline: 0; }
 }
+
+.home-hero {
+  background: linear-gradient(120deg, #091929 0%, #0d263b 63%, #1d4561 100%);
+}
+
+.home-hero .hero-grid {
+  gap: clamp(1.75rem, 6vw, 5.5rem);
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.home-hero-status {
+  gap: 0.65rem;
+  color: #ffe0a1;
+}
+
+.home-hero-status::before {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 0.5rem;
+  border-radius: 50%;
+  background: var(--gold);
+  content: "";
+}
+
+.home-hero h1 {
+  max-width: 20ch;
+  font-size: clamp(2.4rem, 4.8vw, 4.1rem);
+  line-height: 1.02;
+}
+
+.home-hero .hero-subtitle {
+  max-width: 33rem;
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+}
+
+.home-hero .hero-actions .button {
+  min-height: 3.5rem;
+}
+
+.home-hero .hero-actions .button-primary {
+  background: #bd321f;
+}
+
+.home-hero .hero-actions .button-primary:hover,
+.home-hero .hero-actions .button-primary:focus-visible {
+  background: var(--red-dark);
+}
+
+.home-hero .hero-media img {
+  height: clamp(21rem, 38vw, 29rem);
+  max-height: none;
+  border-radius: var(--radius-lg);
+  object-position: center 42%;
+}
+
+.home-hero-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.1rem;
+  margin-top: 1.25rem;
+  font-size: 0.87rem;
+}
+
+.home-hero-areas a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: #e2edf5;
+}
+
+.home-hero-areas a:hover {
+  color: var(--gold);
+}
+
+.home-service-picker {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.home-service-picker h2 {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+}
+
+.home-service-link {
+  position: relative;
+  display: block;
+  min-width: 0;
+  padding: 1.15rem 2.65rem 1.15rem 1.15rem;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.home-service-link h3 {
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  text-wrap: initial;
+}
+
+.home-service-link p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.home-service-link::after {
+  position: absolute;
+  inset: 1.1rem 1rem auto auto;
+  color: var(--blue);
+  font-size: 1.25rem;
+  content: "→";
+}
+
+.home-service-link:hover {
+  border-color: var(--blue);
+  background: var(--surface-blue);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .home-hero .hero-grid {
+    padding-block: 1.8rem 1rem;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(1.95rem, 7.4vw, 2.8rem);
+  }
+
+  .home-hero-areas {
+    gap: 0 0.85rem;
+    margin-top: 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  .home-hero .hero-actions .button span {
+    white-space: nowrap;
+  }
+
+  .home-service-picker .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .home-service-link {
+    border-top-width: 1px;
+    border-left: 3px solid var(--blue);
+  }
+}
